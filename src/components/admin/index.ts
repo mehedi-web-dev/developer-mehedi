@@ -4,3 +4,4 @@ export * from "./admin-header";
 export * from "./admin-overview";
 export * from "./coming-soon";
 export * from "./services";
+export * from "./projects";

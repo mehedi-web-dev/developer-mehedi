@@ -43,7 +43,7 @@ export const ADMIN_NAV_ITEMS: NavItem[] = [
     name: "Projects",
     href: "/admin/projects",
     icon: FolderKanban,
-    badge: "07C",
+    badge: "Active",
   },
   {
     name: "Reviews",
