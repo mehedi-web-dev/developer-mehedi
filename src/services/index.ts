@@ -5,3 +5,4 @@ export * from "./projects.service";
 export * from "./reviews.service";
 export * from "./faqs.service";
 export * from "./contact.service";
+export * from "./admin.service";
