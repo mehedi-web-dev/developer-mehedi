@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppProviders } from "@/providers";
+import { Navbar, Footer } from "@/components/layout";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,14 +33,17 @@ export const metadata: Metadata = {
     default: "Mehedi Hasan | WordPress & Frontend Developer",
     template: "%s | Mehedi Hasan",
   },
-  description: "WordPress & Frontend Developer specializing in modern web development, Next.js, React, and bespoke WordPress solutions.",
+  description:
+    "Mehedi Hasan is a WordPress and Frontend Developer specializing in WordPress, Elementor, React and Next.js.",
   keywords: [
     "Mehedi Hasan",
     "WordPress Developer",
     "Frontend Developer",
-    "Next.js Developer",
+    "Elementor Pro Developer",
+    "WooCommerce",
     "React Developer",
-    "Web Developer",
+    "Next.js Developer",
+    "Web Developer Bangladesh",
     "Portfolio",
   ],
   authors: [{ name: "Mehedi Hasan" }],
@@ -50,12 +54,14 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Mehedi Hasan Portfolio",
     title: "Mehedi Hasan | WordPress & Frontend Developer",
-    description: "WordPress & Frontend Developer specializing in modern web development, Next.js, React, and bespoke WordPress solutions.",
+    description:
+      "Mehedi Hasan is a WordPress and Frontend Developer specializing in WordPress, Elementor, React and Next.js.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Mehedi Hasan | WordPress & Frontend Developer",
-    description: "WordPress & Frontend Developer specializing in modern web development, Next.js, React, and bespoke WordPress solutions.",
+    description:
+      "Mehedi Hasan is a WordPress and Frontend Developer specializing in WordPress, Elementor, React and Next.js.",
   },
   robots: {
     index: true,
@@ -77,8 +83,12 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)]">
-        <AppProviders>{children}</AppProviders>
+      <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--primary)]/20">
+        <AppProviders>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </AppProviders>
       </body>
     </html>
   );
