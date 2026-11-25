@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
-import { HelpCircle } from "lucide-react";
-import { ComingSoon } from "@/components/admin/coming-soon";
+import { redirect } from "next/navigation";
+import { checkAdminAuthorization } from "@/lib/auth/server";
+import { FAQsManager } from "@/components/admin/faqs";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "FAQs Management | Admin Portal",
+  description: "Create, edit, reorder, and activate portfolio frequently asked questions.",
 };
 
-export default function AdminFAQsPage() {
-  return (
-    <ComingSoon
-      title="FAQs Management"
-      description="Frequently asked questions editor, reordering, and visibility controls will be delivered in Phase 07D."
-      phase="Phase 07D"
-      icon={<HelpCircle className="w-8 h-8 text-cyan-400" />}
-    />
-  );
+export default async function AdminFAQsPage() {
+  const authCheck = await checkAdminAuthorization();
+
+  if (authCheck.status === "unauthenticated") {
+    redirect("/login");
+  }
+
+  if (authCheck.status === "unauthorized") {
+    redirect("/login?reason=unauthorized");
+  }
+
+  return <FAQsManager />;
 }

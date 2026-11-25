@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
-import { Mail } from "lucide-react";
-import { ComingSoon } from "@/components/admin/coming-soon";
+import { redirect } from "next/navigation";
+import { checkAdminAuthorization } from "@/lib/auth/server";
+import { ContactsManager } from "@/components/admin/contacts";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Contact Messages | Admin Portal",
+  description: "Review client inquiries, manage status workflows, and track communications.",
 };
 
-export default function AdminContactsPage() {
-  return (
-    <ComingSoon
-      title="Contact Messages & Inquiries"
-      description="Inquiry inbox, message status tracker (new/read/replied), and spam filtering will be delivered in Phase 07D."
-      phase="Phase 07D"
-      icon={<Mail className="w-8 h-8 text-cyan-400" />}
-    />
-  );
+export default async function AdminContactsPage() {
+  const authCheck = await checkAdminAuthorization();
+
+  if (authCheck.status === "unauthenticated") {
+    redirect("/login");
+  }
+
+  if (authCheck.status === "unauthorized") {
+    redirect("/login?reason=unauthorized");
+  }
+
+  return <ContactsManager />;
 }

@@ -5,3 +5,7 @@ export * from "./admin-overview";
 export * from "./coming-soon";
 export * from "./services";
 export * from "./projects";
+export * from "./reviews";
+export * from "./faqs";
+export * from "./contacts";
+export * from "./settings";

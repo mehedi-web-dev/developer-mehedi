@@ -49,25 +49,25 @@ export const ADMIN_NAV_ITEMS: NavItem[] = [
     name: "Reviews",
     href: "/admin/reviews",
     icon: MessageSquareQuote,
-    badge: "07D",
+    badge: "Active",
   },
   {
     name: "FAQs",
     href: "/admin/faqs",
     icon: HelpCircle,
-    badge: "07D",
+    badge: "Active",
   },
   {
     name: "Contacts",
     href: "/admin/contacts",
     icon: Mail,
-    badge: "07D",
+    badge: "Active",
   },
   {
     name: "Site Settings",
     href: "/admin/settings",
     icon: Settings,
-    badge: "07D",
+    badge: "Active",
   },
 ];
 

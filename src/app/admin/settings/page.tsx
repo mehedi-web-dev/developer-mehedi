@@ -1,18 +1,25 @@
 import type { Metadata } from "next";
-import { Settings } from "lucide-react";
-import { ComingSoon } from "@/components/admin/coming-soon";
+import { redirect } from "next/navigation";
+import { checkAdminAuthorization } from "@/lib/auth/server";
+import { SettingsManager } from "@/components/admin/settings";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Site Settings | Admin Portal",
+  description: "Configure profile information, availability, social links, and portfolio settings.",
 };
 
-export default function AdminSettingsPage() {
-  return (
-    <ComingSoon
-      title="Site Settings & Profile"
-      description="Personal info, availability indicator, social links, resume URL, and skills configuration will be delivered in Phase 07D."
-      phase="Phase 07D"
-      icon={<Settings className="w-8 h-8 text-cyan-400" />}
-    />
-  );
+export default async function AdminSettingsPage() {
+  const authCheck = await checkAdminAuthorization();
+
+  if (authCheck.status === "unauthenticated") {
+    redirect("/login");
+  }
+
+  if (authCheck.status === "unauthorized") {
+    redirect("/login?reason=unauthorized");
+  }
+
+  return <SettingsManager />;
 }

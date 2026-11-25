@@ -169,6 +169,19 @@ export interface ContactFormPayload {
 }
 
 /**
+ * Contact Message Model (from backend Contact collection)
+ */
+export interface ContactItem {
+  _id: string;
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
+  status: "new" | "read" | "replied";
+  createdAt: string;
+}
+
+/**
  * User representation from Better Auth
  */
 export interface User {

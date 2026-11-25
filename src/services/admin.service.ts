@@ -1,5 +1,13 @@
 import { api } from "@/lib/api";
-import type { ServiceItem, ProjectItem, PaginationMeta } from "@/types";
+import type {
+  ServiceItem,
+  ProjectItem,
+  ReviewItem,
+  FAQItem,
+  ContactItem,
+  SiteSettings,
+  PaginationMeta,
+} from "@/types";
 
 /* =========================================================================
    SERVICES INTERFACES & METHODS (PHASE 07B)
@@ -411,4 +419,261 @@ export async function getAdminDashboardStats(): Promise<DashboardStats> {
     },
     lastUpdated: new Date().toISOString(),
   };
+}
+
+/* =========================================================================
+   REVIEWS INTERFACES & METHODS (PHASE 07D)
+   ========================================================================= */
+
+export interface AdminReviewsQuery {
+  page?: number;
+  limit?: number;
+  approved?: boolean;
+  featured?: boolean;
+}
+
+export interface AdminReviewsResponse {
+  reviews: ReviewItem[];
+  pagination: PaginationMeta;
+}
+
+export interface CreateReviewInput {
+  clientName: string;
+  clientPosition?: string;
+  clientImage?: string;
+  review: string;
+  rating: number;
+  featured?: boolean;
+  approved?: boolean;
+  order?: number;
+}
+
+export type UpdateReviewInput = Partial<CreateReviewInput>;
+
+export async function getAdminReviews(
+  query: AdminReviewsQuery = {}
+): Promise<AdminReviewsResponse> {
+  const { page = 1, limit = 50, approved, featured } = query;
+  const params: Record<string, string | number | boolean | undefined> = {
+    page,
+    limit,
+  };
+  if (approved !== undefined) params.approved = approved;
+  if (featured !== undefined) params.featured = featured;
+
+  const res = await api.get<ReviewItem[]>("/api/admin/reviews", { params });
+
+  return {
+    reviews: Array.isArray(res.data) ? res.data : [],
+    pagination: res.pagination || {
+      page,
+      limit,
+      totalItems: Array.isArray(res.data) ? res.data.length : 0,
+      totalPages: 1,
+      hasNextPage: false,
+      hasPrevPage: false,
+    },
+  };
+}
+
+export async function getAdminReviewById(id: string): Promise<ReviewItem> {
+  const res = await api.get<ReviewItem>(`/api/admin/reviews/${id}`);
+  if (!res.data) throw new Error("Review not found");
+  return res.data;
+}
+
+export async function createAdminReview(
+  data: CreateReviewInput
+): Promise<ReviewItem> {
+  const res = await api.post<ReviewItem>("/api/admin/reviews", data);
+  if (!res.data) throw new Error(res.message || "Failed to create review");
+  return res.data;
+}
+
+export async function updateAdminReview(
+  id: string,
+  data: UpdateReviewInput
+): Promise<ReviewItem> {
+  const res = await api.patch<ReviewItem>(`/api/admin/reviews/${id}`, data);
+  if (!res.data) throw new Error(res.message || "Failed to update review");
+  return res.data;
+}
+
+export async function deleteAdminReview(id: string): Promise<{ id: string }> {
+  const res = await api.delete<{ id: string }>(`/api/admin/reviews/${id}`);
+  return res.data || { id };
+}
+
+export async function toggleReviewApproved(
+  id: string,
+  currentApproved: boolean
+): Promise<ReviewItem> {
+  return updateAdminReview(id, { approved: !currentApproved });
+}
+
+export async function toggleReviewFeatured(
+  id: string,
+  currentFeatured: boolean
+): Promise<ReviewItem> {
+  return updateAdminReview(id, { featured: !currentFeatured });
+}
+
+/* =========================================================================
+   FAQS INTERFACES & METHODS (PHASE 07D)
+   ========================================================================= */
+
+export interface AdminFAQsQuery {
+  page?: number;
+  limit?: number;
+  active?: boolean;
+}
+
+export interface AdminFAQsResponse {
+  faqs: FAQItem[];
+  pagination: PaginationMeta;
+}
+
+export interface CreateFAQInput {
+  question: string;
+  answer: string;
+  active?: boolean;
+  order?: number;
+}
+
+export type UpdateFAQInput = Partial<CreateFAQInput>;
+
+export async function getAdminFAQs(
+  query: AdminFAQsQuery = {}
+): Promise<AdminFAQsResponse> {
+  const { page = 1, limit = 50, active } = query;
+  const params: Record<string, string | number | boolean | undefined> = {
+    page,
+    limit,
+  };
+  if (active !== undefined) params.active = active;
+
+  const res = await api.get<FAQItem[]>("/api/admin/faqs", { params });
+
+  return {
+    faqs: Array.isArray(res.data) ? res.data : [],
+    pagination: res.pagination || {
+      page,
+      limit,
+      totalItems: Array.isArray(res.data) ? res.data.length : 0,
+      totalPages: 1,
+      hasNextPage: false,
+      hasPrevPage: false,
+    },
+  };
+}
+
+export async function getAdminFAQById(id: string): Promise<FAQItem> {
+  const res = await api.get<FAQItem>(`/api/admin/faqs/${id}`);
+  if (!res.data) throw new Error("FAQ not found");
+  return res.data;
+}
+
+export async function createAdminFAQ(data: CreateFAQInput): Promise<FAQItem> {
+  const res = await api.post<FAQItem>("/api/admin/faqs", data);
+  if (!res.data) throw new Error(res.message || "Failed to create FAQ");
+  return res.data;
+}
+
+export async function updateAdminFAQ(
+  id: string,
+  data: UpdateFAQInput
+): Promise<FAQItem> {
+  const res = await api.patch<FAQItem>(`/api/admin/faqs/${id}`, data);
+  if (!res.data) throw new Error(res.message || "Failed to update FAQ");
+  return res.data;
+}
+
+export async function deleteAdminFAQ(id: string): Promise<{ id: string }> {
+  const res = await api.delete<{ id: string }>(`/api/admin/faqs/${id}`);
+  return res.data || { id };
+}
+
+export async function toggleFAQActive(
+  id: string,
+  currentActive: boolean
+): Promise<FAQItem> {
+  return updateAdminFAQ(id, { active: !currentActive });
+}
+
+/* =========================================================================
+   CONTACT MESSAGES INTERFACES & METHODS (PHASE 07D)
+   ========================================================================= */
+
+export interface AdminContactsQuery {
+  page?: number;
+  limit?: number;
+  status?: "new" | "read" | "replied";
+}
+
+export interface AdminContactsResponse {
+  contacts: ContactItem[];
+  pagination: PaginationMeta;
+}
+
+export async function getAdminContacts(
+  query: AdminContactsQuery = {}
+): Promise<AdminContactsResponse> {
+  const { page = 1, limit = 50, status } = query;
+  const params: Record<string, string | number | boolean | undefined> = {
+    page,
+    limit,
+  };
+  if (status) params.status = status;
+
+  const res = await api.get<ContactItem[]>("/api/admin/contacts", { params });
+
+  return {
+    contacts: Array.isArray(res.data) ? res.data : [],
+    pagination: res.pagination || {
+      page,
+      limit,
+      totalItems: Array.isArray(res.data) ? res.data.length : 0,
+      totalPages: 1,
+      hasNextPage: false,
+      hasPrevPage: false,
+    },
+  };
+}
+
+export async function getAdminContactById(id: string): Promise<ContactItem> {
+  const res = await api.get<ContactItem>(`/api/admin/contacts/${id}`);
+  if (!res.data) throw new Error("Contact message not found");
+  return res.data;
+}
+
+export async function updateContactStatus(
+  id: string,
+  status: "new" | "read" | "replied"
+): Promise<ContactItem> {
+  const res = await api.patch<ContactItem>(`/api/admin/contacts/${id}`, { status });
+  if (!res.data) throw new Error(res.message || "Failed to update contact status");
+  return res.data;
+}
+
+export async function deleteAdminContact(id: string): Promise<{ id: string }> {
+  const res = await api.delete<{ id: string }>(`/api/admin/contacts/${id}`);
+  return res.data || { id };
+}
+
+/* =========================================================================
+   SITE SETTINGS INTERFACES & METHODS (PHASE 07D)
+   ========================================================================= */
+
+export async function getAdminSiteSettings(): Promise<SiteSettings> {
+  const res = await api.get<SiteSettings>("/api/admin/site-settings");
+  if (!res.data) throw new Error("Site settings not found");
+  return res.data;
+}
+
+export async function updateAdminSiteSettings(
+  data: Partial<SiteSettings>
+): Promise<SiteSettings> {
+  const res = await api.patch<SiteSettings>("/api/admin/site-settings", data);
+  if (!res.data) throw new Error(res.message || "Failed to update site settings");
+  return res.data;
 }
