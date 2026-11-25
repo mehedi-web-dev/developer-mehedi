@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import {
   Settings,
   User,
@@ -14,10 +15,13 @@ import {
   Plus,
   Trash2,
   RefreshCw,
+  UploadCloud,
 } from "lucide-react";
 import {
   getAdminSiteSettings,
   updateAdminSiteSettings,
+  uploadSingleImage,
+  MAX_UPLOAD_SIZE_BYTES,
 } from "@/services/admin.service";
 import type { SiteSettings } from "@/types";
 
@@ -39,6 +43,38 @@ export function SettingsManager() {
   const [personalProfileImage, setPersonalProfileImage] = React.useState("");
   const [personalResumeUrl, setPersonalResumeUrl] = React.useState("");
   const [personalAvailableForHire, setPersonalAvailableForHire] = React.useState(true);
+
+  // Avatar upload state
+  const [isUploadingAvatar, setIsUploadingAvatar] = React.useState(false);
+  const [avatarError, setAvatarError] = React.useState<string | null>(null);
+  const avatarFileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setAvatarError(null);
+    if (file.size > MAX_UPLOAD_SIZE_BYTES) {
+      setAvatarError(
+        `File size exceeds 10 MB limit (${(file.size / (1024 * 1024)).toFixed(2)} MB).`
+      );
+      if (avatarFileInputRef.current) avatarFileInputRef.current.value = "";
+      return;
+    }
+
+    setIsUploadingAvatar(true);
+    try {
+      const res = await uploadSingleImage(file);
+      setPersonalProfileImage(res.url || res.displayUrl);
+      showSuccess("Avatar uploaded successfully through backend storage.");
+    } catch (err) {
+      console.error("[Settings Manager] Avatar upload failed:", err);
+      setAvatarError(err instanceof Error ? err.message : "Failed to upload avatar image.");
+    } finally {
+      setIsUploadingAvatar(false);
+      if (avatarFileInputRef.current) avatarFileInputRef.current.value = "";
+    }
+  };
 
   // Social Links state
   const [socialLinks, setSocialLinks] = React.useState<Array<{ platform: string; url: string; icon?: string }>>([]);
@@ -474,32 +510,94 @@ export function SettingsManager() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1.5">
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
                   <label className="text-xs font-semibold text-slate-300">
-                    Profile / Avatar Image URL
+                    Profile / Avatar Image
                   </label>
-                  <input
-                    type="url"
-                    value={personalProfileImage}
-                    onChange={(e) => setPersonalProfileImage(e.target.value)}
-                    placeholder="https://example.com/avatar.jpg"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-cyan-300 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 font-mono"
-                  />
+                  <span className="text-[10px] text-slate-400">
+                    JPG, PNG or WEBP (Max 10 MB)
+                  </span>
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-semibold text-slate-300">
-                    Resume / CV Link
-                  </label>
+                {avatarError && (
+                  <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2">
+                    <AlertCircle className="w-3.5 h-3.5 text-rose-400 flex-shrink-0" />
+                    <span>{avatarError}</span>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 border border-white/10">
+                  <div className="relative w-14 h-14 rounded-full overflow-hidden bg-white/5 border border-white/10 flex-shrink-0 flex items-center justify-center">
+                    {personalProfileImage ? (
+                      <Image
+                        src={personalProfileImage}
+                        alt="Profile avatar"
+                        fill
+                        className="object-cover"
+                        sizes="56px"
+                        unoptimized={personalProfileImage.startsWith("http")}
+                      />
+                    ) : (
+                      <User className="w-6 h-6 text-slate-400" />
+                    )}
+                  </div>
+
+                  <div className="flex-1 min-w-0 space-y-2">
+                    <input
+                      type="url"
+                      value={personalProfileImage}
+                      onChange={(e) => setPersonalProfileImage(e.target.value)}
+                      placeholder="https://example.com/avatar.jpg"
+                      className="w-full px-3 py-1.5 rounded-lg bg-black/40 border border-white/10 text-xs text-cyan-300 font-mono focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                    />
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={() => avatarFileInputRef.current?.click()}
+                        disabled={isUploadingAvatar || isSaving}
+                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 border border-cyan-500/30 text-xs font-medium transition-colors"
+                      >
+                        {isUploadingAvatar ? (
+                          <RefreshCw className="w-3 h-3 animate-spin" />
+                        ) : (
+                          <UploadCloud className="w-3 h-3" />
+                        )}
+                        <span>{isUploadingAvatar ? "Uploading to ImgBB..." : "Upload Photo"}</span>
+                      </button>
+                      {personalProfileImage && (
+                        <button
+                          type="button"
+                          onClick={() => setPersonalProfileImage("")}
+                          className="px-2.5 py-1 rounded-lg text-xs text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-colors"
+                        >
+                          Remove
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
                   <input
-                    type="url"
-                    value={personalResumeUrl}
-                    onChange={(e) => setPersonalResumeUrl(e.target.value)}
-                    placeholder="https://drive.google.com/..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-cyan-300 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 font-mono"
+                    ref={avatarFileInputRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    onChange={handleAvatarUpload}
+                    className="hidden"
                   />
                 </div>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-slate-300">
+                  Resume / CV Link
+                </label>
+                <input
+                  type="url"
+                  value={personalResumeUrl}
+                  onChange={(e) => setPersonalResumeUrl(e.target.value)}
+                  placeholder="https://drive.google.com/..."
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-cyan-300 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 font-mono"
+                />
               </div>
 
               <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between">
