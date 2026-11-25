@@ -14,7 +14,23 @@ import {
 export const metadata: Metadata = {
   title: "Mehedi Hasan | WordPress & Frontend Developer",
   description:
-    "Mehedi Hasan is a WordPress and Frontend Developer specializing in WordPress, Elementor, React and Next.js.",
+    "Explore 80+ completed WordPress and modern frontend web projects by Mehedi Hasan. Specializing in custom themes, Elementor Pro, WooCommerce, React, and Next.js.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Mehedi Hasan | WordPress & Frontend Developer",
+    description:
+      "Explore 80+ completed WordPress and modern frontend web projects by Mehedi Hasan. Specializing in custom themes, Elementor Pro, WooCommerce, React, and Next.js.",
+    url: "/",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mehedi Hasan | WordPress & Frontend Developer",
+    description:
+      "Explore 80+ completed WordPress and modern frontend web projects by Mehedi Hasan. Specializing in custom themes, Elementor Pro, WooCommerce, React, and Next.js.",
+  },
 };
 
 export default function Home() {

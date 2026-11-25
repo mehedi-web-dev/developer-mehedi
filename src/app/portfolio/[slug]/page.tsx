@@ -33,24 +33,50 @@ export async function generateMetadata({
 
   if (!project) {
     return {
-      title: "Project Not Found | Mehedi Hasan Portfolio",
+      title: "Project Not Found",
       description: "The requested project case study could not be found.",
+      robots: {
+        index: false,
+        follow: false,
+      },
     };
   }
 
-  const title = `${project.title} | Mehedi Hasan Portfolio`;
+  const title = `${project.title} — Case Study`;
   const description =
     project.shortDescription ||
-    (project.description ? project.description.slice(0, 160) : "Project case study by Mehedi Hasan");
+    (project.description
+      ? project.description.slice(0, 160).replace(/\r?\n+/g, " ")
+      : "Project case study by Mehedi Hasan");
+
+  const images = project.thumbnail
+    ? [{ url: project.thumbnail, alt: `${project.title} preview` }]
+    : [];
 
   return {
     title,
     description,
+    keywords: [
+      project.title,
+      project.category,
+      ...(Array.isArray(project.technologies) ? project.technologies : []),
+      "Mehedi Hasan Portfolio",
+    ],
+    alternates: {
+      canonical: `/portfolio/${encodeURIComponent(project.slug)}`,
+    },
     openGraph: {
-      title,
+      title: `${project.title} | Mehedi Hasan Portfolio`,
       description,
       type: "article",
-      images: project.thumbnail ? [{ url: project.thumbnail }] : [],
+      url: `/portfolio/${encodeURIComponent(project.slug)}`,
+      images,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} | Mehedi Hasan Portfolio`,
+      description,
+      images: images.length > 0 ? [images[0].url] : undefined,
     },
   };
 }
