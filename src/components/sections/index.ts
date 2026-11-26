@@ -3,6 +3,7 @@ export * from "./about";
 export * from "./skills";
 export * from "./experience-education";
 export * from "./services-preview";
+export * from "./development-process";
 export * from "./projects-preview";
 export * from "./reviews";
 export * from "./faqs";

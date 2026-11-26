@@ -33,7 +33,7 @@ export function Navbar() {
 
       // Section spy for homepage
       if (pathname === "/") {
-        const sections = ["hero", "about", "skills", "services-preview", "portfolio-preview", "contact"];
+        const sections = ["hero", "about", "skills", "services-preview", "process", "portfolio-preview", "contact"];
         const scrollPosition = window.scrollY + 100;
 
         for (const sectionId of sections) {

@@ -4,6 +4,7 @@ import {
   AboutSection,
   SkillsSection,
   ServicesPreviewSection,
+  DevelopmentProcessSection,
   ProjectsPreviewSection,
   ExperienceEducationSection,
   ReviewsSection,
@@ -45,6 +46,7 @@ export default async function Home() {
       <AboutSection siteSettings={siteSettings} />
       <SkillsSection />
       <ServicesPreviewSection />
+      <DevelopmentProcessSection />
       <ProjectsPreviewSection />
       <ExperienceEducationSection />
       <ReviewsSection />
