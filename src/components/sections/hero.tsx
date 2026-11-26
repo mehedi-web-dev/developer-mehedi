@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -9,10 +11,30 @@ import {
   Code2,
   Terminal,
   Zap,
+  Download,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { getSiteSettings } from "@/services";
+import type { SiteSettings } from "@/types";
 
-export function HeroSection() {
+export interface HeroSectionProps {
+  siteSettings?: SiteSettings | null;
+}
+
+export function HeroSection({ siteSettings: initialSettings }: HeroSectionProps = {}) {
+  const [settings, setSettings] = React.useState<SiteSettings | null>(initialSettings || null);
+  const [imageError, setImageError] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!initialSettings) {
+      getSiteSettings().then((data) => {
+        if (data) setSettings(data);
+      });
+    }
+  }, [initialSettings]);
+
+  const profileImage = settings?.personalInfo?.profileImage?.trim() || "";
+  const resumeUrl = settings?.personalInfo?.resumeUrl?.trim() || "";
   return (
     <section
       id="hero"
@@ -82,6 +104,19 @@ export function HeroSection() {
               >
                 Explore My Work
               </Link>
+              {resumeUrl ? (
+                <a
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download={resumeUrl.endsWith(".pdf") ? "Mehedi-Hasan-Resume.pdf" : undefined}
+                  className="inline-flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--surface)] px-6 py-3.5 text-sm font-semibold text-[var(--foreground)] transition-all hover:border-[var(--secondary)] hover:text-[var(--secondary)] hover:bg-[var(--surface-hover)] hover:scale-[1.02] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--secondary)]"
+                  aria-label="Download Mehedi Hasan's Resume (PDF)"
+                >
+                  <Download className="h-4 w-4 text-[var(--secondary)]" />
+                  <span>Download Resume</span>
+                </a>
+              ) : null}
             </div>
 
             {/* Social Links & Trust Indicators */}
@@ -140,18 +175,50 @@ export function HeroSection() {
               <div className="absolute inset-8 rounded-full border border-[var(--primary)]/20" />
               <div className="absolute inset-16 rounded-full border border-[var(--secondary)]/20 animate-[pulse_4s_ease-in-out_infinite]" />
 
-              {/* Central Premium Monogram Badge */}
-              <div className="glass relative flex h-48 w-48 flex-col items-center justify-center rounded-3xl p-6 shadow-2xl glow-primary">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-[var(--secondary)] text-white shadow-lg shadow-[var(--primary)]/30">
-                  <Code2 className="h-8 w-8" />
+              {/* Central Profile Image or Monogram Fallback */}
+              {profileImage && !imageError ? (
+                <div className="relative group">
+                  {/* Subtle ambient gradient aura behind the image */}
+                  <div className="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-[var(--primary)] via-violet-600 to-[var(--secondary)] opacity-35 blur-xl group-hover:opacity-60 transition-opacity duration-500" />
+
+                  {/* Outer Framed Glass Container */}
+                  <div className="glass relative h-56 w-56 sm:h-64 sm:w-64 rounded-3xl p-2 border-2 border-white/15 shadow-2xl overflow-hidden transition-transform duration-500 group-hover:scale-[1.02]">
+                    <div className="relative h-full w-full rounded-2xl overflow-hidden bg-[var(--surface)]">
+                      <Image
+                        src={profileImage}
+                        alt="Mehedi Hasan - WordPress & Frontend Developer"
+                        fill
+                        sizes="(max-width: 640px) 224px, 256px"
+                        priority
+                        className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                        onError={() => setImageError(true)}
+                      />
+                      {/* Subtle bottom gradient shadow */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#080B14]/85 via-transparent to-transparent pointer-events-none" />
+
+                      {/* Bottom Name Badge */}
+                      <div className="absolute bottom-2.5 inset-x-2.5 text-center">
+                        <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-[#080B14]/85 text-white backdrop-blur-md border border-white/15 shadow-md">
+                          Mehedi Hasan &bull; Developer
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="mt-3 text-lg font-bold tracking-tight text-[var(--foreground)]">
-                  Mehedi Hasan
-                </h3>
-                <p className="text-[11px] font-mono text-[var(--primary)] uppercase tracking-wider">
-                  Developer
-                </p>
-              </div>
+              ) : (
+                /* Central Premium Monogram Badge (Graceful Fallback) */
+                <div className="glass relative flex h-48 w-48 flex-col items-center justify-center rounded-3xl p-6 shadow-2xl glow-primary">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-[var(--secondary)] text-white shadow-lg shadow-[var(--primary)]/30">
+                    <Code2 className="h-8 w-8" />
+                  </div>
+                  <h3 className="mt-3 text-lg font-bold tracking-tight text-[var(--foreground)]">
+                    Mehedi Hasan
+                  </h3>
+                  <p className="text-[11px] font-mono text-[var(--primary)] uppercase tracking-wider">
+                    Developer
+                  </p>
+                </div>
+              )}
 
               {/* Floating Technology Cards */}
               <div className="absolute -top-4 -left-2 glass flex items-center gap-2 rounded-xl p-3 shadow-md animate-bounce [animation-duration:6s]">

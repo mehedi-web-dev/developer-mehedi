@@ -10,6 +10,9 @@ import {
   FAQSection,
   ContactSection,
 } from "@/components/sections";
+import { getSiteSettings } from "@/services";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Mehedi Hasan | WordPress & Frontend Developer",
@@ -33,11 +36,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const siteSettings = await getSiteSettings();
+
   return (
     <div className="flex flex-col">
-      <HeroSection />
-      <AboutSection />
+      <HeroSection siteSettings={siteSettings} />
+      <AboutSection siteSettings={siteSettings} />
       <SkillsSection />
       <ServicesPreviewSection />
       <ProjectsPreviewSection />

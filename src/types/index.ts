@@ -112,20 +112,25 @@ export interface FAQItem {
 }
 
 /**
+ * Personal Information in Site Settings
+ */
+export interface SiteSettingsPersonalInfo {
+  name?: string;
+  title?: string;
+  bio?: string;
+  profileImage?: string;
+  email?: string;
+  phone?: string;
+  location?: string;
+  resumeUrl?: string;
+  availableForHire?: boolean;
+}
+
+/**
  * Site Settings Model
  */
 export interface SiteSettings {
-  personalInfo?: {
-    name?: string;
-    title?: string;
-    bio?: string;
-    profileImage?: string;
-    email?: string;
-    phone?: string;
-    location?: string;
-    resumeUrl?: string;
-    availableForHire?: boolean;
-  };
+  personalInfo?: SiteSettingsPersonalInfo;
   socialLinks?: Array<{
     platform: string;
     url: string;
