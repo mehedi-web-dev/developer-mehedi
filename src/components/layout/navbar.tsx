@@ -18,6 +18,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/#hero" },
   { label: "About", href: "/#about" },
   { label: "Services", href: "/services" },
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -81,6 +82,7 @@ export function Navbar() {
 
   const isActive = (href: string) => {
     if (href === "/services" && pathname.startsWith("/services")) return true;
+    if (href === "/portfolio" && (pathname === "/portfolio" || pathname.startsWith("/portfolio/"))) return true;
     if (pathname === "/" && href.startsWith("/#")) {
       const hash = href.replace("/", "");
       return activeHash === hash;

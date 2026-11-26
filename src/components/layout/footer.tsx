@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Mail, ArrowUpRight, MapPin, Globe } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { BrandLogo } from "@/components/ui/brand-logo";
 
@@ -77,6 +77,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/portfolio" className="transition-colors hover:text-[var(--primary)]">
+                  Portfolio
+                </Link>
+              </li>
+              <li>
                 <Link href="/#contact" className="transition-colors hover:text-[var(--primary)]">
                   Contact
                 </Link>
@@ -113,18 +118,6 @@ export function Footer() {
                   className="text-[var(--foreground)] hover:text-[var(--primary)] transition-colors"
                 >
                   mehedihasan958327@gmail.com
-                </a>
-              </p>
-              <p className="flex items-center gap-2">
-                <Globe className="h-4 w-4 text-[var(--secondary)] shrink-0" />
-                <a
-                  href="https://mehedihasanbd.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-[var(--foreground)] hover:text-[var(--primary)] transition-colors"
-                >
-                  mehedihasanbd.com
-                  <ArrowUpRight className="h-3 w-3" />
                 </a>
               </p>
             </div>
