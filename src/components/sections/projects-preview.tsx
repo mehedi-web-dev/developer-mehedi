@@ -148,7 +148,7 @@ export function ProjectsPreviewSection() {
             {projects.map((project) => (
               <div
                 key={project._id}
-                className="glass rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--secondary)] transition-all duration-300 flex flex-col group shadow-sm hover:shadow-xl hover:shadow-[var(--secondary)]/5"
+                className="glass rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--secondary)] hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--secondary)]/10 transition-all duration-300 flex flex-col group shadow-sm"
               >
                 {/* Thumbnail Image */}
                 <div className="relative aspect-video w-full overflow-hidden bg-[var(--surface-hover)]">

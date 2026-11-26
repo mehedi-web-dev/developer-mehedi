@@ -119,7 +119,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main Navigation">
+        <nav className="hidden items-center gap-1.5 md:flex" aria-label="Main Navigation">
           {NAV_ITEMS.map((item) => {
             const active = isActive(item.href);
             return (
@@ -127,16 +127,17 @@ export function Navbar() {
                 key={item.label}
                 href={item.href}
                 onClick={() => handleLinkClick(item.href)}
+                aria-current={active ? "page" : undefined}
                 className={cn(
-                  "relative rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
+                  "relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
                   active
-                    ? "text-[var(--primary)] font-semibold"
+                    ? "text-[var(--primary)] font-semibold bg-[var(--primary)]/10 dark:bg-[var(--primary)]/15 shadow-xs"
                     : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
                 )}
               >
                 {item.label}
                 {active && (
-                  <span className="absolute inset-x-2 -bottom-1 h-0.5 rounded-full bg-[var(--primary)]" />
+                  <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)]" />
                 )}
               </Link>
             );

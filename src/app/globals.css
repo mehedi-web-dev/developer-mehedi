@@ -113,6 +113,10 @@
   box-shadow: var(--shadow-glow);
 }
 
+@utility glow-secondary {
+  box-shadow: 0 0 25px -3px rgba(34, 211, 238, 0.3);
+}
+
 /* Responsive custom container */
 @utility container-custom {
   width: 100%;
@@ -140,6 +144,7 @@
 /* Base styles */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
   color-scheme: light dark;
 }
 

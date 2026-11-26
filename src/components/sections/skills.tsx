@@ -163,7 +163,7 @@ export function SkillsSection() {
                   return (
                     <div
                       key={skill.name}
-                      className="group relative rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-all duration-200 hover:border-[var(--primary)] hover:shadow-lg hover:shadow-[var(--primary)]/5"
+                      className="group relative rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-all duration-300 hover:border-[var(--primary)] hover:-translate-y-1 hover:shadow-lg hover:shadow-[var(--primary)]/10"
                     >
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--surface-subtle)] text-[var(--primary)] transition-transform duration-200 group-hover:scale-110">

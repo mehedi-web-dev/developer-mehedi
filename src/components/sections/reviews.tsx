@@ -134,7 +134,7 @@ export function ReviewsSection() {
             {reviews.map((rev) => (
               <div
                 key={rev._id}
-                className="glass rounded-3xl p-8 border border-[var(--border)] hover:border-[var(--primary)] transition-all duration-300 flex flex-col justify-between shadow-sm"
+                className="glass rounded-3xl p-8 border border-[var(--border)] hover:border-[var(--primary)] hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--primary)]/10 transition-all duration-300 flex flex-col justify-between shadow-sm"
               >
                 <div>
                   {/* Star Rating */}

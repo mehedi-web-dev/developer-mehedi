@@ -145,18 +145,18 @@ export function HeroSection({ siteSettings: initialSettings }: HeroSectionProps 
             </div>
 
             {/* Experience & Stats Summary */}
-            <div className="mt-10 grid grid-cols-3 gap-6 sm:gap-8 w-full max-w-lg">
-              <div>
-                <p className="font-sans text-3xl font-extrabold text-[var(--foreground)]">3+</p>
-                <p className="mt-1 text-xs text-[var(--muted)]">Years of Experience</p>
+            <div className="mt-10 grid grid-cols-3 gap-3 sm:gap-4 w-full max-w-lg">
+              <div className="glass rounded-2xl p-3 sm:p-4 text-center border border-[var(--border)] transition-all duration-300 hover:border-[var(--primary)]/40 hover:-translate-y-0.5">
+                <p className="font-sans text-2xl sm:text-3xl font-extrabold text-[var(--foreground)]">3+</p>
+                <p className="mt-1 text-[11px] sm:text-xs text-[var(--muted)]">Years Exp.</p>
               </div>
-              <div>
-                <p className="font-sans text-3xl font-extrabold text-[var(--primary)]">80+</p>
-                <p className="mt-1 text-xs text-[var(--muted)]">Completed Projects</p>
+              <div className="glass rounded-2xl p-3 sm:p-4 text-center border border-[var(--border)] transition-all duration-300 hover:border-[var(--primary)]/40 hover:-translate-y-0.5">
+                <p className="font-sans text-2xl sm:text-3xl font-extrabold text-[var(--primary)]">80+</p>
+                <p className="mt-1 text-[11px] sm:text-xs text-[var(--muted)]">Projects Done</p>
               </div>
-              <div>
-                <p className="font-sans text-3xl font-extrabold text-[var(--secondary)]">100%</p>
-                <p className="mt-1 text-xs text-[var(--muted)]">Client Commitment</p>
+              <div className="glass rounded-2xl p-3 sm:p-4 text-center border border-[var(--border)] transition-all duration-300 hover:border-[var(--secondary)]/40 hover:-translate-y-0.5">
+                <p className="font-sans text-2xl sm:text-3xl font-extrabold text-[var(--secondary)]">100%</p>
+                <p className="mt-1 text-[11px] sm:text-xs text-[var(--muted)]">Commitment</p>
               </div>
             </div>
           </motion.div>
@@ -221,7 +221,7 @@ export function HeroSection({ siteSettings: initialSettings }: HeroSectionProps 
               )}
 
               {/* Floating Technology Cards */}
-              <div className="absolute -top-4 -left-2 glass flex items-center gap-2 rounded-xl p-3 shadow-md animate-bounce [animation-duration:6s]">
+              <div className="absolute -top-4 -left-2 glass flex items-center gap-2 rounded-xl p-3 shadow-md animate-bounce [animation-duration:6s] transition-transform duration-300 hover:scale-105">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500">
                   <Layers className="h-4 w-4" />
                 </div>
@@ -231,7 +231,7 @@ export function HeroSection({ siteSettings: initialSettings }: HeroSectionProps 
                 </div>
               </div>
 
-              <div className="absolute -bottom-4 -right-2 glass flex items-center gap-2 rounded-xl p-3 shadow-md animate-bounce [animation-duration:5s]">
+              <div className="absolute -bottom-4 -right-2 glass flex items-center gap-2 rounded-xl p-3 shadow-md animate-bounce [animation-duration:5s] transition-transform duration-300 hover:scale-105">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-500/10 text-[var(--secondary)]">
                   <Zap className="h-4 w-4" />
                 </div>
@@ -241,14 +241,14 @@ export function HeroSection({ siteSettings: initialSettings }: HeroSectionProps 
                 </div>
               </div>
 
-              <div className="absolute top-1/2 -right-6 glass flex items-center gap-2 rounded-xl p-2.5 shadow-md hidden sm:flex">
+              <div className="absolute top-1/2 -right-6 glass flex items-center gap-2 rounded-xl p-2.5 shadow-md hidden sm:flex transition-transform duration-300 hover:scale-105">
                 <div className="flex h-7 w-7 items-center justify-center rounded-md bg-purple-500/10 text-[var(--primary)]">
                   <Terminal className="h-3.5 w-3.5" />
                 </div>
                 <span className="text-xs font-medium text-[var(--foreground)]">Tailwind CSS</span>
               </div>
 
-              <div className="absolute top-12 -left-6 glass flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-mono text-[var(--muted)] shadow-sm hidden sm:flex">
+              <div className="absolute top-12 -left-6 glass flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-mono text-[var(--muted)] shadow-sm hidden sm:flex transition-transform duration-300 hover:scale-105">
                 <Sparkles className="h-3 w-3 text-amber-400" />
                 80+ Projects Delivered
               </div>

@@ -235,7 +235,7 @@ export function PortfolioCatalog() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="glass rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--secondary)] transition-all duration-300 flex flex-col group shadow-sm hover:shadow-xl hover:shadow-[var(--secondary)]/5"
+                  className="glass rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--secondary)] hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--secondary)]/10 transition-all duration-300 flex flex-col group shadow-sm"
                 >
                   {/* Thumbnail Image */}
                   <Link

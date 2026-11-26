@@ -21,7 +21,7 @@ export function ExperienceEducationSection() {
         {/* Milestone Grid */}
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Milestone 1: Sorobindu */}
-          <div className="glass rounded-3xl p-8 border border-[var(--border)] shadow-md hover:border-[var(--primary)] transition-all">
+          <div className="glass rounded-3xl p-8 border border-[var(--border)] shadow-md hover:border-[var(--primary)] hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
             <div className="flex items-center justify-between mb-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-500/10 text-[var(--primary)]">
                 <Award className="h-6 w-6" />
@@ -56,13 +56,13 @@ export function ExperienceEducationSection() {
           </div>
 
           {/* Milestone 2: Programming Hero */}
-          <div className="glass rounded-3xl p-8 border border-[var(--border)] shadow-md hover:border-[var(--secondary)] transition-all relative overflow-hidden">
+          <div className="glass rounded-3xl p-8 border border-[var(--border)] shadow-md hover:border-[var(--secondary)] hover:-translate-y-1 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
             <div className="flex items-center justify-between mb-4">
               <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-[var(--secondary)]">
                 <BookOpen className="h-6 w-6" />
               </div>
               <span className="flex items-center gap-1.5 rounded-full bg-cyan-500/10 text-[var(--secondary)] px-3 py-1 text-xs font-semibold">
-                <Clock className="h-3 w-3 animate-spin" />
+                <Clock className="h-3.5 w-3.5" />
                 Ongoing / In Progress
               </span>
             </div>
