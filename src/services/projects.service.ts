@@ -37,7 +37,9 @@ export async function getProjects(
  */
 export async function getFeaturedProjects(): Promise<ProjectItem[]> {
   try {
-    const res = await api.get<ProjectItem[]>("/api/projects/featured");
+    const res = await api.get<ProjectItem[]>("/api/projects/featured", {
+      cache: "no-store",
+    });
     return Array.isArray(res.data) ? res.data : [];
   } catch (error) {
     console.error("[Projects Service] Failed to fetch featured projects:", error);

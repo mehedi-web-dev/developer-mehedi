@@ -11,7 +11,7 @@ import {
   FAQSection,
   ContactSection,
 } from "@/components/sections";
-import { getSiteSettings } from "@/services";
+import { getSiteSettings, getFeaturedProjects } from "@/services";
 
 export const dynamic = "force-dynamic";
 
@@ -38,7 +38,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const siteSettings = await getSiteSettings();
+  const [siteSettings, initialProjects] = await Promise.all([
+    getSiteSettings(),
+    getFeaturedProjects().catch(() => null),
+  ]);
 
   return (
     <div className="flex flex-col">
@@ -47,7 +50,7 @@ export default async function Home() {
       <SkillsSection />
       <ServicesPreviewSection />
       <DevelopmentProcessSection />
-      <ProjectsPreviewSection />
+      <ProjectsPreviewSection initialProjects={initialProjects} />
       <ExperienceEducationSection />
       <ReviewsSection />
       <FAQSection />
