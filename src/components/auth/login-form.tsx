@@ -96,8 +96,9 @@ export function LoginForm() {
         return;
       }
 
-      // Successful admin login - hard navigation ensures fresh cookie transmission to server components
-      window.location.href = "/admin";
+      // Successful admin login
+      router.push("/admin");
+      router.refresh();
     } catch {
       setErrorMessage(
         "Unable to connect to the authentication service. Please check your connection or retry."
