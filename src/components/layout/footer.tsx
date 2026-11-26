@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Mail, ArrowUpRight, Code2 } from "lucide-react";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
+import { Mail, ArrowUpRight, MapPin, Globe } from "lucide-react";
+import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/ui/icons";
+import { BrandLogo } from "@/components/ui/brand-logo";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,16 +12,9 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4 lg:gap-12">
           {/* Brand Info */}
           <div className="space-y-4 md:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] text-white shadow-sm">
-                <Code2 className="h-4 w-4" />
-              </div>
-              <span className="font-sans text-lg font-bold tracking-tight text-[var(--foreground)]">
-                Mehedi Hasan
-              </span>
-            </Link>
+            <BrandLogo size="footer" />
             <p className="max-w-md text-sm leading-relaxed text-[var(--muted)]">
-              WordPress & Frontend Developer specializing in Elementor Pro, WooCommerce, React, and
+              WordPress &amp; Frontend Developer specializing in Elementor Pro, WooCommerce, React, and
               Next.js. Crafting clean, accessible, and high-performing web experiences.
             </p>
             <div className="flex items-center gap-3 pt-2">
@@ -41,6 +35,15 @@ export function Footer() {
                 aria-label="LinkedIn Profile"
               >
                 <LinkedinIcon className="h-4 w-4" />
+              </a>
+              <a
+                href="https://wa.me/8801318352581"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--muted)] transition-colors hover:border-[#25D366] hover:text-[#25D366]"
+                aria-label="WhatsApp (+880 1318-352581)"
+              >
+                <WhatsAppIcon className="h-4 w-4" />
               </a>
               <a
                 href="mailto:mehedihasan958327@gmail.com"
@@ -74,11 +77,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="transition-colors hover:text-[var(--primary)]">
-                  Portfolio
-                </Link>
-              </li>
-              <li>
                 <Link href="/#contact" className="transition-colors hover:text-[var(--primary)]">
                   Contact
                 </Link>
@@ -89,12 +87,27 @@ export function Footer() {
           {/* Direct Contact & Details */}
           <div className="space-y-3">
             <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--foreground)]">
-              Contact & Location
+              Contact &amp; Location
             </h3>
-            <div className="space-y-2 text-sm text-[var(--muted)]">
-              <p>Location: Bangladesh</p>
-              <p className="break-all">
-                Email:{" "}
+            <div className="space-y-2.5 text-sm text-[var(--muted)]">
+              <p className="flex items-center gap-2 text-[var(--foreground)]">
+                <MapPin className="h-4 w-4 text-[var(--secondary)] shrink-0" />
+                <span>Noakhali, Bangladesh</span>
+              </p>
+              <p className="flex items-center gap-2">
+                <WhatsAppIcon className="h-4 w-4 text-[#25D366] shrink-0" />
+                <a
+                  href="https://wa.me/8801318352581"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--foreground)] hover:text-[#25D366] transition-colors"
+                  aria-label="Direct WhatsApp chat"
+                >
+                  +880 1318-352581
+                </a>
+              </p>
+              <p className="flex items-center gap-2 break-all">
+                <Mail className="h-4 w-4 text-[var(--primary)] shrink-0" />
                 <a
                   href="mailto:mehedihasan958327@gmail.com"
                   className="text-[var(--foreground)] hover:text-[var(--primary)] transition-colors"
@@ -102,8 +115,8 @@ export function Footer() {
                   mehedihasan958327@gmail.com
                 </a>
               </p>
-              <p>
-                Portfolio:{" "}
+              <p className="flex items-center gap-2">
+                <Globe className="h-4 w-4 text-[var(--secondary)] shrink-0" />
                 <a
                   href="https://mehedihasanbd.com"
                   target="_blank"

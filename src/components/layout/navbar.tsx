@@ -3,8 +3,9 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight, Code2 } from "lucide-react";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { BrandLogo } from "@/components/ui/brand-logo";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
@@ -17,7 +18,6 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/#hero" },
   { label: "About", href: "/#about" },
   { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -81,7 +81,6 @@ export function Navbar() {
 
   const isActive = (href: string) => {
     if (href === "/services" && pathname.startsWith("/services")) return true;
-    if (href === "/portfolio" && pathname.startsWith("/portfolio")) return true;
     if (pathname === "/" && href.startsWith("/#")) {
       const hash = href.replace("/", "");
       return activeHash === hash;
@@ -99,24 +98,8 @@ export function Navbar() {
       )}
     >
       <div className="container-custom flex h-16 items-center justify-between">
-        {/* Brand / Wordmark */}
-        <Link
-          href="/"
-          className="group flex items-center gap-2 text-[var(--foreground)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] rounded-lg p-1"
-          aria-label="Mehedi Hasan - Home"
-        >
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] text-white shadow-md shadow-[var(--primary)]/20 transition-transform duration-300 group-hover:scale-105">
-            <Code2 className="h-5 w-5" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-sans text-base font-bold tracking-tight text-[var(--foreground)]">
-              Mehedi Hasan
-            </span>
-            <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--muted)]">
-              WordPress & Frontend
-            </span>
-          </div>
-        </Link>
+        {/* Brand / Logo */}
+        <BrandLogo />
 
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-1.5 md:flex" aria-label="Main Navigation">
