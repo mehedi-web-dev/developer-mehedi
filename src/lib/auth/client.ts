@@ -1,15 +1,17 @@
 "use client";
 
 import { createAuthClient } from "better-auth/react";
-import { getApiBaseUrl } from "@/lib/api/config";
 
 /**
  * Official Better Auth React client integration.
- * Communicates with developer-mehedi-server Better Auth instance.
- * Automatically configured with cross-origin credentials support.
+ * Communicates through the same-origin Next.js reverse proxy (/api/auth/*),
+ * ensuring session cookies are stored and sent reliably as first-party cookies.
  */
 export const authClient = createAuthClient({
-  baseURL: getApiBaseUrl(),
+  baseURL:
+    typeof window !== "undefined"
+      ? window.location.origin
+      : process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   fetchOptions: {
     credentials: "include",
   },

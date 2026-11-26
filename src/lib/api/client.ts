@@ -1,4 +1,4 @@
-import { getApiBaseUrl } from "./config";
+import { getBackendUrl } from "./config";
 import { ApiError } from "./errors";
 import type { ApiResponse } from "@/types";
 
@@ -9,11 +9,19 @@ export interface RequestOptions extends Omit<RequestInit, "body"> {
 
 /**
  * Builds a full URL including query parameters.
+ * In the browser, returns same-origin relative URLs (/api/...).
+ * On the server, prepends the internal backend URL.
  */
 function buildUrl(endpoint: string, params?: RequestOptions["params"]): string {
-  const base = getApiBaseUrl();
   const path = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
-  const url = new URL(`${base}${path}`);
+
+  let url: URL;
+  if (typeof window !== "undefined") {
+    url = new URL(path, window.location.origin);
+  } else {
+    const base = getBackendUrl();
+    url = new URL(path, base);
+  }
 
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
@@ -21,6 +29,10 @@ function buildUrl(endpoint: string, params?: RequestOptions["params"]): string {
         url.searchParams.append(key, String(value));
       }
     });
+  }
+
+  if (typeof window !== "undefined") {
+    return `${url.pathname}${url.search}`;
   }
 
   return url.toString();

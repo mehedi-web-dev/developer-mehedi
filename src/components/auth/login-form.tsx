@@ -86,7 +86,7 @@ export function LoginForm() {
 
       // Verify that the signed-in user possesses the admin role
       const sessionResult = await authClient.getSession();
-      const user = sessionResult.data?.user as unknown as User | undefined;
+      const user = (sessionResult?.data?.user || (result.data as { user?: User })?.user) as User | undefined;
 
       if (!user || user.role !== "admin") {
         // Sign out immediately to prevent leaving a non-admin session active
@@ -96,9 +96,8 @@ export function LoginForm() {
         return;
       }
 
-      // Successful admin login
-      router.push("/admin");
-      router.refresh();
+      // Successful admin login - hard navigation ensures fresh cookie transmission to server components
+      window.location.href = "/admin";
     } catch {
       setErrorMessage(
         "Unable to connect to the authentication service. Please check your connection or retry."

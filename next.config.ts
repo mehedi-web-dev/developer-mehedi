@@ -24,6 +24,21 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    const backendUrl =
+      process.env.INTERNAL_BACKEND_URL ||
+      process.env.NEXT_PUBLIC_API_URL ||
+      "http://localhost:5000";
+
+    const cleanBackendUrl = backendUrl.trim().replace(/\/+$/, "");
+
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${cleanBackendUrl}/api/:path*`,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

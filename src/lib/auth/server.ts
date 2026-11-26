@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { getApiBaseUrl } from "@/lib/api/config";
+import { getBackendUrl } from "@/lib/api/config";
 import type { User, Session } from "@/types";
 
 export interface ServerSessionResult {
@@ -25,8 +25,8 @@ export async function getServerSession(): Promise<ServerSessionResult | null> {
       return null;
     }
 
-    const baseUrl = getApiBaseUrl();
-    const response = await fetch(`${baseUrl}/api/auth/get-session`, {
+    const backendUrl = getBackendUrl();
+    const response = await fetch(`${backendUrl}/api/auth/get-session`, {
       method: "GET",
       headers: {
         Cookie: cookieHeader,
