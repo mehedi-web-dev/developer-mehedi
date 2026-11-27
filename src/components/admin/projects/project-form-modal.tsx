@@ -122,8 +122,13 @@ function ProjectFormContent({
 
   const handleAddTech = () => {
     const val = techInput.trim();
-    if (val && !technologies.includes(val)) {
-      setTechnologies([...technologies, val]);
+    if (!val) return;
+    const parts = val.includes(",")
+      ? val.split(",").map((s) => s.trim()).filter(Boolean)
+      : [val];
+    const newItems = parts.filter((p) => !technologies.includes(p));
+    if (newItems.length > 0) {
+      setTechnologies([...technologies, ...newItems]);
       setTechInput("");
     }
   };

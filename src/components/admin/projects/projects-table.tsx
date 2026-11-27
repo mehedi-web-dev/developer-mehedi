@@ -184,28 +184,28 @@ export function ProjectsTable({
           <table className="w-full text-left text-sm text-slate-300">
             <thead className="text-[11px] uppercase tracking-wider text-slate-400 bg-white/5 border-b border-white/10">
               <tr>
-                <th scope="col" className="px-5 py-3.5 font-semibold">
+                <th scope="col" className="px-4 py-3 font-semibold">
                   Project Title & Thumbnail
                 </th>
-                <th scope="col" className="px-4 py-3.5 font-semibold">
+                <th scope="col" className="px-2.5 py-3 font-semibold">
                   Slug
                 </th>
-                <th scope="col" className="px-4 py-3.5 font-semibold">
+                <th scope="col" className="px-2.5 py-3 font-semibold">
                   Category
                 </th>
-                <th scope="col" className="px-4 py-3.5 font-semibold text-center">
+                <th scope="col" className="px-2 py-3 font-semibold text-center">
                   Order
                 </th>
-                <th scope="col" className="px-4 py-3.5 font-semibold text-center">
+                <th scope="col" className="px-2.5 py-3 font-semibold text-center">
                   Status
                 </th>
-                <th scope="col" className="px-4 py-3.5 font-semibold text-center">
+                <th scope="col" className="px-2 py-3 font-semibold text-center">
                   Featured
                 </th>
-                <th scope="col" className="px-4 py-3.5 font-semibold">
+                <th scope="col" className="px-2.5 py-3 font-semibold">
                   Completed
                 </th>
-                <th scope="col" className="px-5 py-3.5 font-semibold text-right">
+                <th scope="col" className="px-3 py-3 font-semibold text-right">
                   Actions
                 </th>
               </tr>
@@ -312,7 +312,7 @@ export function ProjectsTable({
                       className="hover:bg-white/[0.02] transition-colors group"
                     >
                       {/* Project Title & Thumbnail */}
-                      <td className="px-5 py-4">
+                      <td className="px-4 py-3">
                         <div className="flex items-start gap-3">
                           <div className="relative w-12 h-10 rounded-lg overflow-hidden bg-black/40 border border-white/10 flex-shrink-0 mt-0.5">
                             {project.thumbnail ? (
@@ -344,7 +344,8 @@ export function ProjectsTable({
                                 {project.technologies.slice(0, 3).map((tech, i) => (
                                   <span
                                     key={i}
-                                    className="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400 border border-white/10"
+                                    className="text-[9px] px-1.5 py-0.5 rounded bg-white/5 text-slate-400 border border-white/10 max-w-[150px] truncate"
+                                    title={tech}
                                   >
                                     {tech}
                                   </span>
@@ -361,28 +362,28 @@ export function ProjectsTable({
                       </td>
 
                       {/* Slug */}
-                      <td className="px-4 py-4">
+                      <td className="px-2.5 py-3">
                         <span className="font-mono text-xs text-cyan-300 bg-cyan-500/10 border border-cyan-500/20 px-2 py-1 rounded-md">
                           /{project.slug}
                         </span>
                       </td>
 
                       {/* Category */}
-                      <td className="px-4 py-4">
+                      <td className="px-2.5 py-3">
                         <span className="text-xs px-2.5 py-1 rounded-full font-medium bg-violet-500/15 text-violet-300 border border-violet-500/30 whitespace-nowrap">
                           {project.category}
                         </span>
                       </td>
 
                       {/* Order */}
-                      <td className="px-4 py-4 text-center">
+                      <td className="px-2 py-3 text-center">
                         <span className="text-xs font-mono text-slate-300">
                           {project.order ?? 0}
                         </span>
                       </td>
 
                       {/* Status / Toggle Published */}
-                      <td className="px-4 py-4 text-center">
+                      <td className="px-2.5 py-3 text-center">
                         <button
                           type="button"
                           onClick={() => onTogglePublished(project)}
@@ -406,7 +407,7 @@ export function ProjectsTable({
                       </td>
 
                       {/* Featured / Toggle Featured */}
-                      <td className="px-4 py-4 text-center">
+                      <td className="px-2 py-3 text-center">
                         <button
                           type="button"
                           onClick={() => onToggleFeatured(project)}
@@ -431,12 +432,12 @@ export function ProjectsTable({
                       </td>
 
                       {/* Completion Date */}
-                      <td className="px-4 py-4 text-xs text-slate-400 whitespace-nowrap">
+                      <td className="px-2.5 py-3 text-xs text-slate-400 whitespace-nowrap">
                         {completionDateFormatted}
                       </td>
 
                       {/* Actions */}
-                      <td className="px-5 py-4 text-right">
+                      <td className="px-3 py-3 text-right">
                         <div className="flex items-center justify-end gap-1.5">
                           {/* Preview Link */}
                           {project.published ? (
