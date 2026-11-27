@@ -201,7 +201,7 @@ export function CustomCursor() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[99999] overflow-hidden select-none"
+      className="pointer-events-none fixed inset-0 z-[999999] overflow-hidden select-none"
     >
       {/* Outer trailing ring */}
       <div

@@ -247,29 +247,44 @@ body {
   }
 }
 
-/* Custom Cursor styles */
-@media (pointer: fine) and (hover: hover) {
-  body.has-custom-cursor,
-  body.has-custom-cursor * {
+/* Global Custom Cursor styles for desktop fine-pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  body *,
+  body *::before,
+  body *::after {
     cursor: none !important;
   }
 
-  body.has-custom-cursor input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),
-  body.has-custom-cursor textarea,
-  body.has-custom-cursor [contenteditable="true"],
-  body.has-custom-cursor [contenteditable=""] {
+  input,
+  textarea,
+  [contenteditable="true"],
+  [contenteditable=""] {
     cursor: text !important;
   }
 
-  body.has-custom-cursor select {
-    cursor: default !important;
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="range"],
+  input[type="color"],
+  input[type="file"],
+  input[type="image"] {
+    cursor: none !important;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body.has-custom-cursor,
-  body.has-custom-cursor * {
+  html,
+  body,
+  body *,
+  body *::before,
+  body *::after {
     cursor: auto !important;
   }
 }
+
 
