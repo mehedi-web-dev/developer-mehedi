@@ -235,24 +235,24 @@ export function SkillsSection() {
         className="relative h-[280vh] sm:h-[300vh]"
       >
         {/* Sticky Viewport Stage */}
-        <div className="sticky top-16 sm:top-20 z-10 h-[calc(100vh-4rem)] sm:h-[calc(100vh-5rem)] max-h-[820px] flex flex-col justify-center px-4 sm:px-6 lg:px-8">
-          <div className="container-custom max-w-4xl mx-auto w-full">
+        <div className="sticky top-14 sm:top-20 z-10 min-h-[calc(100dvh-3.5rem)] sm:min-h-[calc(100vh-5rem)] max-h-[860px] flex flex-col justify-center px-2.5 sm:px-6 lg:px-8 py-1 sm:py-6">
+          <div className="w-full max-w-4xl mx-auto">
             {/* Section Header & Sticky Progress Indicator */}
-            <div className="mb-6 sm:mb-8 text-center space-y-3">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3.5 py-1 text-xs font-medium text-[var(--primary)] shadow-xs">
-                <Sparkles className="h-3.5 w-3.5" />
+            <div className="mb-1.5 xs:mb-2 sm:mb-5 lg:mb-8 text-center space-y-0.5 sm:space-y-2">
+              <div className="hidden sm:inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-2.5 py-0.5 sm:px-3.5 sm:py-1 text-[11px] sm:text-xs font-medium text-[var(--primary)] shadow-xs">
+                <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                 <span>Technical Capabilities</span>
               </div>
-              <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-[var(--foreground)]">
+              <h2 className="text-lg xs:text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[var(--foreground)]">
                 My Technical Toolkit
               </h2>
-              <p className="text-xs sm:text-sm text-[var(--muted)] max-w-md mx-auto">
+              <p className="hidden xs:block text-[11px] sm:text-sm text-[var(--muted)] max-w-md mx-auto">
                 Scroll down to explore core specializations one category at a time.
               </p>
 
               {/* Progress Indicator (01/03) */}
-              <div className="pt-2 flex items-center justify-center gap-3">
-                <span className="font-mono text-xs font-bold text-[var(--foreground)] tracking-wider">
+              <div className="pt-0.5 sm:pt-1.5 flex items-center justify-center gap-2 sm:gap-3">
+                <span className="font-mono text-[10px] sm:text-xs font-bold text-[var(--foreground)] tracking-wider">
                   {String(activeIndex + 1).padStart(2, "0")} / {String(TOTAL_CATEGORIES).padStart(2, "0")}
                 </span>
                 <div className="flex items-center gap-1.5" aria-hidden="true">
@@ -262,7 +262,7 @@ export function SkillsSection() {
                       className={cn(
                         "h-1.5 rounded-full transition-all duration-300",
                         idx === activeIndex
-                          ? "w-7 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]"
+                          ? "w-5 sm:w-7 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]"
                           : "w-1.5 bg-[var(--border)]"
                       )}
                     />
@@ -272,7 +272,7 @@ export function SkillsSection() {
             </div>
 
             {/* Central Sticky Card Presentation Stage */}
-            <div className="relative w-full min-h-[360px] sm:min-h-[400px] lg:min-h-[420px]">
+            <div className="relative w-full min-h-[440px] xs:min-h-[460px] sm:min-h-[490px] lg:min-h-[430px] max-h-[calc(100dvh-6.5rem)] sm:max-h-none">
               {/* Card 0: WordPress Ecosystem */}
               <motion.div
                 style={{
@@ -282,50 +282,54 @@ export function SkillsSection() {
                   pointerEvents: activeIndex === 0 ? "auto" : "none",
                 }}
                 aria-hidden={activeIndex !== 0}
-                className="absolute inset-0 glass rounded-3xl p-6 sm:p-8 lg:p-10 border border-[var(--border)] shadow-2xl overflow-hidden flex flex-col justify-between"
+                className="absolute inset-0 glass rounded-2xl sm:rounded-3xl p-2.5 xs:p-3 sm:p-5 lg:p-8 border border-[var(--border)] shadow-2xl overflow-y-auto overflow-x-hidden sm:overflow-hidden flex flex-col justify-between scrollbar-none"
               >
-                <div className="absolute top-0 right-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-[var(--primary)]/10 blur-2xl pointer-events-none" />
+                <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl pointer-events-none" aria-hidden="true">
+                  <div className="absolute top-0 right-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-[var(--primary)]/10 blur-2xl" />
+                </div>
 
                 <div>
-                  <div className="flex items-center justify-between pb-4 mb-5 border-b border-[var(--border)]">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/10 text-[var(--primary)] shadow-sm">
-                        <Globe className="h-5 w-5" />
+                  <div className="flex items-center justify-between pb-1.5 sm:pb-3 mb-1.5 sm:mb-3.5 border-b border-[var(--border)] gap-2">
+                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                      <div className="flex h-7 w-7 xs:h-8 xs:w-8 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-violet-500/10 text-[var(--primary)] shadow-sm">
+                        <Globe className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
                       </div>
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]">
+                      <div className="min-w-0">
+                        <h3 className="text-sm xs:text-base sm:text-2xl font-bold tracking-tight text-[var(--foreground)] leading-tight">
                           {CATEGORIES[0].title}
                         </h3>
-                        <p className="font-mono text-xs text-[var(--primary)]">
+                        <p className="font-mono text-[9px] xs:text-[10px] sm:text-xs text-[var(--primary)]">
                           {CATEGORIES[0].tagline}
                         </p>
                       </div>
                     </div>
-                    <span className="rounded-full bg-[var(--surface-subtle)] px-3 py-1 font-mono text-xs font-bold text-[var(--primary)] border border-[var(--border)]">
+                    <span className="shrink-0 rounded-full bg-[var(--surface-subtle)] px-2 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-xs font-bold text-[var(--primary)] border border-[var(--border)]">
                       01 / 03
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 xs:gap-1.5 sm:gap-3">
                     {CATEGORIES[0].skills.map((skill) => {
                       const Icon = skill.icon;
                       return (
                         <div
                           key={skill.name}
-                          className="group rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-4 transition-all duration-300 hover:border-[var(--primary)] hover:-translate-y-1 hover:shadow-md hover:shadow-[var(--primary)]/10"
+                          className="group rounded-xl sm:rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-1.5 xs:p-2 sm:p-3.5 transition-all duration-300 hover:border-[var(--primary)] hover:-translate-y-0.5 hover:shadow-md hover:shadow-[var(--primary)]/10"
                         >
-                          <div className="flex items-center justify-between mb-2">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[var(--surface-subtle)] text-[var(--primary)] transition-transform duration-200 group-hover:scale-110">
-                              <Icon className="h-4 w-4" />
+                          <div className="flex items-center justify-between mb-0.5 sm:mb-1.5 gap-1.5">
+                            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                              <div className="flex h-5 w-5 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--surface-subtle)] text-[var(--primary)] transition-transform duration-200 group-hover:scale-110">
+                                <Icon className="h-2.5 w-2.5 sm:h-4 sm:w-4" />
+                              </div>
+                              <h4 className="text-xs sm:text-sm font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
+                                {skill.name}
+                              </h4>
                             </div>
-                            <span className="rounded-full bg-[var(--surface-subtle)] px-2 py-0.5 text-[10px] font-mono font-medium text-[var(--muted)]">
+                            <span className="shrink-0 rounded-full bg-[var(--surface-subtle)] px-1.5 py-0.2 sm:px-2 sm:py-0.5 text-[8px] sm:text-[10px] font-mono font-medium text-[var(--muted)]">
                               {skill.level}
                             </span>
                           </div>
-                          <h4 className="text-sm font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
-                            {skill.name}
-                          </h4>
-                          <p className="mt-1 text-[11px] leading-relaxed text-[var(--muted)]">
+                          <p className="text-[9.5px] xs:text-[10px] sm:text-[11px] leading-tight sm:leading-relaxed text-[var(--muted)] line-clamp-2 sm:line-clamp-none">
                             {skill.description}
                           </p>
                         </div>
@@ -334,9 +338,9 @@ export function SkillsSection() {
                   </div>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--muted)]">
+                <div className="pt-1 sm:pt-3 mt-1 sm:mt-3 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-1 text-[9.5px] xs:text-[10px] sm:text-xs text-[var(--muted)]">
                   <span>80+ Completed WordPress Client Websites</span>
-                  <span className="font-mono text-[11px] text-[var(--primary)]">Scroll down for next card &darr;</span>
+                  <span className="font-mono text-[9px] sm:text-[11px] text-[var(--primary)]">Scroll down for next card &darr;</span>
                 </div>
               </motion.div>
 
@@ -349,50 +353,54 @@ export function SkillsSection() {
                   pointerEvents: activeIndex === 1 ? "auto" : "none",
                 }}
                 aria-hidden={activeIndex !== 1}
-                className="absolute inset-0 glass rounded-3xl p-6 sm:p-8 lg:p-10 border border-[var(--border)] shadow-2xl overflow-hidden flex flex-col justify-between"
+                className="absolute inset-0 glass rounded-2xl sm:rounded-3xl p-2.5 xs:p-3 sm:p-5 lg:p-8 border border-[var(--border)] shadow-2xl overflow-y-auto overflow-x-hidden sm:overflow-hidden flex flex-col justify-between scrollbar-none"
               >
-                <div className="absolute top-0 right-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-[var(--secondary)]/10 blur-2xl pointer-events-none" />
+                <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl pointer-events-none" aria-hidden="true">
+                  <div className="absolute top-0 right-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-[var(--secondary)]/10 blur-2xl" />
+                </div>
 
                 <div>
-                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-[var(--border)]">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-cyan-500/10 text-[var(--secondary)] shadow-sm">
-                        <Zap className="h-5 w-5" />
+                  <div className="flex items-center justify-between pb-1.5 sm:pb-3 mb-1 sm:mb-3 border-b border-[var(--border)] gap-2">
+                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                      <div className="flex h-7 w-7 xs:h-8 xs:w-8 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-cyan-500/10 text-[var(--secondary)] shadow-sm">
+                        <Zap className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
                       </div>
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]">
+                      <div className="min-w-0">
+                        <h3 className="text-sm xs:text-base sm:text-2xl font-bold tracking-tight text-[var(--foreground)] leading-tight">
                           {CATEGORIES[1].title}
                         </h3>
-                        <p className="font-mono text-xs text-[var(--secondary)]">
+                        <p className="font-mono text-[9px] xs:text-[10px] sm:text-xs text-[var(--secondary)]">
                           {CATEGORIES[1].tagline}
                         </p>
                       </div>
                     </div>
-                    <span className="rounded-full bg-[var(--surface-subtle)] px-3 py-1 font-mono text-xs font-bold text-[var(--secondary)] border border-[var(--border)]">
+                    <span className="shrink-0 rounded-full bg-[var(--surface-subtle)] px-2 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-xs font-bold text-[var(--secondary)] border border-[var(--border)]">
                       02 / 03
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1 xs:gap-1.5 sm:gap-2.5">
                     {CATEGORIES[1].skills.map((skill) => {
                       const Icon = skill.icon;
                       return (
                         <div
                           key={skill.name}
-                          className="group rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-3 sm:p-3.5 transition-all duration-300 hover:border-[var(--secondary)] hover:-translate-y-1 hover:shadow-md hover:shadow-[var(--secondary)]/10"
+                          className="group rounded-xl sm:rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-1.5 xs:p-2 sm:p-3 transition-all duration-300 hover:border-[var(--secondary)] hover:-translate-y-0.5 hover:shadow-md hover:shadow-[var(--secondary)]/10"
                         >
-                          <div className="flex items-center justify-between mb-1.5">
-                            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--surface-subtle)] text-[var(--secondary)] transition-transform duration-200 group-hover:scale-110">
-                              <Icon className="h-3.5 w-3.5" />
+                          <div className="flex items-center justify-between mb-0.5 gap-1.5">
+                            <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                              <div className="flex h-5 w-5 xs:h-6 xs:w-6 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-md bg-[var(--surface-subtle)] text-[var(--secondary)] transition-transform duration-200 group-hover:scale-110">
+                                <Icon className="h-2.5 w-2.5 xs:h-3 xs:w-3 sm:h-3.5 sm:w-3.5" />
+                              </div>
+                              <h4 className="text-xs sm:text-sm font-bold text-[var(--foreground)] group-hover:text-[var(--secondary)] transition-colors">
+                                {skill.name}
+                              </h4>
                             </div>
-                            <span className="rounded-full bg-[var(--surface-subtle)] px-1.5 py-0.5 text-[9px] font-mono font-medium text-[var(--muted)]">
+                            <span className="shrink-0 rounded-full bg-[var(--surface-subtle)] px-1.5 py-0.2 text-[8px] sm:text-[9px] font-mono font-medium text-[var(--muted)]">
                               {skill.level}
                             </span>
                           </div>
-                          <h4 className="text-xs sm:text-sm font-bold text-[var(--foreground)] group-hover:text-[var(--secondary)] transition-colors">
-                            {skill.name}
-                          </h4>
-                          <p className="mt-1 text-[10px] leading-relaxed text-[var(--muted)] line-clamp-2">
+                          <p className="text-[9px] xs:text-[9.5px] sm:text-[11px] leading-tight text-[var(--muted)] line-clamp-1 sm:line-clamp-2">
                             {skill.description}
                           </p>
                         </div>
@@ -401,9 +409,9 @@ export function SkillsSection() {
                   </div>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--muted)]">
+                <div className="pt-1 sm:pt-2.5 mt-1 sm:mt-2.5 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-1 text-[9.5px] xs:text-[10px] sm:text-xs text-[var(--muted)]">
                   <span>Component-Driven React 19 &amp; Next.js App Router</span>
-                  <span className="font-mono text-[11px] text-[var(--secondary)]">Scroll down for next card &darr;</span>
+                  <span className="font-mono text-[9px] sm:text-[11px] text-[var(--secondary)]">Scroll down for next card &darr;</span>
                 </div>
               </motion.div>
 
@@ -416,52 +424,59 @@ export function SkillsSection() {
                   pointerEvents: activeIndex === 2 ? "auto" : "none",
                 }}
                 aria-hidden={activeIndex !== 2}
-                className="absolute inset-0 glass rounded-3xl p-6 sm:p-8 lg:p-10 border border-[var(--border)] shadow-2xl overflow-hidden flex flex-col justify-between"
+                className="absolute inset-0 glass rounded-2xl sm:rounded-3xl p-2.5 xs:p-3 sm:p-5 lg:p-8 border border-[var(--border)] shadow-2xl overflow-y-auto overflow-x-hidden sm:overflow-hidden flex flex-col justify-between scrollbar-none"
               >
-                <div className="absolute top-0 right-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-[var(--primary)]/10 blur-2xl pointer-events-none" />
+                <div className="absolute inset-0 overflow-hidden rounded-2xl sm:rounded-3xl pointer-events-none" aria-hidden="true">
+                  <div className="absolute top-0 right-0 -mr-16 -mt-16 h-48 w-48 rounded-full bg-[var(--primary)]/10 blur-2xl" />
+                </div>
 
                 <div>
-                  <div className="flex items-center justify-between pb-4 mb-5 border-b border-[var(--border)]">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-violet-500/10 text-[var(--primary)] shadow-sm">
-                        <Server className="h-5 w-5" />
+                  <div className="flex items-center justify-between pb-1.5 sm:pb-3 mb-1.5 sm:mb-3.5 border-b border-[var(--border)] gap-2">
+                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+                      <div className="flex h-7 w-7 xs:h-8 xs:w-8 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-violet-500/10 text-[var(--primary)] shadow-sm">
+                        <Server className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
                       </div>
-                      <div>
-                        <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-[var(--foreground)]">
+                      <div className="min-w-0">
+                        <h3 className="text-sm xs:text-base sm:text-2xl font-bold tracking-tight text-[var(--foreground)] leading-tight">
                           {CATEGORIES[2].title}
                         </h3>
-                        <p className="font-mono text-xs text-[var(--primary)]">
+                        <p className="font-mono text-[9px] xs:text-[10px] sm:text-xs text-[var(--primary)]">
                           {CATEGORIES[2].tagline}
                         </p>
                       </div>
                     </div>
-                    <span className="rounded-full bg-[var(--surface-subtle)] px-3 py-1 font-mono text-xs font-bold text-[var(--primary)] border border-[var(--border)]">
+                    <span className="shrink-0 rounded-full bg-[var(--surface-subtle)] px-2 py-0.5 sm:px-3 sm:py-1 font-mono text-[9px] sm:text-xs font-bold text-[var(--primary)] border border-[var(--border)]">
                       03 / 03
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {CATEGORIES[2].skills.map((skill) => {
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 xs:gap-2 sm:gap-3 lg:gap-4">
+                    {CATEGORIES[2].skills.map((skill, idx) => {
                       const Icon = skill.icon;
                       return (
                         <div
                           key={skill.name}
-                          className="group rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-5 transition-all duration-300 hover:border-[var(--primary)] hover:-translate-y-1 hover:shadow-md hover:shadow-[var(--primary)]/10 flex flex-col justify-between min-h-[170px]"
+                          className={cn(
+                            "group rounded-xl sm:rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-2 xs:p-2.5 sm:p-3.5 lg:p-5 transition-all duration-300 hover:border-[var(--primary)] hover:-translate-y-0.5 hover:shadow-md hover:shadow-[var(--primary)]/10 flex flex-col justify-between min-h-[85px] sm:min-h-[110px] lg:min-h-[140px]",
+                            idx === 2 ? "sm:col-span-2 sm:max-w-md sm:mx-auto sm:w-full lg:col-span-1 lg:max-w-none" : ""
+                          )}
                         >
                           <div>
-                            <div className="flex items-center justify-between mb-3">
-                              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--surface-subtle)] text-[var(--primary)] transition-transform duration-200 group-hover:scale-110">
-                                <Icon className="h-4.5 w-4.5" />
+                            <div className="flex items-center justify-between mb-1 sm:mb-2 gap-1.5">
+                              <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                                <div className="flex h-5 w-5 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg sm:rounded-xl bg-[var(--surface-subtle)] text-[var(--primary)] transition-transform duration-200 group-hover:scale-110">
+                                  <Icon className="h-2.5 w-2.5 sm:h-4 sm:w-4" />
+                                </div>
+                                <h4 className="text-xs sm:text-sm font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
+                                  {skill.name}
+                                </h4>
                               </div>
-                              <span className="rounded-full bg-[var(--surface-subtle)] px-2 py-0.5 text-[10px] font-mono font-medium text-[var(--muted)]">
+                              <span className="shrink-0 rounded-full bg-[var(--surface-subtle)] px-1.5 py-0.2 sm:px-2 sm:py-0.5 text-[8px] sm:text-[10px] font-mono font-medium text-[var(--muted)]">
                                 {skill.level}
                               </span>
                             </div>
-                            <h4 className="text-sm font-bold text-[var(--foreground)] group-hover:text-[var(--primary)] transition-colors">
-                              {skill.name}
-                            </h4>
                           </div>
-                          <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
+                          <p className="mt-0.5 sm:mt-1.5 text-[9px] xs:text-[10px] sm:text-xs leading-tight sm:leading-relaxed text-[var(--muted)] line-clamp-1 sm:line-clamp-none">
                             {skill.description}
                           </p>
                         </div>
@@ -470,9 +485,9 @@ export function SkillsSection() {
                   </div>
                 </div>
 
-                <div className="pt-4 mt-4 border-t border-[var(--border)] flex items-center justify-between text-xs text-[var(--muted)]">
+                <div className="pt-1 sm:pt-3 mt-1 sm:mt-3 border-t border-[var(--border)] flex flex-wrap items-center justify-between gap-1 text-[9.5px] xs:text-[10px] sm:text-xs text-[var(--muted)]">
                   <span>Server-side Architecture, REST APIs &amp; NoSQL Data Modeling</span>
-                  <span className="font-mono text-[11px] text-[var(--primary)]">Modern Web Standards &bull; Full-Stack</span>
+                  <span className="font-mono text-[9px] sm:text-[11px] text-[var(--primary)]">Modern Web Standards &bull; Full-Stack</span>
                 </div>
               </motion.div>
             </div>
