@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { AppProviders } from "@/providers";
 import { PublicLayoutShell } from "@/components/layout";
+import { CustomCursor } from "@/components/ui";
 import { JsonLd } from "@/components/seo";
 import { getSiteUrl, SEO_CONFIG, getPersonJsonLd, getWebSiteJsonLd } from "@/lib/seo";
 import "./globals.css";
@@ -98,6 +99,7 @@ export default function RootLayout({
         <JsonLd data={[getPersonJsonLd(), getWebSiteJsonLd()]} />
       </head>
       <body className="min-h-full flex flex-col bg-[var(--background)] text-[var(--foreground)] selection:bg-[var(--primary)]/20">
+        <CustomCursor />
         <AppProviders>
           <PublicLayoutShell>{children}</PublicLayoutShell>
         </AppProviders>

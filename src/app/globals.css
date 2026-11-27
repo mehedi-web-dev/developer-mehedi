@@ -246,3 +246,30 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Custom Cursor styles */
+@media (pointer: fine) and (hover: hover) {
+  body.has-custom-cursor,
+  body.has-custom-cursor * {
+    cursor: none !important;
+  }
+
+  body.has-custom-cursor input:not([type="button"]):not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([type="file"]),
+  body.has-custom-cursor textarea,
+  body.has-custom-cursor [contenteditable="true"],
+  body.has-custom-cursor [contenteditable=""] {
+    cursor: text !important;
+  }
+
+  body.has-custom-cursor select {
+    cursor: default !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.has-custom-cursor,
+  body.has-custom-cursor * {
+    cursor: auto !important;
+  }
+}
+
