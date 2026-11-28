@@ -36,20 +36,30 @@ export function Navbar() {
   }, [isOpen]);
 
   const navLinks = [
-    { label: "Home", href: "/#hero" },
+    { label: "Home", href: "/" },
     { label: "About Me", href: "/#about" },
     { label: "Web development", href: "/#expectations" },
     { label: "Services", href: "/#services" },
     { label: "Portfolio", href: "/#portfolio-preview" },
   ];
 
-  const handleLinkClick = (href: string) => {
+  const handleLinkClick = (e: React.MouseEvent, href: string) => {
     setIsOpen(false);
-    if (href.startsWith("/#") && pathname === "/") {
-      const id = href.replace("/#", "");
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
+    if (pathname === "/") {
+      if (href === "/" || href === "/#hero") {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.history.replaceState(null, "", "/");
+        return;
+      }
+      if (href.startsWith("/#")) {
+        e.preventDefault();
+        const id = href.replace("/#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+          window.history.replaceState(null, "", `/#${id}`);
+        }
       }
     }
   };
@@ -70,8 +80,8 @@ export function Navbar() {
         >
           {/* Monogram M Logo */}
           <Link
-            href="/#hero"
-            onClick={() => handleLinkClick("/#hero")}
+            href="/"
+            onClick={(e) => handleLinkClick(e, "/")}
             className="flex items-center justify-center w-8 h-8 rounded-full hover:scale-110 transition-transform focus:outline-none"
             aria-label="Home"
           >
@@ -88,7 +98,7 @@ export function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  onClick={() => handleLinkClick(item.href)}
+                  onClick={(e) => handleLinkClick(e, item.href)}
                   onMouseEnter={() => setHoveredLink(item.label)}
                   onMouseLeave={() => setHoveredLink(null)}
                   className="relative flex items-center h-6 overflow-hidden cursor-pointer select-none"
@@ -126,7 +136,7 @@ export function Navbar() {
           {/* "Contact" Button with Corner-Expanding Diagonal Flood Fill */}
           <Link
             href="/#contact"
-            onClick={() => handleLinkClick("/#contact")}
+            onClick={(e) => handleLinkClick(e, "/#contact")}
             onMouseEnter={() => setContactHovered(true)}
             onMouseLeave={() => setContactHovered(false)}
             className="relative flex items-center justify-center h-9 px-6 rounded-full bg-white text-black text-xs font-semibold tracking-wide transition-all shadow-md ml-1 overflow-hidden select-none cursor-pointer"
@@ -165,8 +175,8 @@ export function Navbar() {
           }`}
         >
           <Link
-            href="/#hero"
-            onClick={() => handleLinkClick("/#hero")}
+            href="/"
+            onClick={(e) => handleLinkClick(e, "/")}
             className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center font-bold text-sm text-white shrink-0"
           >
             M
@@ -174,7 +184,7 @@ export function Navbar() {
 
           <Link
             href="/#contact"
-            onClick={() => handleLinkClick("/#contact")}
+            onClick={(e) => handleLinkClick(e, "/#contact")}
             className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1 rounded-full bg-white/[0.04] border border-white/5 text-[11px] sm:text-xs font-medium text-zinc-300 truncate"
           >
             <span className="relative flex h-2 w-2 shrink-0">
@@ -216,7 +226,7 @@ export function Navbar() {
                   <Link
                     key={item.label}
                     href={item.href}
-                    onClick={() => handleLinkClick(item.href)}
+                    onClick={(e) => handleLinkClick(e, item.href)}
                     className="flex items-center justify-between w-full px-3 py-2 rounded-2xl text-left text-sm font-medium text-zinc-200 hover:text-black hover:bg-[#c6ff00] transition-all"
                   >
                     <span>{item.label}</span>
@@ -225,7 +235,7 @@ export function Navbar() {
                 ))}
                 <Link
                   href="/#contact"
-                  onClick={() => handleLinkClick("/#contact")}
+                  onClick={(e) => handleLinkClick(e, "/#contact")}
                   className="mt-2 w-full text-center py-2.5 rounded-full bg-white text-black font-semibold text-xs"
                 >
                   Contact

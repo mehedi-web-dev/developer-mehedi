@@ -78,6 +78,13 @@ export function AboutSection({
           <div className="flex flex-wrap items-center gap-4">
             <Link
               href="/#contact"
+              onClick={(e) => {
+                if (typeof window !== "undefined" && window.location.pathname === "/") {
+                  e.preventDefault();
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                  window.history.replaceState(null, "", "/#contact");
+                }
+              }}
               className="px-6 py-3 rounded-full bg-[#c6ff00] hover:bg-[#d4ff33] text-black font-semibold text-xs uppercase tracking-wider transition-all flex items-center gap-2"
             >
               <span>Let&apos;s Connect</span>
