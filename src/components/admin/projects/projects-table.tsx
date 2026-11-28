@@ -442,11 +442,11 @@ export function ProjectsTable({
                           {/* Preview Link */}
                           {project.published ? (
                             <Link
-                              href={project.liveUrl || "/#portfolio-preview"}
+                              href={`/portfolio/${project.slug}`}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="p-1.5 rounded-lg text-slate-400 hover:text-cyan-400 hover:bg-cyan-500/10 border border-transparent hover:border-cyan-500/20 transition-all"
-                              title="Preview Project"
+                              title="Preview Project Case Study"
                             >
                               <ExternalLink className="w-3.5 h-3.5" />
                             </Link>

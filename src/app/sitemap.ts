@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/lib/seo";
+import { FALLBACK_PROJECTS } from "@/services/projects.service";
 
 /**
  * Dynamic Next.js App Router sitemap generation.
@@ -8,7 +9,7 @@ import { getSiteUrl } from "@/lib/seo";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = getSiteUrl();
 
-  return [
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: siteUrl,
       lastModified: new Date(),
@@ -28,4 +29,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
   ];
+
+  const projectRoutes: MetadataRoute.Sitemap = FALLBACK_PROJECTS.map((project) => ({
+    url: `${siteUrl}/portfolio/${encodeURIComponent(project.slug)}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
+
+  return [...staticRoutes, ...projectRoutes];
 }
