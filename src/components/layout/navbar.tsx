@@ -9,6 +9,8 @@ import { ArrowUpRight } from "lucide-react";
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
+  const [hoveredLink, setHoveredLink] = React.useState<string | null>(null);
+  const [contactHovered, setContactHovered] = React.useState(false);
   const navRef = React.useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -70,7 +72,7 @@ export function Navbar() {
           <Link
             href="/#hero"
             onClick={() => handleLinkClick("/#hero")}
-            className="flex items-center justify-center w-8 h-8 rounded-full hover:opacity-80 transition-opacity focus:outline-none"
+            className="flex items-center justify-center w-8 h-8 rounded-full hover:scale-110 transition-transform focus:outline-none"
             aria-label="Home"
           >
             <span className="font-display font-extrabold text-base tracking-tight text-white select-none">
@@ -78,27 +80,76 @@ export function Navbar() {
             </span>
           </Link>
 
-          {/* Horizontal Desktop Navigation Links */}
-          <div className="flex items-center gap-6 text-xs font-medium text-zinc-300">
-            {navLinks.map((item) => (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => handleLinkClick(item.href)}
-                className="hover:text-white transition-colors tracking-wide"
-              >
-                {item.label}
-              </Link>
-            ))}
+          {/* Horizontal Desktop Navigation Links with 3D Cube Roll Effect */}
+          <div className="flex items-center gap-7 text-[13.5px] font-sans font-medium">
+            {navLinks.map((item) => {
+              const isHovered = hoveredLink === item.label;
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => handleLinkClick(item.href)}
+                  onMouseEnter={() => setHoveredLink(item.label)}
+                  onMouseLeave={() => setHoveredLink(null)}
+                  className="relative flex items-center h-6 overflow-hidden cursor-pointer select-none"
+                  style={{ perspective: "1200px" }}
+                >
+                  <motion.div
+                    animate={{ rotateX: isHovered ? -90 : 0 }}
+                    transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
+                    style={{
+                      transformStyle: "preserve-3d",
+                      transformOrigin: "50% 0% 0px",
+                    }}
+                    className="flex flex-col items-center justify-start h-6 leading-6"
+                  >
+                    {/* Default Label */}
+                    <span className="h-6 flex items-center text-zinc-300 tracking-normal whitespace-nowrap">
+                      {item.label}
+                    </span>
+                    {/* 3D Rotated Hover Label in Lime Accent */}
+                    <span
+                      className="h-6 flex items-center text-[#c6ff00] font-semibold tracking-normal whitespace-nowrap"
+                      style={{
+                        transform: "rotateX(90deg)",
+                        transformOrigin: "50% 0% 0px",
+                      }}
+                    >
+                      {item.label}
+                    </span>
+                  </motion.div>
+                </Link>
+              );
+            })}
           </div>
 
-          {/* White Pill Contact Button */}
+          {/* "Contact" Button with Corner-Expanding Diagonal Flood Fill */}
           <Link
             href="/#contact"
             onClick={() => handleLinkClick("/#contact")}
-            className="px-5 py-2 rounded-full bg-white hover:bg-zinc-200 text-black text-xs font-semibold tracking-wide transition-all shadow-md ml-1"
+            onMouseEnter={() => setContactHovered(true)}
+            onMouseLeave={() => setContactHovered(false)}
+            className="relative flex items-center justify-center h-9 px-6 rounded-full bg-white text-black text-xs font-semibold tracking-wide transition-all shadow-md ml-1 overflow-hidden select-none cursor-pointer"
           >
-            Contact
+            {/* Expanding Circle Fill from Bottom-Left Corner */}
+            <motion.div
+              initial={false}
+              animate={{
+                width: contactHovered ? 180 : 20,
+                height: contactHovered ? 180 : 20,
+                bottom: contactHovered ? -70 : -20,
+                left: contactHovered ? -30 : -20,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 380,
+                damping: 28,
+              }}
+              className="absolute rounded-full bg-[#c6ff00] pointer-events-none z-0"
+            />
+            <span className="relative z-10 font-semibold text-black">
+              Contact
+            </span>
           </Link>
         </motion.nav>
 
