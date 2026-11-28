@@ -94,16 +94,9 @@ export function ExpectationsSection({ hideDesktopSlot = false }: ExpectationsSec
           </div>
         </div>
 
-        {/* Right Column: On Desktop, Sticky 3D Card flips into this space! On Mobile, shows standard card */}
-        <div className="lg:col-span-5 flex justify-center">
-          <div className="w-[340px] h-[476px] hidden lg:block" />
-          <div className="lg:hidden w-full max-w-sm rounded-3xl overflow-hidden border border-black/10 dark:border-white/10 shadow-2xl">
-            <img
-              src="/developer-desk.jpg"
-              alt="Developer Workspace"
-              className="w-full h-auto object-cover"
-            />
-          </div>
+        {/* Right Column: Slot reserved on Desktop for the 3D Sticky Flipping Card. Hidden on responsive/mobile */}
+        <div className="hidden lg:flex lg:col-span-5 justify-center">
+          <div className="w-[340px] h-[476px]" />
         </div>
       </div>
     </section>

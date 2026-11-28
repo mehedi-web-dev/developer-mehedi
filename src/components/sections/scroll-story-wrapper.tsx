@@ -93,8 +93,8 @@ export function ScrollStoryWrapper({ siteSettings }: ScrollStoryWrapperProps) {
             >
               <img
                 src={workspaceImage}
-                alt="Developer Desk"
-                className="w-full h-full object-cover"
+                alt="Mehedi Hasan - Developer Workspace"
+                className="w-full h-full object-cover object-[70%_center]"
               />
             </div>
 
