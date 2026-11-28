@@ -25,17 +25,17 @@ export function ScrollStoryWrapper({ siteSettings }: ScrollStoryWrapperProps) {
     restDelta: 0.001,
   });
 
-  // Responsive X offset for desktop (starts at center 0px, moves to right column 330px)
-  const x = useTransform(smoothProgress, [0, 0.28, 0.72, 1], ["0px", "330px", "330px", "330px"]);
+  // Precise X translation from center (0px) to right column (350px on desktop)
+  const x = useTransform(smoothProgress, [0, 0.28, 0.72, 1], ["0px", "350px", "350px", "350px"]);
   // 3D Flip:
   // 0 -> 180deg (reveals Back face: developer desk) during Expectations
   // 180 -> 340deg (-20deg tilt, reveals Front face: Mehedi portrait) during About
   const rotateY = useTransform(smoothProgress, [0, 0.35, 0.75, 1], [0, 180, 340, 340]);
-  const rotateZ = useTransform(smoothProgress, [0, 0.3, 0.75, 1], [0, 8, 4, 4]);
-  const scale = useTransform(smoothProgress, [0, 0.28, 0.75, 1], [1, 0.93, 1, 1]);
+  const rotateZ = useTransform(smoothProgress, [0, 0.3, 0.75, 1], [0, 7.5, 4, 4]);
+  const scale = useTransform(smoothProgress, [0, 0.28, 0.75, 1], [1, 0.94, 1, 1]);
 
-  // "Hi" badge toggle animation state (cycles between "Hi" and "👋")
-  const [badgeState, setBadgeState] = React.useState<"hi" | "wave">("hi");
+  // "Hi" / waving hand badge toggle animation state
+  const [badgeState, setBadgeState] = React.useState<"hi" | "wave">("wave");
 
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -56,7 +56,7 @@ export function ScrollStoryWrapper({ siteSettings }: ScrollStoryWrapperProps) {
         className="hidden lg:block absolute inset-0 pointer-events-none z-30"
         style={{ perspective: "2200px" }}
       >
-        <div className="sticky top-28 flex justify-center w-full">
+        <div className="sticky top-32 flex justify-center w-full">
           <motion.div
             style={{
               x,
@@ -65,11 +65,11 @@ export function ScrollStoryWrapper({ siteSettings }: ScrollStoryWrapperProps) {
               scale,
               transformStyle: "preserve-3d",
             }}
-            className="pointer-events-auto relative w-[330px] h-[460px] rounded-[26px] cursor-pointer shadow-2xl"
+            className="pointer-events-auto relative w-[320px] xl:w-[350px] h-[450px] xl:h-[490px] rounded-[28px] cursor-pointer shadow-2xl"
           >
             {/* FRONT FACE: Mehedi Hasan Portrait */}
             <div
-              className="absolute inset-0 w-full h-full rounded-[26px] overflow-hidden border-2 border-white/15 bg-[#16171a] shadow-2xl"
+              className="absolute inset-0 w-full h-full rounded-[28px] overflow-hidden border-2 border-white/10 bg-[#16171a] shadow-2xl"
               style={{
                 backfaceVisibility: "hidden",
                 WebkitBackfaceVisibility: "hidden",
@@ -77,25 +77,14 @@ export function ScrollStoryWrapper({ siteSettings }: ScrollStoryWrapperProps) {
             >
               <img
                 src={portraitImage}
-                alt="Mehedi Hasan - WordPress & Frontend Developer"
-                className="w-full h-full object-cover object-top filter contrast-110"
+                alt="Mehedi Hasan"
+                className="w-full h-full object-cover object-top"
               />
-              {/* Bottom text overlay with left padding so badge NEVER covers text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex items-end pl-18 pr-4 pb-4.5 pt-12">
-                <div>
-                  <p className="text-white font-bold text-sm tracking-tight leading-tight">
-                    Mehedi Hasan
-                  </p>
-                  <p className="text-[#c6ff00] text-xs font-mono tracking-tight mt-0.5">
-                    WordPress &amp; Frontend Dev
-                  </p>
-                </div>
-              </div>
             </div>
 
-            {/* BACK FACE: Developer Desk / Multi-Monitor Code Setup */}
+            {/* BACK FACE: Developer Desk Workspace */}
             <div
-              className="absolute inset-0 w-full h-full rounded-[26px] overflow-hidden border-2 border-white/15 bg-[#16171a] shadow-2xl"
+              className="absolute inset-0 w-full h-full rounded-[28px] overflow-hidden border-2 border-white/10 bg-[#16171a] shadow-2xl"
               style={{
                 transform: "rotateY(180deg)",
                 backfaceVisibility: "hidden",
@@ -104,24 +93,14 @@ export function ScrollStoryWrapper({ siteSettings }: ScrollStoryWrapperProps) {
             >
               <img
                 src={workspaceImage}
-                alt="Developer Desk & Engineering Workspace"
+                alt="Developer Desk"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent flex items-end pl-18 pr-4 pb-4.5 pt-12">
-                <div>
-                  <p className="text-white font-bold text-sm tracking-tight leading-tight">
-                    Developer Workspace
-                  </p>
-                  <p className="text-[#c6ff00] text-xs font-mono tracking-tight mt-0.5">
-                    Code, Architecture &amp; Design
-                  </p>
-                </div>
-              </div>
             </div>
 
-            {/* FLOATING 3D "HI" / WAVING BADGE */}
+            {/* FLOATING 3D "HI" / WAVING BADGE (Anchored at Bottom-Left corner, matching Image 2) */}
             <div
-              className="absolute bottom-2 left-2 z-40 w-14 h-14 rounded-full bg-[#c6ff00] text-black shadow-2xl border-2 border-[#0c0d0e] flex items-center justify-center overflow-hidden"
+              className="absolute -bottom-5 -left-5 z-40 w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-[#c6ff00] text-black shadow-2xl border-4 border-[#0c0d0e] flex items-center justify-center overflow-hidden"
               style={{
                 transform: "translateZ(45px)",
               }}
@@ -131,11 +110,11 @@ export function ScrollStoryWrapper({ siteSettings }: ScrollStoryWrapperProps) {
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="flex flex-col items-center justify-start h-[200%] w-full"
               >
-                <div className="h-1/2 w-full flex items-center justify-center font-display font-extrabold text-base select-none">
+                <div className="h-1/2 w-full flex items-center justify-center font-display font-extrabold text-xl select-none text-black">
                   Hi
                 </div>
-                <div className="h-1/2 w-full flex items-center justify-center text-xl select-none">
-                  👋
+                <div className="h-1/2 w-full flex items-center justify-center text-3xl select-none">
+                  ✋
                 </div>
               </motion.div>
             </div>

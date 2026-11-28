@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
+import { Geist, Geist_Mono, Space_Grotesk, Oswald } from "next/font/google";
 import { AppProviders } from "@/providers";
 import { PublicLayoutShell } from "@/components/layout";
 import { CustomCursor } from "@/components/ui";
@@ -24,6 +24,13 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   display: "swap",
   weight: ["500", "600", "700"],
+});
+
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["600", "700"],
 });
 
 const siteUrl = getSiteUrl();
@@ -100,7 +107,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} dark h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${spaceGrotesk.variable} ${oswald.variable} dark h-full antialiased`}
     >
       <head>
         <JsonLd data={[getPersonJsonLd(), getWebSiteJsonLd()]} />
