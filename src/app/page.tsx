@@ -7,7 +7,7 @@ import {
   FAQSection,
   ContactSection,
 } from "@/components/sections";
-import { getSiteSettings, getFeaturedProjects } from "@/services";
+import { getSiteSettings, getProjects } from "@/services";
 
 export const dynamic = "force-dynamic";
 
@@ -36,7 +36,9 @@ export const metadata: Metadata = {
 export default async function Home() {
   const [siteSettings, initialProjects] = await Promise.all([
     getSiteSettings().catch(() => null),
-    getFeaturedProjects().catch(() => null),
+    getProjects({ limit: 100 })
+      .then((r) => r.projects)
+      .catch(() => null),
   ]);
 
   return (

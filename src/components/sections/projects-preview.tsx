@@ -2,8 +2,9 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { FALLBACK_PROJECTS } from "@/services";
 import type { ProjectItem } from "@/types";
 
 export interface ProjectsPreviewSectionProps {
@@ -21,42 +22,6 @@ interface ProjectCardData {
   liveUrl?: string;
 }
 
-const FEATURED_STACK_PROJECTS: ProjectCardData[] = [
-  {
-    id: "1",
-    title: "MeetMate AI",
-    badge: "Web Design & SaaS",
-    subtitle:
-      "Bespoke design and full frontend development for an automated AI meeting intelligence platform, focused on enterprise conversion and interactive UI.",
-    image: "https://framerusercontent.com/images/tbAYKmuCPrc8idgXtBNAyxXWA.png",
-    slug: "meetmate-ai-saas",
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    liveUrl: "https://meetmate.ai",
-  },
-  {
-    id: "2",
-    title: "Rawink Tattoo",
-    badge: "Branding & Custom Web",
-    subtitle:
-      "Raw Ink Tattoo, a creative and professional studio. Complete digital identity and dynamic portfolio showcase with artist profiles and instant booking.",
-    image: "https://framerusercontent.com/images/odZb6sCBuXZLQUkegaYdvpoPck.png",
-    slug: "rawink-creative-studio",
-    technologies: ["WordPress", "Elementor Pro", "Custom CSS", "ACF Pro"],
-    liveUrl: "https://rawink.nl",
-  },
-  {
-    id: "3",
-    title: "Gijs.nl",
-    badge: "Web Design & E-Commerce",
-    subtitle:
-      "Elegant and functional website for a custom shutter and home maintenance specialist, engineered for uncompromising build quality and effortless usability.",
-    image: "https://framerusercontent.com/images/8tYnYpe4DeBFntYlkXLzk8HvC9A.png",
-    slug: "gijs-luxe-shutters",
-    technologies: ["WooCommerce", "WordPress", "Custom Checkout", "Speed Optimization"],
-    liveUrl: "https://gijs.nl",
-  },
-];
-
 /**
  * Single Stacking Card with Scroll-linked Scaling
  */
@@ -71,13 +36,8 @@ function StackingProjectCard({
 }) {
   const cardRef = React.useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "start start"],
-  });
-
-  // Calculate top sticky offset so each card stacks cleanly with slight staggered header exposure
-  const topOffset = 110 + index * 24;
+  // Calculate top sticky offset so all cards stack cleanly with staggered header exposure
+  const topOffset = 100 + index * 16;
 
   return (
     <div
@@ -92,7 +52,7 @@ function StackingProjectCard({
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
+        transition={{ duration: 0.5, delay: index * 0.08 }}
         className="group relative w-full bg-white dark:bg-[#141517] rounded-[28px] sm:rounded-[36px] border border-black/10 dark:border-white/10 overflow-hidden shadow-2xl hover:border-[#c6ff00]/60 transition-all duration-300"
       >
         <Link href={`/portfolio/${project.slug}`} className="block">
@@ -105,7 +65,7 @@ function StackingProjectCard({
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute top-5 left-5 z-10">
-                <span className="px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-xs font-semibold text-[#c6ff00] font-mono">
+                <span className="px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-xs font-semibold text-[#c6ff00] font-mono">
                   {project.badge}
                 </span>
               </div>
@@ -116,7 +76,7 @@ function StackingProjectCard({
               <div>
                 <div className="flex items-center justify-between gap-4 mb-4">
                   <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
-                    Case Study 0{index + 1}
+                    Project 0{index + 1} of 0{total}
                   </span>
                   <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-zinc-600 dark:text-zinc-400 group-hover:text-black group-hover:bg-[#c6ff00] transition-colors">
                     <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
@@ -135,7 +95,7 @@ function StackingProjectCard({
               {/* Technologies Pills */}
               <div className="pt-6 border-t border-black/10 dark:border-white/10">
                 <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
+                  {project.technologies.slice(0, 6).map((tech) => (
                     <span
                       key={tech}
                       className="px-2.5 py-1 rounded-lg bg-black/5 dark:bg-white/[0.04] border border-black/5 dark:border-white/5 text-[11px] font-mono text-zinc-700 dark:text-zinc-300"
@@ -143,6 +103,11 @@ function StackingProjectCard({
                       {tech}
                     </span>
                   ))}
+                  {project.technologies.length > 6 && (
+                    <span className="px-2 py-1 rounded-lg bg-black/5 dark:bg-white/[0.04] text-[10px] font-mono text-zinc-500">
+                      +{project.technologies.length - 6} more
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -154,21 +119,21 @@ function StackingProjectCard({
 }
 
 export function ProjectsPreviewSection({ initialProjects }: ProjectsPreviewSectionProps = {}) {
-  const displayProjects =
+  const projectsList =
     initialProjects && initialProjects.length > 0
-      ? initialProjects.slice(0, 3).map((p, i) => ({
-          id: p._id,
-          title: p.title,
-          badge: p.category || FEATUREFEAT_BADGE(i),
-          subtitle: p.shortDescription || p.description || FEATURED_STACK_PROJECTS[i].subtitle,
-          image: p.thumbnail || FEATURED_STACK_PROJECTS[i].image,
-          slug: p.slug,
-          technologies:
-            Array.isArray(p.technologies) && p.technologies.length > 0
-              ? p.technologies
-              : FEATURED_STACK_PROJECTS[i].technologies,
-        }))
-      : FEATURED_STACK_PROJECTS;
+      ? initialProjects
+      : FALLBACK_PROJECTS;
+
+  const displayProjects: ProjectCardData[] = projectsList.map((p) => ({
+    id: p._id,
+    title: p.title,
+    badge: p.category || "Full-Stack Web Development",
+    subtitle: p.shortDescription || p.description || "",
+    image: p.thumbnail,
+    slug: p.slug,
+    technologies: Array.isArray(p.technologies) ? p.technologies : [],
+    liveUrl: p.liveUrl,
+  }));
 
   return (
     <section id="portfolio-preview" className="py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-black/10 dark:border-white/10">
@@ -179,10 +144,10 @@ export function ProjectsPreviewSection({ initialProjects }: ProjectsPreviewSecti
             Selected Works
           </span>
           <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight mb-4">
-            Featured Projects
+            Featured Projects ({displayProjects.length})
           </h2>
           <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed">
-            These selected projects reflect my passion for combining strategy and creativity — solving real business challenges through purposeful design and clean code.
+            These selected projects reflect my passion for combining strategy and creativity — delivering production-grade web applications, custom WordPress implementations, and e-commerce platforms.
           </p>
         </div>
         <Link
@@ -193,7 +158,7 @@ export function ProjectsPreviewSection({ initialProjects }: ProjectsPreviewSecti
         </Link>
       </div>
 
-      {/* Sticky Stacking Cards Container */}
+      {/* Sticky Stacking Cards Container: Renders ALL projects */}
       <div className="relative w-full">
         {displayProjects.map((project, idx) => (
           <StackingProjectCard
@@ -206,9 +171,4 @@ export function ProjectsPreviewSection({ initialProjects }: ProjectsPreviewSecti
       </div>
     </section>
   );
-}
-
-function FEATUREFEAT_BADGE(index: number): string {
-  const badges = ["Web Design & SaaS", "Branding & Custom Web", "Web Design & E-Commerce"];
-  return badges[index % badges.length];
 }
