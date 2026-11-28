@@ -98,8 +98,8 @@ export function ExpectationsSection({ hideDesktopSlot = false }: ExpectationsSec
           <div className="w-[340px] h-[476px] hidden lg:block" />
           <div className="lg:hidden w-full max-w-sm rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
             <img
-              src="https://framerusercontent.com/images/Nf63tXddU52SRtJJgRHqk7zzD2g.png"
-              alt="Mehedi Workspace"
+              src="/developer-desk.jpg"
+              alt="Developer Workspace"
               className="w-full h-auto object-cover"
             />
           </div>

@@ -29,8 +29,7 @@ export function HeroSection({
   }, [initialSettings]);
 
   const profileImage =
-    settings?.personalInfo?.profileImage?.trim() ||
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80";
+    settings?.personalInfo?.profileImage?.trim() || "/mehedi-avatar.png";
 
   return (
     <section id="hero" className="relative px-4 sm:px-6 max-w-6xl mx-auto pt-32 pb-20">

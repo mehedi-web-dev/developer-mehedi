@@ -27,8 +27,7 @@ export function AboutSection({
   }, [initialSettings]);
 
   const portraitImage =
-    settings?.personalInfo?.profileImage?.trim() ||
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80";
+    settings?.personalInfo?.profileImage?.trim() || "/mehedi-avatar.png";
 
   return (
     <section id="about" className="py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">

@@ -31,11 +31,11 @@ export function ContactSection() {
         <div className="text-center mb-12">
           {/* Avatar with Waving Hand 👋 Badge */}
           <div className="inline-block relative mb-6">
-            <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/15 mx-auto bg-gradient-to-tr from-zinc-800 to-zinc-700 shadow-xl">
+            <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-white/20 mx-auto bg-gradient-to-tr from-zinc-800 to-zinc-700 shadow-2xl relative">
               <img
-                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80"
+                src="/mehedi-avatar.png"
                 alt="Mehedi Hasan"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-top"
               />
             </div>
             <motion.div
