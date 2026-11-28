@@ -92,19 +92,9 @@ export function AboutSection({
           </div>
         </div>
 
-        {/* Right Column: On Desktop, Sticky 3D Card flips here; on Mobile, shows clean card */}
-        <div className="lg:col-span-5 flex justify-center">
-          <div className="w-[320px] xl:w-[350px] h-[450px] xl:h-[490px] hidden lg:block" />
-          <div className="lg:hidden relative w-[260px] xs:w-[280px] sm:w-[320px] h-[360px] xs:h-[400px] sm:h-[450px] rounded-[28px] overflow-hidden border border-white/10 shadow-2xl bg-[#16171a]">
-            <img
-              src={portraitImage}
-              alt="Mehedi Hasan - Portrait"
-              className="w-full h-full object-cover object-top"
-            />
-            <div className="absolute -bottom-2 -left-2 w-14 h-14 rounded-full bg-[#c6ff00] text-black flex items-center justify-center text-xl shadow-xl border-2 border-[#0c0d0e]">
-              👋
-            </div>
-          </div>
+        {/* Right Column: Slot reserved on Desktop for the 3D Sticky Flipping Card. Hidden on responsive/mobile */}
+        <div className="hidden lg:flex lg:col-span-5 justify-center">
+          <div className="w-[320px] xl:w-[350px] h-[450px] xl:h-[490px]" />
         </div>
       </div>
     </section>
