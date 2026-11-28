@@ -4,42 +4,42 @@
 @custom-variant dark (&:is(.dark, .dark *));
 
 :root {
-  /* Colors - Default Dark Theme matching Framer */
-  --background: #0c0d0e;
-  --foreground: #f4f4f5;
-  --surface: #141517;
-  --surface-hover: #1e2024;
-  --surface-subtle: #101113;
-  --border: rgba(255, 255, 255, 0.08);
-  --border-subtle: rgba(255, 255, 255, 0.04);
-  --primary: #c6ff00;
-  --primary-hover: #b3ea00;
+  /* Colors - Light Theme matching Framer Light */
+  --background: #f7f8fa;
+  --foreground: #0c0d0e;
+  --surface: #ffffff;
+  --surface-hover: #f1f3f6;
+  --surface-subtle: #eaecef;
+  --border: rgba(0, 0, 0, 0.09);
+  --border-subtle: rgba(0, 0, 0, 0.05);
+  --primary: #a8e600;
+  --primary-hover: #96cc00;
   --primary-foreground: #000000;
-  --secondary: #c6ff00;
-  --secondary-hover: #b3ea00;
-  --secondary-foreground: #000000;
-  --accent: #c6ff00;
+  --secondary: #101114;
+  --secondary-hover: #1e2024;
+  --secondary-foreground: #ffffff;
+  --accent: #a8e600;
   --accent-foreground: #000000;
-  --muted: #a1a1aa;
-  --muted-foreground: #71717a;
-  --card: #141517;
-  --card-foreground: #f4f4f5;
-  --card-border: rgba(255, 255, 255, 0.08);
+  --muted: #64748b;
+  --muted-foreground: #94a3b8;
+  --card: #ffffff;
+  --card-foreground: #0c0d0e;
+  --card-border: rgba(0, 0, 0, 0.08);
 
   /* Glassmorphism */
-  --glass-bg: rgba(20, 21, 23, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.06);
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 25px -3px rgba(198, 255, 0, 0.3);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 25px -3px rgba(168, 230, 0, 0.3);
 }
 
 .dark {
-  /* Colors - Dark Theme matching Framer */
+  /* Colors - Dark Theme matching Framer Dark */
   --background: #0c0d0e;
   --foreground: #f4f4f5;
   --surface: #141517;

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Navbar } from "./navbar";
 import { Footer } from "./footer";
 import { AnimatedBackground } from "@/components/background";
+import { FramerThemeToggle } from "@/components/ui/framer-theme-toggle";
 
 export interface PublicLayoutShellProps {
   children: React.ReactNode;
@@ -33,6 +34,7 @@ export function PublicLayoutShell({ children }: PublicLayoutShellProps) {
       <Navbar />
       <main className="relative z-10 flex-1">{children}</main>
       <Footer />
+      <FramerThemeToggle />
     </>
   );
 }
