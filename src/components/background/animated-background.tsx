@@ -144,50 +144,50 @@ export function AnimatedBackground() {
         className="absolute inset-0 opacity-40 dark:opacity-75 transition-opacity duration-500"
         style={{
           backgroundImage: `
-            radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.12) 0px, transparent 55%),
-            radial-gradient(at 100% 0%, rgba(34, 211, 238, 0.10) 0px, transparent 55%),
-            radial-gradient(at 50% 45%, rgba(124, 58, 237, 0.06) 0px, transparent 65%),
-            radial-gradient(at 85% 95%, rgba(6, 182, 212, 0.09) 0px, transparent 55%),
-            radial-gradient(at 15% 90%, rgba(139, 92, 246, 0.08) 0px, transparent 55%)
+            radial-gradient(at 0% 0%, rgba(198, 255, 0, 0.05) 0px, transparent 55%),
+            radial-gradient(at 100% 0%, rgba(198, 255, 0, 0.04) 0px, transparent 55%),
+            radial-gradient(at 50% 45%, rgba(255, 255, 255, 0.02) 0px, transparent 65%),
+            radial-gradient(at 85% 95%, rgba(198, 255, 0, 0.04) 0px, transparent 55%),
+            radial-gradient(at 15% 90%, rgba(198, 255, 0, 0.03) 0px, transparent 55%)
           `,
         }}
       />
 
       {/* Layer 1: Parallax Ambient Orbs */}
       <div ref={orbsRef} className="absolute inset-[-30px] will-change-transform">
-        {/* Orb 1: Violet Aura - Top Left / Hero */}
+        {/* Orb 1: Lime Aura - Top Left / Hero */}
         <div
-          className="absolute -top-28 -left-24 sm:top-[-8%] sm:left-[-4%] h-[480px] w-[480px] sm:h-[680px] sm:w-[680px] rounded-full blur-[80px] sm:blur-[130px] opacity-55 dark:opacity-90 transition-opacity duration-500 animate-bg-orb-1"
+          className="absolute -top-28 -left-24 sm:top-[-8%] sm:left-[-4%] h-[480px] w-[480px] sm:h-[680px] sm:w-[680px] rounded-full blur-[80px] sm:blur-[130px] opacity-40 dark:opacity-70 transition-opacity duration-500 animate-bg-orb-1"
           style={{
             background:
-              "radial-gradient(circle, rgba(139, 92, 246, 0.26) 0%, rgba(139, 92, 246, 0.07) 50%, transparent 70%)",
+              "radial-gradient(circle, rgba(198, 255, 0, 0.12) 0%, rgba(198, 255, 0, 0.03) 50%, transparent 70%)",
           }}
         />
 
-        {/* Orb 2: Cyan Ambient Glow - Top Right / Header Navigation */}
+        {/* Orb 2: Ambient Glow - Top Right / Header Navigation */}
         <div
-          className="absolute top-[18%] -right-28 sm:top-[12%] sm:right-[-4%] h-[420px] w-[420px] sm:h-[620px] sm:w-[620px] rounded-full blur-[75px] sm:blur-[120px] opacity-55 dark:opacity-90 transition-opacity duration-500 animate-bg-orb-2"
+          className="absolute top-[18%] -right-28 sm:top-[12%] sm:right-[-4%] h-[420px] w-[420px] sm:h-[620px] sm:w-[620px] rounded-full blur-[75px] sm:blur-[120px] opacity-35 dark:opacity-60 transition-opacity duration-500 animate-bg-orb-2"
           style={{
             background:
-              "radial-gradient(circle, rgba(34, 211, 238, 0.22) 0%, rgba(34, 211, 238, 0.06) 50%, transparent 70%)",
+              "radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, rgba(198, 255, 0, 0.02) 50%, transparent 70%)",
           }}
         />
 
-        {/* Orb 3: Deep Violet & Indigo Fusion - Center / Mid-Page Sections */}
+        {/* Orb 3: Mid-Page Lime Fusion */}
         <div
-          className="absolute top-[48%] left-[10%] sm:top-[44%] sm:left-[18%] h-[440px] w-[440px] sm:h-[620px] sm:w-[620px] rounded-full blur-[90px] sm:blur-[140px] opacity-50 dark:opacity-85 transition-opacity duration-500 animate-bg-orb-3"
+          className="absolute top-[48%] left-[10%] sm:top-[44%] sm:left-[18%] h-[440px] w-[440px] sm:h-[620px] sm:w-[620px] rounded-full blur-[90px] sm:blur-[140px] opacity-30 dark:opacity-55 transition-opacity duration-500 animate-bg-orb-3"
           style={{
             background:
-              "radial-gradient(circle, rgba(124, 58, 237, 0.20) 0%, rgba(59, 130, 246, 0.09) 45%, transparent 70%)",
+              "radial-gradient(circle, rgba(198, 255, 0, 0.08) 0%, rgba(255, 255, 255, 0.02) 45%, transparent 70%)",
           }}
         />
 
-        {/* Orb 4: Teal & Cyan Ambient Wash - Lower Page / Portfolio & Contact */}
+        {/* Orb 4: Lower Page / Portfolio & Contact */}
         <div
-          className="absolute bottom-[-10%] right-[15%] sm:bottom-[-6%] sm:right-[20%] h-[460px] w-[460px] sm:h-[600px] sm:w-[600px] rounded-full blur-[90px] sm:blur-[135px] opacity-50 dark:opacity-85 transition-opacity duration-500 animate-bg-orb-4"
+          className="absolute bottom-[-10%] right-[15%] sm:bottom-[-6%] sm:right-[20%] h-[460px] w-[460px] sm:h-[600px] sm:w-[600px] rounded-full blur-[90px] sm:blur-[135px] opacity-40 dark:opacity-65 transition-opacity duration-500 animate-bg-orb-4"
           style={{
             background:
-              "radial-gradient(circle, rgba(6, 182, 212, 0.20) 0%, rgba(139, 92, 246, 0.08) 50%, transparent 70%)",
+              "radial-gradient(circle, rgba(198, 255, 0, 0.10) 0%, rgba(255, 255, 255, 0.02) 50%, transparent 70%)",
           }}
         />
       </div>

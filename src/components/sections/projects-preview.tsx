@@ -1,269 +1,121 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ExternalLink, Sparkles, FolderGit2, AlertCircle } from "lucide-react";
-import { getFeaturedProjects } from "@/services";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 import type { ProjectItem } from "@/types";
 
 export interface ProjectsPreviewSectionProps {
   initialProjects?: ProjectItem[] | null;
 }
 
-function ProjectCard({ project }: { project: ProjectItem }) {
-  const [imageError, setImageError] = React.useState(false);
-  const detailHref = project.slug
-    ? `/portfolio/${encodeURIComponent(project.slug)}`
-    : "/portfolio";
+const FALLBACK_PROJECTS: Array<{
+  id: string;
+  title: string;
+  badge: string;
+  subtitle: string;
+  image: string;
+  slug: string;
+}> = [
+  {
+    id: "1",
+    title: "MeetMate AI",
+    badge: "Next.js / SaaS",
+    subtitle: "Custom SaaS landing page and interactive application dashboard built for automated AI meeting intelligence.",
+    image: "https://framerusercontent.com/images/tbAYKmuCPrc8idgXtBNAyxXWA.png",
+    slug: "meetmate-ai-saas",
+  },
+  {
+    id: "2",
+    title: "Rawink Studio",
+    badge: "WordPress / Branding",
+    subtitle: "Bold, modern digital identity and dynamic portfolio showcase developed for a high-end creative tattoo studio.",
+    image: "https://framerusercontent.com/images/odZb6sCBuXZLQUkegaYdvpoPck.png",
+    slug: "rawink-creative-studio",
+  },
+  {
+    id: "3",
+    title: "Gijs Shutter Systems",
+    badge: "WooCommerce",
+    subtitle: "Elegant and functional webshop for custom shutters and home renovation specialists, focused on user trust and quotes.",
+    image: "https://framerusercontent.com/images/8tYnYpe4DeBFntYlkXLzk8HvC9A.png",
+    slug: "gijs-luxe-shutters",
+  },
+];
+
+export function ProjectsPreviewSection({ initialProjects }: ProjectsPreviewSectionProps = {}) {
+  const displayProjects =
+    initialProjects && initialProjects.length > 0
+      ? initialProjects.slice(0, 3).map((p) => ({
+          id: p._id,
+          title: p.title,
+          badge: p.category || "Web Development",
+          subtitle: p.shortDescription || p.description,
+          image: p.thumbnail || FALLBACK_PROJECTS[0].image,
+          slug: p.slug,
+        }))
+      : FALLBACK_PROJECTS;
 
   return (
-    <div className="glass rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--secondary)] hover:-translate-y-1 hover:shadow-xl hover:shadow-[var(--secondary)]/10 transition-all duration-300 flex flex-col group shadow-sm">
-      {/* Thumbnail Image */}
-      <div className="relative aspect-video w-full overflow-hidden bg-[var(--surface-hover)]">
-        {project.thumbnail && !imageError ? (
-          <Image
-            src={project.thumbnail}
-            alt={project.title || "Project preview"}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-            onError={() => setImageError(true)}
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-violet-950/20 to-cyan-950/20 text-[var(--muted)]">
-            <FolderGit2 className="h-10 w-10 opacity-50" />
-          </div>
-        )}
-        {project.category && (
-          <div className="absolute top-3 left-3 rounded-full bg-[var(--background)]/85 px-3 py-1 text-[11px] font-mono font-medium backdrop-blur-md text-[var(--foreground)] shadow-sm border border-[var(--border)]">
-            {project.category}
-          </div>
-        )}
-      </div>
-
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-1 justify-between space-y-4">
+    <section id="portfolio-preview" className="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+      {/* Section Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
         <div>
-          <h3 className="text-xl font-bold tracking-tight text-[var(--foreground)] group-hover:text-[var(--secondary)] transition-colors">
-            {project.title}
-          </h3>
-          {project.shortDescription && (
-            <p className="mt-2 text-xs leading-relaxed text-[var(--muted)] line-clamp-3">
-              {project.shortDescription}
-            </p>
-          )}
+          <span className="text-xs uppercase tracking-widest text-[#c6ff00] font-mono font-semibold block mb-2">
+            Portfolio
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight">
+            Featured Projects
+          </h2>
         </div>
-
-        {/* Technologies tags */}
-        {Array.isArray(project.technologies) && project.technologies.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 pt-2">
-            {project.technologies
-              .filter(Boolean)
-              .slice(0, 4)
-              .map((tech, idx) => (
-                <span
-                  key={`${tech}-${idx}`}
-                  className="rounded-md bg-[var(--surface-subtle)] px-2 py-0.5 text-[10px] font-mono text-[var(--muted)] border border-[var(--border)]"
-                >
-                  {tech}
-                </span>
-              ))}
-          </div>
-        )}
-
-        {/* Action links */}
-        <div className="pt-4 border-t border-[var(--border)] flex items-center justify-between">
-          <Link
-            href={detailHref}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--foreground)] hover:text-[var(--secondary)] transition-colors"
-          >
-            <span>Case Study</span>
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
-
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-[var(--muted)] hover:text-[var(--secondary)] transition-colors"
-              aria-label={`Visit live website for ${project.title}`}
-            >
-              <span>Live Site</span>
-              <ExternalLink className="h-3 w-3" />
-            </a>
-          )}
-        </div>
+        <Link
+          href="/portfolio"
+          className="px-6 py-2.5 rounded-full bg-[#c6ff00] hover:bg-[#d4ff33] text-black font-semibold text-xs uppercase tracking-wider transition-all self-start sm:self-auto"
+        >
+          View All Projects
+        </Link>
       </div>
-    </div>
-  );
-}
 
-export function ProjectsPreviewSection({ initialProjects }: ProjectsPreviewSectionProps) {
-  const hasInitial = initialProjects !== undefined && initialProjects !== null;
-  const [projects, setProjects] = React.useState<ProjectItem[]>(() =>
-    hasInitial ? initialProjects.slice(0, 3) : []
-  );
-  const [isLoading, setIsLoading] = React.useState(!hasInitial);
-  const [error, setError] = React.useState<string | null>(null);
-
-  const loadProjects = React.useCallback(() => {
-    setIsLoading(true);
-    setError(null);
-    getFeaturedProjects()
-      .then((data) => {
-        setProjects(Array.isArray(data) ? data.slice(0, 3) : []);
-      })
-      .catch(() => {
-        setError("Unable to load featured projects from the server at this moment.");
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
-  React.useEffect(() => {
-    if (hasInitial) return;
-
-    let isMounted = true;
-    getFeaturedProjects()
-      .then((data) => {
-        if (isMounted) {
-          setProjects(Array.isArray(data) ? data.slice(0, 3) : []);
-        }
-      })
-      .catch(() => {
-        if (isMounted) {
-          setError("Unable to load featured projects from the server at this moment.");
-        }
-      })
-      .finally(() => {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, [hasInitial]);
-
-  const displayedProjects = projects.slice(0, 3);
-
-  return (
-    <section id="portfolio-preview" className="py-20 sm:py-28 border-t border-[var(--border)] bg-[var(--surface-subtle)]/40">
-      <div className="container-custom">
-        {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-14">
-          <div className="space-y-3 max-w-xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-xs font-medium text-[var(--secondary)] shadow-sm">
-              <Sparkles className="h-3 w-3" />
-              Featured Work
-            </div>
-            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-[var(--foreground)]">
-              Recent Projects
-            </h2>
-            <p className="text-sm leading-relaxed text-[var(--muted)]">
-              A curated selection of client solutions, custom WordPress implementations, and modern frontend web applications.
-            </p>
-          </div>
-
-          <Link
-            href="/portfolio"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--secondary)] hover:text-cyan-400 transition-colors group self-start md:self-auto"
+      {/* 3-column Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {displayProjects.map((project) => (
+          <motion.div
+            key={project.id}
+            whileHover={{ y: -6 }}
+            transition={{ duration: 0.3 }}
+            className="group cursor-pointer bg-[#141517] rounded-3xl border border-white/10 overflow-hidden flex flex-col justify-between hover:border-[#c6ff00]/40 transition-colors shadow-xl"
           >
-            <span>Explore All Projects</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </div>
+            <Link href={`/portfolio/${project.slug}`} className="flex flex-col h-full">
+              {/* Cover Image */}
+              <div className="relative aspect-[16/11] overflow-hidden bg-zinc-900">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/10 text-[11px] font-semibold text-[#c6ff00]">
+                  {project.badge}
+                </span>
+              </div>
 
-        {/* Loading Skeleton */}
-        {isLoading && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="rounded-3xl border border-[var(--border)] bg-[var(--surface)] overflow-hidden animate-pulse"
-              >
-                <div className="aspect-video w-full bg-[var(--surface-hover)]" />
-                <div className="p-6 space-y-4">
-                  <div className="h-4 w-1/3 rounded bg-[var(--surface-hover)]" />
-                  <div className="h-6 w-3/4 rounded bg-[var(--surface-hover)]" />
-                  <div className="h-12 w-full rounded bg-[var(--surface-hover)]" />
-                  <div className="h-4 w-1/2 rounded bg-[var(--surface-hover)]" />
+              {/* Title & Description */}
+              <div className="p-6 flex flex-col justify-between flex-1">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-bold text-white group-hover:text-[#c6ff00] transition-colors">
+                      {project.title}
+                    </h3>
+                    <ArrowUpRight className="w-5 h-5 text-zinc-500 group-hover:text-[#c6ff00] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                  </div>
+                  <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed">
+                    {project.subtitle}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
-
-        {/* Error State */}
-        {!isLoading && error && (
-          <div className="glass rounded-3xl border border-[var(--border)] bg-[var(--surface)]/60 p-8 sm:p-10 text-center max-w-md mx-auto space-y-3 shadow-sm">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/10 text-amber-500 mx-auto border border-amber-500/20">
-              <AlertCircle className="h-6 w-6" />
-            </div>
-            <h3 className="text-base font-bold text-[var(--foreground)]">Projects Unavailable</h3>
-            <p className="text-xs text-[var(--muted)] leading-relaxed">{error}</p>
-            <button
-              type="button"
-              onClick={loadProjects}
-              className="mt-2 rounded-xl bg-[var(--primary)] px-4 py-2 text-xs font-semibold text-white hover:bg-[var(--primary-hover)] transition-colors shadow-md shadow-[var(--primary)]/20 cursor-pointer"
-            >
-              Retry
-            </button>
-          </div>
-        )}
-
-        {/* Empty State */}
-        {!isLoading && !error && displayedProjects.length === 0 && (
-          <div className="glass rounded-3xl border border-[var(--border)] bg-[var(--surface)]/60 p-10 sm:p-14 text-center max-w-lg mx-auto space-y-4 shadow-sm">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--surface-subtle)] text-[var(--secondary)] mx-auto border border-[var(--border)] shadow-inner">
-              <FolderGit2 className="h-7 w-7" />
-            </div>
-            <div className="space-y-1">
-              <h3 className="text-lg font-bold text-[var(--foreground)]">No Featured Projects Yet</h3>
-              <p className="text-xs sm:text-sm text-[var(--muted)] leading-relaxed">
-                Featured project case studies are currently being curated. Explore the complete portfolio archive to view all completed works.
-              </p>
-            </div>
-            <div className="pt-2">
-              <Link
-                href="/portfolio"
-                className="inline-flex items-center gap-2 rounded-xl bg-[var(--surface-subtle)] px-4 py-2.5 text-xs font-semibold text-[var(--foreground)] border border-[var(--border)] hover:border-[var(--secondary)] hover:text-[var(--secondary)] transition-all shadow-sm"
-              >
-                <span>Explore All Projects</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </div>
-        )}
-
-        {/* Projects Grid: Responsive and perfectly balanced for 1, 2, or 3 cards */}
-        {!isLoading && !error && displayedProjects.length > 0 && (
-          <>
-            {displayedProjects.length === 1 && (
-              <div className="max-w-md mx-auto">
-                <ProjectCard project={displayedProjects[0]} />
-              </div>
-            )}
-            {displayedProjects.length === 2 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-8">
-                {displayedProjects.map((project) => (
-                  <ProjectCard key={project._id} project={project} />
-                ))}
-              </div>
-            )}
-            {displayedProjects.length >= 3 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {displayedProjects.map((project) => (
-                  <ProjectCard key={project._id} project={project} />
-                ))}
-              </div>
-            )}
-          </>
-        )}
+            </Link>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

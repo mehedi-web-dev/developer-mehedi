@@ -1,171 +1,60 @@
 "use client";
 
 import * as React from "react";
-import { ChevronDown, HelpCircle, AlertCircle } from "lucide-react";
-import { getActiveFAQs } from "@/services";
-import type { FAQItem } from "@/types";
-import { cn } from "@/lib/utils";
+import { AccordionItem } from "@/components/ui/accordion-item";
 
 export function FAQSection() {
-  const [faqs, setFaqs] = React.useState<FAQItem[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [error, setError] = React.useState<string | null>(null);
-  const [openIndex, setOpenIndex] = React.useState<number | null>(0);
+  const [openIndex, setOpenIndex] = React.useState<number>(0);
 
-  const loadFaqs = React.useCallback(() => {
-    let isMounted = true;
-    setIsLoading(true);
-    setError(null);
-
-    getActiveFAQs()
-      .then((data) => {
-        if (isMounted) {
-          setFaqs(data);
-          setIsLoading(false);
-        }
-      })
-      .catch(() => {
-        if (isMounted) {
-          setError("Unable to load FAQs from the server at this moment.");
-          setIsLoading(false);
-        }
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  React.useEffect(() => {
-    let isMounted = true;
-    getActiveFAQs()
-      .then((data) => {
-        if (isMounted) {
-          setFaqs(data);
-          setIsLoading(false);
-        }
-      })
-      .catch(() => {
-        if (isMounted) {
-          setError("Unable to load FAQs from the server at this moment.");
-          setIsLoading(false);
-        }
-      });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const faqs = [
+    {
+      q: "How fast will my new website or store be completed?",
+      a: "Your complete website or webshop is guaranteed to go live within 7 to 10 business days, assuming all initial content, design assets, and feedback are provided promptly.",
+    },
+    {
+      q: "Are there any hidden costs or unexpected charges?",
+      a: "No, absolutely not. I work strictly with transparent, upfront fixed project quotes. You will know the exact investment, deliverables, and timeline before we write a single line of code.",
+    },
+    {
+      q: "Do you provide support and maintenance after launch?",
+      a: "Yes! Every project includes a 30-day post-launch warranty. In addition, I offer flexible monthly care plans covering regular updates, cloud backups, security scans, and ongoing content assistance.",
+    },
+    {
+      q: "What technologies and platforms do you specialize in?",
+      a: "My core expertise lies in custom WordPress development, Elementor Pro, Crocoblock, WooCommerce, as well as modern frontend web stacks using React, Next.js, TypeScript, and Tailwind CSS.",
+    },
+    {
+      q: "How do we communicate and collaborate during the project?",
+      a: "I communicate actively via WhatsApp, Slack, email, and scheduled Google Meet / Zoom calls. You will receive interactive staging previews and regular milestone updates throughout the development lifecycle.",
+    },
+    {
+      q: "What type of clients do you typically partner with?",
+      a: "I work with ambitious small-to-medium businesses, SaaS startups, digital marketing agencies, creative studios, and entrepreneurs seeking a high-converting, professional web presence.",
+    },
+  ];
 
   return (
-    <section className="py-20 sm:py-28 border-t border-[var(--border)] bg-[var(--surface-subtle)]/40">
-      <div className="container-custom max-w-4xl">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-1 text-xs font-medium text-[var(--secondary)]">
-            <HelpCircle className="h-3 w-3" />
-            Frequently Asked Questions
-          </div>
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl text-[var(--foreground)]">
-            Questions &amp; Answers
-          </h2>
-          <p className="text-sm leading-relaxed text-[var(--muted)]">
-            Clear insights regarding project workflow, technologies, WordPress development, and timelines.
-          </p>
-        </div>
+    <section id="faqs" className="py-20 px-4 sm:px-6 max-w-4xl mx-auto border-t border-white/5">
+      <div className="text-center mb-12">
+        <span className="text-xs uppercase tracking-widest text-[#c6ff00] font-mono font-semibold block mb-2">
+          Questions &amp; Answers
+        </span>
+        <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-white tracking-tight">
+          Frequently Asked Questions
+        </h2>
+      </div>
 
-        {/* Loading Skeleton */}
-        {isLoading && (
-          <div className="mt-14 space-y-4">
-            {[1, 2, 3, 4].map((i) => (
-              <div
-                key={i}
-                className="rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-6 animate-pulse space-y-3"
-              >
-                <div className="h-5 w-2/3 rounded bg-[var(--surface-hover)]" />
-                <div className="h-4 w-5/6 rounded bg-[var(--surface-hover)]" />
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Error State */}
-        {!isLoading && error && (
-          <div className="mt-14 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-8 text-center max-w-md mx-auto space-y-3">
-            <AlertCircle className="h-8 w-8 text-amber-500 mx-auto" />
-            <h3 className="text-base font-bold text-[var(--foreground)]">FAQs Unavailable</h3>
-            <p className="text-xs text-[var(--muted)]">{error}</p>
-            <button
-              type="button"
-              onClick={loadFaqs}
-              className="mt-2 rounded-lg bg-[var(--primary)] px-4 py-2 text-xs font-semibold text-white hover:bg-[var(--primary-hover)] transition-colors"
-            >
-              Retry
-            </button>
-          </div>
-        )}
-
-        {/* Empty State */}
-        {!isLoading && !error && faqs.length === 0 && (
-          <div className="mt-14 rounded-2xl border border-[var(--border)] bg-[var(--surface)] p-12 text-center max-w-lg mx-auto space-y-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[var(--surface-subtle)] text-[var(--muted)] mx-auto">
-              <HelpCircle className="h-6 w-6" />
-            </div>
-            <h3 className="text-lg font-bold text-[var(--foreground)]">No FAQs Published Yet</h3>
-            <p className="text-sm text-[var(--muted)]">
-              Got specific questions about working together? Reach out directly using the contact form below.
-            </p>
-          </div>
-        )}
-
-        {/* Accordion List */}
-        {!isLoading && !error && faqs.length > 0 && (
-          <div className="mt-14 space-y-4">
-            {faqs.map((faq, index) => {
-              const isOpen = openIndex === index;
-              return (
-                <div
-                  key={faq._id}
-                  className={cn(
-                    "rounded-2xl border transition-all duration-200 overflow-hidden",
-                    isOpen
-                      ? "border-[var(--primary)] bg-[var(--surface)] shadow-md shadow-[var(--primary)]/5"
-                      : "border-[var(--border)] bg-[var(--surface)] hover:border-[var(--border-subtle)]"
-                  )}
-                >
-                  <button
-                    type="button"
-                    onClick={() => toggleAccordion(index)}
-                    aria-expanded={isOpen}
-                    className="flex w-full items-center justify-between p-6 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
-                  >
-                    <span className="text-base font-semibold text-[var(--foreground)] pr-4">
-                      {faq.question}
-                    </span>
-                    <span
-                      className={cn(
-                        "flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--surface-subtle)] text-[var(--muted)] transition-transform duration-200",
-                        isOpen && "rotate-180 bg-[var(--primary)]/10 text-[var(--primary)]"
-                      )}
-                    >
-                      <ChevronDown className="h-4 w-4" />
-                    </span>
-                  </button>
-
-                  {isOpen && (
-                    <div className="px-6 pb-6 pt-1 text-sm leading-relaxed text-[var(--muted)] border-t border-[var(--border)]/50 animate-in fade-in-50 duration-200">
-                      {faq.answer}
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        )}
+      <div className="bg-[#141517] rounded-3xl p-6 sm:p-8 border border-white/10">
+        {faqs.map((faq, idx) => (
+          <AccordionItem
+            key={idx}
+            number={`0${idx + 1}.`}
+            title={faq.q}
+            subtitle={faq.a}
+            isOpen={openIndex === idx}
+            onToggle={() => setOpenIndex(openIndex === idx ? -1 : idx)}
+          />
+        ))}
       </div>
     </section>
   );

@@ -3,196 +3,153 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUpRight } from "lucide-react";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { BrandLogo } from "@/components/ui/brand-logo";
-import { cn } from "@/lib/utils";
-
-interface NavItem {
-  label: string;
-  href: string;
-  isExternal?: boolean;
-}
-
-const NAV_ITEMS: NavItem[] = [
-  { label: "Home", href: "/#hero" },
-  { label: "About", href: "/#about" },
-  { label: "Services", href: "/services" },
-  { label: "Portfolio", href: "/portfolio" },
-  { label: "Contact", href: "/#contact" },
-];
 
 export function Navbar() {
-  const [isScrolled, setIsScrolled] = React.useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const [activeHash, setActiveHash] = React.useState("");
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
   const pathname = usePathname();
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-
-      // Section spy for homepage
-      if (pathname === "/") {
-        const sections = ["hero", "about", "skills", "services-preview", "process", "portfolio-preview", "contact"];
-        const scrollPosition = window.scrollY + 100;
-
-        for (const sectionId of sections) {
-          const el = document.getElementById(sectionId);
-          if (el) {
-            const top = el.offsetTop;
-            const height = el.offsetHeight;
-            if (scrollPosition >= top && scrollPosition < top + height) {
-              setActiveHash(`#${sectionId}`);
-              break;
-            }
-          }
-        }
-      }
+      setScrolled(window.scrollY > 40);
     };
-
     window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
-
-  // Close mobile menu on resize to desktop
-  React.useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth >= 768) {
-        setMobileMenuOpen(false);
-      }
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleLinkClick = (href: string) => {
-    setMobileMenuOpen(false);
+  const navLinks = [
+    { label: "Home", href: "/#hero" },
+    { label: "About Me", href: "/#about" },
+    { label: "Web Development", href: "/#expectations" },
+    { label: "Services & Automation", href: "/#services" },
+    { label: "Portfolio", href: "/portfolio" },
+    { label: "Contact", href: "/#contact" },
+  ];
 
-    // If anchor link on homepage
+  const handleLinkClick = (href: string) => {
+    setIsOpen(false);
     if (href.startsWith("/#") && pathname === "/") {
-      const targetId = href.replace("/#", "");
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: "smooth" });
+      const id = href.replace("/#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
       }
     }
-  };
-
-  const isActive = (href: string) => {
-    if (href === "/services" && pathname.startsWith("/services")) return true;
-    if (href === "/portfolio" && (pathname === "/portfolio" || pathname.startsWith("/portfolio/"))) return true;
-    if (pathname === "/" && href.startsWith("/#")) {
-      const hash = href.replace("/", "");
-      return activeHash === hash;
-    }
-    return false;
   };
 
   return (
-    <header
-      className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300",
-        isScrolled
-          ? "border-b border-[var(--border)] bg-[var(--background)]/80 backdrop-blur-md shadow-sm"
-          : "bg-transparent"
-      )}
-    >
-      <div className="container-custom flex h-16 items-center justify-between">
-        {/* Brand / Logo */}
-        <BrandLogo />
+    <>
+      {/* Floating Top Navbar Pill */}
+      <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+        <motion.div
+          initial={{ y: -40, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className={`pointer-events-auto flex items-center justify-between gap-3 px-3.5 py-2.5 rounded-full border transition-all duration-300 shadow-2xl backdrop-blur-xl ${
+            scrolled
+              ? "bg-[#141517]/90 border-white/15 shadow-black/80"
+              : "bg-[#161719]/80 border-white/10"
+          }`}
+        >
+          {/* Monogram Logo */}
+          <Link
+            href="/#hero"
+            className="flex items-center gap-2.5 group focus:outline-none"
+            onClick={() => handleLinkClick("/#hero")}
+          >
+            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-[#1f2024] to-[#2a2c32] border border-white/15 flex items-center justify-center font-bold text-sm text-[#c6ff00] group-hover:scale-105 transition-transform overflow-hidden shadow-inner font-display">
+              <span>M</span>
+            </div>
+          </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-1.5 md:flex" aria-label="Main Navigation">
-          {NAV_ITEMS.map((item) => {
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                onClick={() => handleLinkClick(item.href)}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "relative rounded-full px-3.5 py-1.5 text-sm font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]",
-                  active
-                    ? "text-[var(--primary)] font-semibold bg-[var(--primary)]/10 dark:bg-[var(--primary)]/15 shadow-xs"
-                    : "text-[var(--muted)] hover:text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
-                )}
-              >
-                {item.label}
-                {active && (
-                  <span className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-[var(--primary)] shadow-[0_0_8px_var(--primary)]" />
-                )}
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Action Controls & Theme Toggle */}
-        <div className="hidden items-center gap-3 md:flex">
-          <ThemeToggle />
+          {/* Status Indicator */}
           <Link
             href="/#contact"
             onClick={() => handleLinkClick("/#contact")}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[var(--primary)] px-4 py-2 text-sm font-medium text-white shadow-sm transition-all duration-200 hover:bg-[var(--primary-hover)] hover:shadow-md hover:shadow-[var(--primary)]/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)] active:scale-95"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/5 transition-all text-xs font-medium text-zinc-300 hover:text-white"
           >
-            Hire Me
-            <ArrowUpRight className="h-4 w-4" />
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#c6ff00] opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#c6ff00]" />
+            </span>
+            <span className="hidden sm:inline">Available for projects</span>
+            <span className="sm:hidden">Available</span>
           </Link>
-        </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-2 md:hidden">
-          <ThemeToggle />
+          {/* Hamburger Menu Button */}
           <button
             type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)] transition-colors hover:bg-[var(--surface-hover)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--primary)]"
-            aria-expanded={mobileMenuOpen}
-            aria-label="Toggle navigation menu"
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle Navigation Menu"
+            className="w-9 h-9 rounded-full bg-[#c6ff00] hover:bg-[#d4ff33] text-black flex items-center justify-center transition-all transform active:scale-95 shadow-md shadow-[#c6ff00]/20"
           >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {isOpen ? (
+              <X className="w-5 h-5 stroke-[2.5]" />
+            ) : (
+              <Menu className="w-5 h-5 stroke-[2.5]" />
+            )}
           </button>
-        </div>
-      </div>
+        </motion.div>
+      </header>
 
-      {/* Mobile Drawer Navigation */}
-      {mobileMenuOpen && (
-        <div className="border-b border-[var(--border)] bg-[var(--background)]/95 px-4 pt-2 pb-6 backdrop-blur-xl md:hidden animate-in slide-in-from-top-2 duration-200">
-          <nav className="flex flex-col space-y-1" aria-label="Mobile Navigation">
-            {NAV_ITEMS.map((item) => {
-              const active = isActive(item.href);
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => handleLinkClick(item.href)}
-                  className={cn(
-                    "flex items-center justify-between rounded-lg px-3 py-2.5 text-base font-medium transition-colors",
-                    active
-                      ? "bg-[var(--primary)]/10 text-[var(--primary)] font-semibold"
-                      : "text-[var(--foreground)] hover:bg-[var(--surface-hover)]"
-                  )}
-                >
-                  {item.label}
-                  {active && <span className="h-1.5 w-1.5 rounded-full bg-[var(--primary)]" />}
-                </Link>
-              );
-            })}
-            <div className="pt-3">
-              <Link
-                href="/#contact"
-                onClick={() => handleLinkClick("/#contact")}
-                className="flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--primary)] py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[var(--primary-hover)]"
-              >
-                Let&apos;s Work Together
-                <ArrowUpRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </nav>
-        </div>
-      )}
-    </header>
+      {/* Modal Drawer Navigation */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md flex items-center justify-center p-4"
+            onClick={() => setIsOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.95, y: 15, opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="w-full max-w-md bg-[#131416] border border-white/10 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden"
+            >
+              <div className="flex items-center justify-between pb-6 border-b border-white/10">
+                <span className="text-xs uppercase tracking-widest text-zinc-400 font-semibold">
+                  Navigation
+                </span>
+                <span className="text-xs text-[#c6ff00] font-mono">
+                  Mehedi Hasan
+                </span>
+              </div>
+
+              <div className="flex flex-col gap-2 mt-6">
+                {navLinks.map((item, index) => (
+                  <motion.div
+                    key={item.label}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 + 0.1 }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={() => handleLinkClick(item.href)}
+                      className="flex items-center justify-between w-full px-4 py-3 rounded-2xl text-left text-lg font-medium text-zinc-200 hover:text-black hover:bg-[#c6ff00] transition-all group"
+                    >
+                      <span>{item.label}</span>
+                      <ArrowUpRight className="w-4 h-4 opacity-40 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-xs text-zinc-500 font-mono">
+                <span>mehedi.dev81@gmail.com</span>
+                <span className="text-[#c6ff00]">Available Remote</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

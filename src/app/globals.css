@@ -4,73 +4,73 @@
 @custom-variant dark (&:is(.dark, .dark *));
 
 :root {
-  /* Colors - Light Theme */
-  --background: #f8fafc;
-  --foreground: #090d16;
-  --surface: #ffffff;
-  --surface-hover: #f1f5f9;
-  --surface-subtle: #f8fafc;
-  --border: #e2e8f0;
-  --border-subtle: #f1f5f9;
-  --primary: #7c3aed;
-  --primary-hover: #6d28d9;
-  --primary-foreground: #ffffff;
-  --secondary: #0891b2;
-  --secondary-hover: #0e7490;
-  --secondary-foreground: #ffffff;
-  --accent: #8b5cf6;
-  --accent-foreground: #ffffff;
-  --muted: #64748b;
-  --muted-foreground: #94a3b8;
-  --card: #ffffff;
-  --card-foreground: #090d16;
-  --card-border: #e2e8f0;
+  /* Colors - Default Dark Theme matching Framer */
+  --background: #0c0d0e;
+  --foreground: #f4f4f5;
+  --surface: #141517;
+  --surface-hover: #1e2024;
+  --surface-subtle: #101113;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --primary: #c6ff00;
+  --primary-hover: #b3ea00;
+  --primary-foreground: #000000;
+  --secondary: #c6ff00;
+  --secondary-hover: #b3ea00;
+  --secondary-foreground: #000000;
+  --accent: #c6ff00;
+  --accent-foreground: #000000;
+  --muted: #a1a1aa;
+  --muted-foreground: #71717a;
+  --card: #141517;
+  --card-foreground: #f4f4f5;
+  --card-border: rgba(255, 255, 255, 0.08);
 
   /* Glassmorphism */
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(226, 232, 240, 0.85);
-  --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
-
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.07);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08);
-  --shadow-glow: 0 0 20px -3px rgba(124, 58, 237, 0.25);
-}
-
-.dark {
-  /* Colors - Dark Theme */
-  --background: #080b14;
-  --foreground: #f8fafc;
-  --surface: #101827;
-  --surface-hover: #1e293b;
-  --surface-subtle: #0d1321;
-  --border: #1e293b;
-  --border-subtle: #151e32;
-  --primary: #8b5cf6;
-  --primary-hover: #a78bfa;
-  --primary-foreground: #ffffff;
-  --secondary: #22d3ee;
-  --secondary-hover: #67e8f9;
-  --secondary-foreground: #080b14;
-  --accent: #8b5cf6;
-  --accent-foreground: #ffffff;
-  --muted: #94a3b8;
-  --muted-foreground: #64748b;
-  --card: #101827;
-  --card-foreground: #f8fafc;
-  --card-border: #1e293b;
-
-  /* Glassmorphism */
-  --glass-bg: rgba(16, 24, 39, 0.75);
+  --glass-bg: rgba(20, 21, 23, 0.85);
   --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
 
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.5);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -4px rgba(0, 0, 0, 0.6);
-  --shadow-glow: 0 0 25px -3px rgba(139, 92, 246, 0.35);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 25px -3px rgba(198, 255, 0, 0.3);
+}
+
+.dark {
+  /* Colors - Dark Theme matching Framer */
+  --background: #0c0d0e;
+  --foreground: #f4f4f5;
+  --surface: #141517;
+  --surface-hover: #1e2024;
+  --surface-subtle: #101113;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+  --primary: #c6ff00;
+  --primary-hover: #b3ea00;
+  --primary-foreground: #000000;
+  --secondary: #c6ff00;
+  --secondary-hover: #b3ea00;
+  --secondary-foreground: #000000;
+  --accent: #c6ff00;
+  --accent-foreground: #000000;
+  --muted: #a1a1aa;
+  --muted-foreground: #71717a;
+  --card: #141517;
+  --card-foreground: #f4f4f5;
+  --card-border: rgba(255, 255, 255, 0.08);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(20, 21, 23, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 25px -3px rgba(198, 255, 0, 0.3);
 }
 
 @theme {
@@ -94,8 +94,10 @@
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-card-border: var(--card-border);
+  --color-lime: #c6ff00;
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 

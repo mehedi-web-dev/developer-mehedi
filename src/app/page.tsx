@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import {
   HeroSection,
+  ExpectationsSection,
   AboutSection,
-  SkillsSection,
   ServicesPreviewSection,
-  DevelopmentProcessSection,
   ProjectsPreviewSection,
-  ExperienceEducationSection,
   ReviewsSection,
   FAQSection,
   ContactSection,
@@ -16,42 +14,40 @@ import { getSiteSettings, getFeaturedProjects } from "@/services";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Mehedi Hasan | WordPress & Frontend Developer",
+  title: "Mehedi Hasan | Digital Developer & WordPress Specialist",
   description:
-    "Explore 80+ completed WordPress and modern frontend web projects by Mehedi Hasan. Specializing in custom themes, Elementor Pro, WooCommerce, React, and Next.js.",
+    "Explore high-performance WordPress, Elementor Pro, React, and Next.js web applications by Mehedi Hasan. Guaranteed fast delivery, clean architecture, and conversion-focused design.",
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Mehedi Hasan | WordPress & Frontend Developer",
+    title: "Mehedi Hasan | Digital Developer & WordPress Specialist",
     description:
-      "Explore 80+ completed WordPress and modern frontend web projects by Mehedi Hasan. Specializing in custom themes, Elementor Pro, WooCommerce, React, and Next.js.",
+      "Explore high-performance WordPress, Elementor Pro, React, and Next.js web applications by Mehedi Hasan.",
     url: "/",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mehedi Hasan | WordPress & Frontend Developer",
+    title: "Mehedi Hasan | Digital Developer & WordPress Specialist",
     description:
-      "Explore 80+ completed WordPress and modern frontend web projects by Mehedi Hasan. Specializing in custom themes, Elementor Pro, WooCommerce, React, and Next.js.",
+      "Explore high-performance WordPress, Elementor Pro, React, and Next.js web applications by Mehedi Hasan.",
   },
 };
 
 export default async function Home() {
   const [siteSettings, initialProjects] = await Promise.all([
-    getSiteSettings(),
+    getSiteSettings().catch(() => null),
     getFeaturedProjects().catch(() => null),
   ]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col bg-[#0c0d0e] text-[#f4f4f5] selection:bg-[#c6ff00] selection:text-black">
       <HeroSection siteSettings={siteSettings} />
+      <ExpectationsSection />
       <AboutSection siteSettings={siteSettings} />
-      <SkillsSection />
       <ServicesPreviewSection />
-      <DevelopmentProcessSection />
       <ProjectsPreviewSection initialProjects={initialProjects} />
-      <ExperienceEducationSection />
       <ReviewsSection />
       <FAQSection />
       <ContactSection />

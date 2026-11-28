@@ -18,8 +18,47 @@ import { getProjects } from "@/services";
 import type { ProjectItem, PaginationMeta } from "@/types";
 import { cn } from "@/lib/utils";
 
+const DEFAULT_SHOWCASE_PROJECTS: ProjectItem[] = [
+  {
+    _id: "demo-1",
+    title: "MeetMate AI SaaS",
+    slug: "meetmate-ai-saas",
+    category: "Next.js / SaaS",
+    shortDescription: "Custom SaaS landing page and interactive application dashboard built for automated AI meeting intelligence.",
+    description: "MeetMate AI required a high-converting web presence to showcase their AI-powered meeting summaries. Engineered using Next.js App Router, Tailwind CSS, and Framer Motion.",
+    thumbnail: "https://framerusercontent.com/images/tbAYKmuCPrc8idgXtBNAyxXWA.png",
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    featured: true,
+    published: true,
+  },
+  {
+    _id: "demo-2",
+    title: "Rawink Studio",
+    slug: "rawink-creative-studio",
+    category: "WordPress / Branding",
+    shortDescription: "Bold, modern digital identity and dynamic portfolio showcase developed for a high-end creative tattoo studio.",
+    description: "Raw Ink Tattoo needed a visually striking custom WordPress theme that reflects their artistic edge and allows direct client bookings and gallery filtering.",
+    thumbnail: "https://framerusercontent.com/images/odZb6sCBuXZLQUkegaYdvpoPck.png",
+    technologies: ["WordPress", "Elementor Pro", "Custom CSS", "ACF Pro"],
+    featured: true,
+    published: true,
+  },
+  {
+    _id: "demo-3",
+    title: "Gijs Shutter Systems",
+    slug: "gijs-luxe-shutters",
+    category: "WooCommerce",
+    shortDescription: "Elegant and functional webshop for custom shutters and home renovation specialists, focused on user trust and quotes.",
+    description: "For Gijs, we designed an intuitive e-commerce catalog featuring customized product options, quote requests, and optimized mobile checkout.",
+    thumbnail: "https://framerusercontent.com/images/8tYnYpe4DeBFntYlkXLzk8HvC9A.png",
+    technologies: ["WooCommerce", "WordPress", "Custom Checkout", "Speed Optimization"],
+    featured: true,
+    published: true,
+  },
+];
+
 export function PortfolioCatalog() {
-  const [projects, setProjects] = React.useState<ProjectItem[]>([]);
+  const [projects, setProjects] = React.useState<ProjectItem[]>(DEFAULT_SHOWCASE_PROJECTS);
   const [pagination, setPagination] = React.useState<PaginationMeta | undefined>(undefined);
   const [selectedCategory, setSelectedCategory] = React.useState<string>("All");
   const [availableCategories, setAvailableCategories] = React.useState<string[]>(["All"]);

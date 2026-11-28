@@ -1,4 +1,5 @@
 export * from "./hero";
+export * from "./expectations";
 export * from "./about";
 export * from "./skills";
 export * from "./experience-education";
