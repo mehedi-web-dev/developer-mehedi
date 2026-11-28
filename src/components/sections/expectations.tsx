@@ -8,7 +8,7 @@ export interface ExpectationsSectionProps {
 }
 
 export function ExpectationsSection({ hideDesktopSlot = false }: ExpectationsSectionProps = {}) {
-  const [openIndex, setOpenIndex] = React.useState<number>(0);
+  const [openIndex, setOpenIndex] = React.useState<number>(-1);
 
   const expectations = [
     {

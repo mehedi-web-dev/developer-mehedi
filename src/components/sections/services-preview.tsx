@@ -4,7 +4,7 @@ import * as React from "react";
 import { AccordionItem } from "@/components/ui/accordion-item";
 
 export function ServicesPreviewSection() {
-  const [openIndex, setOpenIndex] = React.useState<number>(1);
+  const [openIndex, setOpenIndex] = React.useState<number>(-1);
 
   const services = [
     {

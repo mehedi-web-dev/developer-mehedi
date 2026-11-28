@@ -4,7 +4,7 @@ import * as React from "react";
 import { AccordionItem } from "@/components/ui/accordion-item";
 
 export function FAQSection() {
-  const [openIndex, setOpenIndex] = React.useState<number>(0);
+  const [openIndex, setOpenIndex] = React.useState<number>(-1);
 
   const faqs = [
     {
