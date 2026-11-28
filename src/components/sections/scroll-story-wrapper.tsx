@@ -65,7 +65,7 @@ export function ScrollStoryWrapper({ siteSettings }: ScrollStoryWrapperProps) {
               scale,
               transformStyle: "preserve-3d",
             }}
-            className="pointer-events-auto relative w-[320px] xl:w-[350px] h-[450px] xl:h-[490px] rounded-[28px] cursor-pointer shadow-2xl"
+            className="pointer-events-auto relative w-[300px] sm:w-[320px] xl:w-[340px] h-[420px] sm:h-[450px] xl:h-[480px] rounded-[28px] cursor-pointer shadow-2xl"
           >
             {/* FRONT FACE: Mehedi Hasan Portrait */}
             <div
