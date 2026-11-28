@@ -1,6 +1,7 @@
 export * from "./hero";
 export * from "./expectations";
 export * from "./about";
+export * from "./scroll-story-wrapper";
 export * from "./skills";
 export * from "./experience-education";
 export * from "./services-preview";

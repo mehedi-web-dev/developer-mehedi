@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
@@ -11,9 +10,13 @@ import type { SiteSettings } from "@/types";
 
 export interface HeroSectionProps {
   siteSettings?: SiteSettings | null;
+  hideDesktopCard?: boolean;
 }
 
-export function HeroSection({ siteSettings: initialSettings }: HeroSectionProps = {}) {
+export function HeroSection({
+  siteSettings: initialSettings,
+  hideDesktopCard = false,
+}: HeroSectionProps = {}) {
   const [settings, setSettings] = React.useState<SiteSettings | null>(initialSettings || null);
   const [imageError, setImageError] = React.useState(false);
 
@@ -60,35 +63,52 @@ export function HeroSection({ siteSettings: initialSettings }: HeroSectionProps 
             </div>
           </motion.h1>
 
-          {/* Central 3D Tilt Portrait Card */}
+          {/* Central Card Slot */}
           <div className="my-8 sm:my-10 flex justify-center">
-            <TiltCard className="w-64 sm:w-80 h-80 sm:h-96 rounded-3xl overflow-hidden border-2 border-white/10 bg-[#16171a] shadow-2xl group cursor-pointer">
-              {!imageError ? (
-                <img
-                  src={profileImage}
-                  alt="Mehedi Hasan"
-                  className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                  onError={() => setImageError(true)}
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-tr from-[#141517] to-[#252830] flex items-center justify-center">
-                  <span className="text-7xl font-display font-extrabold text-[#c6ff00]">M</span>
+            {hideDesktopCard ? (
+              <>
+                {/* On Desktop: Placeholder space where Sticky 3D Card sits */}
+                <div className="hidden lg:block w-[340px] h-[476px]" />
+                {/* On Mobile: Standard Card */}
+                <div className="lg:hidden">
+                  <TiltCard className="w-64 sm:w-80 h-80 sm:h-96 rounded-3xl overflow-hidden border-2 border-white/10 bg-[#16171a] shadow-2xl relative">
+                    {!imageError ? (
+                      <img
+                        src={profileImage}
+                        alt="Mehedi Hasan"
+                        className="w-full h-full object-cover grayscale contrast-125"
+                        onError={() => setImageError(true)}
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-tr from-[#141517] to-[#252830] flex items-center justify-center">
+                        <span className="text-7xl font-display font-extrabold text-[#c6ff00]">M</span>
+                      </div>
+                    )}
+                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-[#c6ff00] text-black font-extrabold font-display flex items-center justify-center text-sm shadow-lg border-2 border-black/40">
+                      Hi
+                    </div>
+                  </TiltCard>
                 </div>
-              )}
-
-              {/* Floating Hi Badge */}
-              <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-[#c6ff00] text-black font-extrabold font-display flex items-center justify-center text-sm shadow-lg border-2 border-black/40">
-                Hi
-              </div>
-
-              {/* Bottom Card Vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end p-5">
-                <div className="text-left">
-                  <p className="text-white font-bold text-sm">Mehedi Hasan</p>
-                  <p className="text-[#c6ff00] text-xs font-mono">WordPress &amp; Frontend Dev</p>
+              </>
+            ) : (
+              <TiltCard className="w-64 sm:w-80 h-80 sm:h-96 rounded-3xl overflow-hidden border-2 border-white/10 bg-[#16171a] shadow-2xl relative">
+                {!imageError ? (
+                  <img
+                    src={profileImage}
+                    alt="Mehedi Hasan"
+                    className="w-full h-full object-cover grayscale contrast-125"
+                    onError={() => setImageError(true)}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-tr from-[#141517] to-[#252830] flex items-center justify-center">
+                    <span className="text-7xl font-display font-extrabold text-[#c6ff00]">M</span>
+                  </div>
+                )}
+                <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-[#c6ff00] text-black font-extrabold font-display flex items-center justify-center text-sm shadow-lg border-2 border-black/40">
+                  Hi
                 </div>
-              </div>
-            </TiltCard>
+              </TiltCard>
+            )}
           </div>
 
           {/* Subheadline & Description */}

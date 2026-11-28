@@ -3,16 +3,19 @@
 import * as React from "react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
-import { TiltCard } from "@/components/ui/tilt-card";
 import { AnimatedCounter } from "@/components/ui/animated-counter";
 import { getSiteSettings } from "@/services";
 import type { SiteSettings } from "@/types";
 
 export interface AboutSectionProps {
   siteSettings?: SiteSettings | null;
+  hideDesktopSlot?: boolean;
 }
 
-export function AboutSection({ siteSettings: initialSettings }: AboutSectionProps = {}) {
+export function AboutSection({
+  siteSettings: initialSettings,
+  hideDesktopSlot = false,
+}: AboutSectionProps = {}) {
   const [settings, setSettings] = React.useState<SiteSettings | null>(initialSettings || null);
 
   React.useEffect(() => {
@@ -23,8 +26,12 @@ export function AboutSection({ siteSettings: initialSettings }: AboutSectionProp
     }
   }, [initialSettings]);
 
+  const portraitImage =
+    settings?.personalInfo?.profileImage?.trim() ||
+    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80";
+
   return (
-    <section id="about" className="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+    <section id="about" className="py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
       <div className="bg-gradient-to-b from-[#141517] to-[#101113] rounded-3xl p-8 sm:p-14 border border-white/10 relative overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Bio & Counters */}
@@ -87,12 +94,13 @@ export function AboutSection({ siteSettings: initialSettings }: AboutSectionProp
             </div>
           </div>
 
-          {/* Right Column: Visual 3D Tilt Card */}
+          {/* Right Column: On Desktop, Sticky 3D Card flips back to Portrait here! On Mobile, shows standard card */}
           <div className="lg:col-span-5 flex justify-center">
-            <TiltCard className="w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden border border-white/15 bg-zinc-900 shadow-2xl relative">
+            <div className="w-[340px] h-[476px] hidden lg:block" />
+            <div className="lg:hidden w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden border border-white/15 bg-zinc-900 shadow-2xl relative">
               <img
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=80"
-                alt="Mehedi Hasan Workspace"
+                src={portraitImage}
+                alt="Mehedi Hasan - Portrait"
                 className="w-full h-full object-cover"
               />
               <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-black/75 backdrop-blur-md border border-white/10 text-xs">
@@ -103,7 +111,7 @@ export function AboutSection({ siteSettings: initialSettings }: AboutSectionProp
                   Global Clients &amp; Scalable Web Architecture
                 </span>
               </div>
-            </TiltCard>
+            </div>
           </div>
         </div>
       </div>

@@ -206,13 +206,13 @@ export function CustomCursor() {
       {/* Outer trailing ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[var(--foreground)]/35 dark:border-white/40 bg-[var(--foreground)]/[0.03] dark:bg-white/[0.04] pointer-events-none will-change-transform transition-[border-color,background-color] duration-150 [&.is-hovered]:border-[var(--primary)] [&.is-hovered]:bg-[var(--primary)]/[0.08]"
+        className="fixed top-0 left-0 w-8 h-8 rounded-full border border-[#c6ff00]/50 bg-[#c6ff00]/[0.05] pointer-events-none will-change-transform transition-[border-color,background-color] duration-150 [&.is-hovered]:border-[#c6ff00] [&.is-hovered]:bg-[#c6ff00]/[0.15]"
         style={{ opacity: 0 }}
       />
       {/* Small solid center dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-1.5 h-1.5 rounded-full bg-[var(--foreground)] dark:bg-white pointer-events-none will-change-transform"
+        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-[#c6ff00] pointer-events-none will-change-transform shadow-[0_0_8px_#c6ff00]"
         style={{ opacity: 0 }}
       />
     </div>

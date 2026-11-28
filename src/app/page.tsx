@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import {
-  HeroSection,
-  ExpectationsSection,
-  AboutSection,
+  ScrollStoryWrapper,
   ServicesPreviewSection,
   ProjectsPreviewSection,
   ReviewsSection,
@@ -43,13 +41,22 @@ export default async function Home() {
 
   return (
     <div className="flex flex-col bg-[#0c0d0e] text-[#f4f4f5] selection:bg-[#c6ff00] selection:text-black">
-      <HeroSection siteSettings={siteSettings} />
-      <ExpectationsSection />
-      <AboutSection siteSettings={siteSettings} />
+      {/* Unified 3D Scroll Story: Hero + Expectations + About with Sticky 3D Flipping Card */}
+      <ScrollStoryWrapper siteSettings={siteSettings} />
+
+      {/* Services & Automation Section */}
       <ServicesPreviewSection />
+
+      {/* Featured Projects Section */}
       <ProjectsPreviewSection initialProjects={initialProjects} />
+
+      {/* Testimonials & Proof Section */}
       <ReviewsSection />
+
+      {/* Frequently Asked Questions */}
       <FAQSection />
+
+      {/* Contact Form & WhatsApp */}
       <ContactSection />
     </div>
   );
