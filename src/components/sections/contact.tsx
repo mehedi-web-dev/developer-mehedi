@@ -54,8 +54,8 @@ export function ContactSection() {
             Let&apos;s build something impactful together — whether it&apos;s your brand, your high-converting website, or your next big digital product.
           </p>
 
-          {/* Direct Quick WhatsApp CTA */}
-          <div className="flex items-center justify-center gap-3 mt-6">
+          {/* Direct Quick Contact CTAs: WhatsApp & Email */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
             <a
               href="https://wa.me/8801318352581"
               target="_blank"
@@ -63,7 +63,14 @@ export function ContactSection() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] hover:bg-[#25D366]/20 border border-white/10 hover:border-[#25D366]/40 text-xs font-semibold text-zinc-300 hover:text-white transition-all"
             >
               <WhatsAppIcon className="w-3.5 h-3.5 text-[#25D366]" />
-              <span>Chat directly on WhatsApp</span>
+              <span>WhatsApp: +880 1318-352581</span>
+            </a>
+            <a
+              href="mailto:mehedihasan958327@gmail.com"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/[0.05] hover:bg-[#c6ff00]/20 border border-white/10 hover:border-[#c6ff00]/40 text-xs font-semibold text-zinc-300 hover:text-white transition-all font-mono"
+            >
+              <Mail className="w-3.5 h-3.5 text-[#c6ff00]" />
+              <span>mehedihasan958327@gmail.com</span>
             </a>
           </div>
         </div>

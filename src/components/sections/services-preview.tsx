@@ -66,7 +66,7 @@ export function ServicesPreviewSection() {
         </div>
 
         {/* Right Column Accordions */}
-        <div className="md:col-span-7 bg-[#141517] rounded-3xl p-6 sm:p-8 border border-white/10">
+        <div className="md:col-span-7 border-t border-white/10 divide-y divide-white/10">
           {services.map((item, idx) => (
             <AccordionItem
               key={idx}

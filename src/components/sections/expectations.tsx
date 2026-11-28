@@ -69,7 +69,7 @@ export function ExpectationsSection({ hideDesktopSlot = false }: ExpectationsSec
             My approach combines strategic insight with modern visual design to create web solutions that deliver measurable business growth.
           </p>
 
-          <div className="bg-[#141517] rounded-3xl p-6 sm:p-8 border border-white/10 mb-6">
+          <div className="border-t border-white/10 mb-6 divide-y divide-white/10">
             {expectations.map((item, idx) => (
               <AccordionItem
                 key={idx}
@@ -83,11 +83,12 @@ export function ExpectationsSection({ hideDesktopSlot = false }: ExpectationsSec
             ))}
           </div>
 
-          <div className="p-5 rounded-2xl bg-[#141518] border border-white/5 text-xs text-zinc-400">
-            <p className="font-semibold text-white mb-1">
+          <div className="pt-6 border-t border-white/10 text-xs text-zinc-400">
+            <p className="font-semibold text-white mb-1 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-[#c6ff00] inline-block" />
               Guaranteed delivery within 7-10 days
             </p>
-            <p>
+            <p className="pl-4">
               No endless delays or vague timelines — just a disciplined, well-crafted development process from first sketch to live launch.
             </p>
           </div>

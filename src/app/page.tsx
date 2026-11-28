@@ -40,7 +40,7 @@ export default async function Home() {
   ]);
 
   return (
-    <div className="flex flex-col bg-[#0c0d0e] text-[#f4f4f5] selection:bg-[#c6ff00] selection:text-black">
+    <div className="flex flex-col bg-transparent text-[var(--foreground)] selection:bg-[#c6ff00] selection:text-black">
       {/* Unified 3D Scroll Story: Hero + Expectations + About with Sticky 3D Flipping Card */}
       <ScrollStoryWrapper siteSettings={siteSettings} />
 

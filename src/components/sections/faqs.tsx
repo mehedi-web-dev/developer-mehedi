@@ -44,7 +44,7 @@ export function FAQSection() {
         </h2>
       </div>
 
-      <div className="bg-[#141517] rounded-3xl p-6 sm:p-8 border border-white/10">
+      <div className="border-t border-white/10 divide-y divide-white/10">
         {faqs.map((faq, idx) => (
           <AccordionItem
             key={idx}

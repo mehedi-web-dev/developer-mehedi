@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { ArrowUpRight, Mail, ArrowUp } from "lucide-react";
+import { ArrowUpRight, ArrowUp } from "lucide-react";
 import { GithubIcon, LinkedinIcon, WhatsAppIcon } from "@/components/ui/icons";
 
 export function Footer() {
@@ -17,29 +17,29 @@ export function Footer() {
   };
 
   return (
-    <footer className="w-full bg-[#c6ff00] text-black pt-16 pb-12 px-6 sm:px-12 mt-20 relative z-20">
+    <footer className="w-full bg-[#c6ff00] text-black pt-12 sm:pt-16 pb-10 sm:pb-12 px-4 sm:px-8 md:px-12 mt-16 sm:mt-20 relative z-20">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 pb-12 border-b border-black/20">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 pb-10 border-b border-black/20">
           <div>
-            <span className="text-xs uppercase font-extrabold tracking-widest text-black/70 mb-2 block font-mono">
+            <span className="text-[11px] sm:text-xs uppercase font-extrabold tracking-widest text-black/70 mb-2 block font-mono">
               WORDPRESS &amp; FRONTEND DEVELOPER
             </span>
-            <h2 className="text-4xl sm:text-6xl font-display font-extrabold tracking-tight leading-none text-black">
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-display font-extrabold tracking-tight leading-none text-black">
               MEHEDI HASAN
             </h2>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-6 w-full sm:w-auto">
             <div>
               <span className="text-xs font-bold text-black/60 block mb-1">
                 Email :
               </span>
               <a
-                href="mailto:mehedi.dev81@gmail.com"
-                className="text-base sm:text-lg font-semibold hover:underline inline-flex items-center gap-1 text-black"
+                href="mailto:mehedihasan958327@gmail.com"
+                className="text-sm sm:text-base md:text-lg font-semibold hover:underline inline-flex items-center gap-1 text-black break-all sm:break-normal"
               >
-                mehedi.dev81@gmail.com
-                <ArrowUpRight className="w-4 h-4" />
+                mehedihasan958327@gmail.com
+                <ArrowUpRight className="w-4 h-4 shrink-0" />
               </a>
             </div>
 
@@ -80,7 +80,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-8 text-xs font-medium text-black/70">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 text-xs font-medium text-black/70 text-center sm:text-left">
           <p>© Copyright {currentYear}. All Rights Reserved by Mehedi Hasan</p>
           <div className="flex items-center gap-4">
             <button

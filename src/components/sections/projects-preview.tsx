@@ -18,6 +18,7 @@ interface ProjectCardData {
   image: string;
   slug: string;
   technologies: string[];
+  liveUrl?: string;
 }
 
 const FEATURED_STACK_PROJECTS: ProjectCardData[] = [
@@ -30,6 +31,7 @@ const FEATURED_STACK_PROJECTS: ProjectCardData[] = [
     image: "https://framerusercontent.com/images/tbAYKmuCPrc8idgXtBNAyxXWA.png",
     slug: "meetmate-ai-saas",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    liveUrl: "https://meetmate.ai",
   },
   {
     id: "2",
@@ -40,6 +42,7 @@ const FEATURED_STACK_PROJECTS: ProjectCardData[] = [
     image: "https://framerusercontent.com/images/odZb6sCBuXZLQUkegaYdvpoPck.png",
     slug: "rawink-creative-studio",
     technologies: ["WordPress", "Elementor Pro", "Custom CSS", "ACF Pro"],
+    liveUrl: "https://rawink.nl",
   },
   {
     id: "3",
@@ -50,6 +53,7 @@ const FEATURED_STACK_PROJECTS: ProjectCardData[] = [
     image: "https://framerusercontent.com/images/8tYnYpe4DeBFntYlkXLzk8HvC9A.png",
     slug: "gijs-luxe-shutters",
     technologies: ["WooCommerce", "WordPress", "Custom Checkout", "Speed Optimization"],
+    liveUrl: "https://gijs.nl",
   },
 ];
 
@@ -91,59 +95,120 @@ function StackingProjectCard({
         transition={{ duration: 0.5, delay: index * 0.1 }}
         className="group relative w-full bg-[#141517] rounded-[28px] sm:rounded-[36px] border border-white/10 overflow-hidden shadow-2xl hover:border-[#c6ff00]/40 transition-all duration-300"
       >
-        <Link href={`/portfolio/${project.slug}`} className="block">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-            {/* Project Media (Left 7 Columns) */}
-            <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-zinc-900">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-              <div className="absolute top-5 left-5 z-10">
-                <span className="px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-xs font-semibold text-[#c6ff00] font-mono">
-                  {project.badge}
-                </span>
-              </div>
-            </div>
-
-            {/* Project Details (Right 5 Columns) */}
-            <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between bg-gradient-to-br from-[#141517] to-[#111214]">
-              <div>
-                <div className="flex items-center justify-between gap-4 mb-4">
-                  <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
-                    Case Study 0{index + 1}
+        {project.liveUrl ? (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+              {/* Project Media (Left 7 Columns) */}
+              <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-zinc-900">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute top-5 left-5 z-10">
+                  <span className="px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-xs font-semibold text-[#c6ff00] font-mono">
+                    {project.badge}
                   </span>
-                  <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-black group-hover:bg-[#c6ff00] transition-colors">
-                    <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
+                </div>
+              </div>
+
+              {/* Project Details (Right 5 Columns) */}
+              <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between bg-gradient-to-br from-[#141517] to-[#111214]">
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-4">
+                    <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+                      Case Study 0{index + 1}
+                    </span>
+                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-black group-hover:bg-[#c6ff00] transition-colors">
+                      <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl sm:text-4xl font-display font-extrabold text-white mb-4 group-hover:text-[#c6ff00] transition-colors leading-tight">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-6">
+                    {project.subtitle}
+                  </p>
+                </div>
+
+                {/* Technologies Pills */}
+                <div className="pt-6 border-t border-white/10">
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/5 text-[11px] font-mono text-zinc-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
                 </div>
-
-                <h3 className="text-2xl sm:text-4xl font-display font-extrabold text-white mb-4 group-hover:text-[#c6ff00] transition-colors leading-tight">
-                  {project.title}
-                </h3>
-
-                <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-6">
-                  {project.subtitle}
-                </p>
+              </div>
+            </div>
+          </a>
+        ) : (
+          <Link href="/#contact" className="block">
+            <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
+              {/* Project Media (Left 7 Columns) */}
+              <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-zinc-900">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute top-5 left-5 z-10">
+                  <span className="px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-xs font-semibold text-[#c6ff00] font-mono">
+                    {project.badge}
+                  </span>
+                </div>
               </div>
 
-              {/* Technologies Pills */}
-              <div className="pt-6 border-t border-white/10">
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/5 text-[11px] font-mono text-zinc-300"
-                    >
-                      {tech}
+              {/* Project Details (Right 5 Columns) */}
+              <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between bg-gradient-to-br from-[#141517] to-[#111214]">
+                <div>
+                  <div className="flex items-center justify-between gap-4 mb-4">
+                    <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+                      Case Study 0{index + 1}
                     </span>
-                  ))}
+                    <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-black group-hover:bg-[#c6ff00] transition-colors">
+                      <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
+                    </div>
+                  </div>
+
+                  <h3 className="text-2xl sm:text-4xl font-display font-extrabold text-white mb-4 group-hover:text-[#c6ff00] transition-colors leading-tight">
+                    {project.title}
+                  </h3>
+
+                  <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-6">
+                    {project.subtitle}
+                  </p>
+                </div>
+
+                {/* Technologies Pills */}
+                <div className="pt-6 border-t border-white/10">
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/5 text-[11px] font-mono text-zinc-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        )}
       </motion.div>
     </div>
   );
@@ -182,10 +247,10 @@ export function ProjectsPreviewSection({ initialProjects }: ProjectsPreviewSecti
           </p>
         </div>
         <Link
-          href="/portfolio"
+          href="/#contact"
           className="px-7 py-3 rounded-full bg-[#c6ff00] hover:bg-[#d4ff33] text-black font-semibold text-xs uppercase tracking-wider transition-all self-start sm:self-auto shadow-lg shadow-[#c6ff00]/20 whitespace-nowrap"
         >
-          View All Projects
+          Start a Project
         </Link>
       </div>
 
