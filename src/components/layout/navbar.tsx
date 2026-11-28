@@ -153,14 +153,6 @@ export function Navbar() {
           </Link>
         </motion.nav>
 
-        {/* Glowing Accent Dot matching Framer Reference */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.4 }}
-          className="hidden lg:block w-2.5 h-2.5 rounded-full bg-[#c6ff00] shadow-[0_0_10px_#c6ff00] mt-3.5 select-none pointer-events-none"
-        />
-
         {/* ================= MOBILE NAVBAR PILL ================= */}
         <motion.div
           initial={{ y: -30, opacity: 0 }}

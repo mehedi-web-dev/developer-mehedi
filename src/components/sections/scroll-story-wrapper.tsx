@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform, useSpring } from "framer-motion";
 import { HeroSection } from "./hero";
 import { ExpectationsSection } from "./expectations";
 import { AboutSection } from "./about";
@@ -98,25 +98,44 @@ export function ScrollStoryWrapper({ siteSettings }: ScrollStoryWrapperProps) {
               />
             </div>
 
-            {/* FLOATING 3D "HI" / WAVING BADGE (Anchored at Bottom-Left corner, matching Image 2) */}
+            {/* FLOATING 3D "HI" / WAVING BADGE */}
             <div
-              className="absolute -bottom-5 -left-5 z-40 w-18 h-18 sm:w-20 sm:h-20 rounded-full bg-[#c6ff00] text-black shadow-2xl border-4 border-[#0c0d0e] flex items-center justify-center overflow-hidden"
+              className="absolute -bottom-4 -left-4 z-40 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#c6ff00] text-black shadow-2xl border-4 border-white dark:border-[#0c0d0e] flex items-center justify-center overflow-hidden select-none"
               style={{
                 transform: "translateZ(45px)",
               }}
             >
-              <motion.div
-                animate={{ y: badgeState === "hi" ? "0%" : "-50%" }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="flex flex-col items-center justify-start h-[200%] w-full"
-              >
-                <div className="h-1/2 w-full flex items-center justify-center font-display font-extrabold text-xl select-none text-black">
-                  Hi
-                </div>
-                <div className="h-1/2 w-full flex items-center justify-center text-3xl select-none">
-                  ✋
-                </div>
-              </motion.div>
+              <AnimatePresence mode="wait">
+                {badgeState === "hi" ? (
+                  <motion.div
+                    key="badge-hi"
+                    initial={{ y: 16, opacity: 0, scale: 0.8 }}
+                    animate={{ y: 0, opacity: 1, scale: 1 }}
+                    exit={{ y: -16, opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full h-full flex items-center justify-center font-display font-black text-xl sm:text-2xl text-black tracking-tight"
+                  >
+                    Hi
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="badge-wave"
+                    initial={{ y: 16, opacity: 0, scale: 0.8 }}
+                    animate={{ y: 0, opacity: 1, scale: 1 }}
+                    exit={{ y: -16, opacity: 0, scale: 0.8 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full h-full flex items-center justify-center text-2xl sm:text-3xl leading-none"
+                  >
+                    <motion.span
+                      animate={{ rotate: [0, 16, -10, 16, 0] }}
+                      transition={{ duration: 0.8, ease: "easeInOut" }}
+                      className="inline-block origin-bottom-right"
+                    >
+                      👋
+                    </motion.span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.div>
         </div>
