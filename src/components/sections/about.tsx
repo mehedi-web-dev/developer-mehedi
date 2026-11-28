@@ -30,46 +30,46 @@ export function AboutSection({
     settings?.personalInfo?.profileImage?.trim() || "/mehedi-avatar.png";
 
   return (
-    <section id="about" className="py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/10">
+    <section id="about" className="py-20 sm:py-28 px-4 sm:px-6 max-w-6xl mx-auto border-t border-black/10 dark:border-white/10">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
         {/* Left Column: Bio & Counters */}
         <div className="lg:col-span-7">
-          <span className="text-xs uppercase tracking-widest text-[#c6ff00] font-mono font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-widest text-[#65a30d] dark:text-[#c6ff00] font-mono font-semibold block mb-2">
             About Me
           </span>
-          <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight leading-tight mb-5">
+          <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight leading-tight mb-5">
             Bridging Creative Vision with Engineering Precision
           </h2>
-          <p className="text-zinc-300 text-sm sm:text-base leading-relaxed mb-4">
+          <p className="text-zinc-700 dark:text-zinc-300 text-sm sm:text-base leading-relaxed mb-4">
             Over the past 3+ years, I have specialized in WordPress and modern frontend web engineering—delivering more than 80 successful projects for international businesses, creative agencies, and founders.
           </p>
-          <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed mb-8">
+          <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm leading-relaxed mb-8">
             Whether building bespoke Elementor Pro layouts, high-converting WooCommerce stores, or lightning-fast web applications with Next.js, React, and TypeScript, my goal is always the same: clean, scalable code and designs that convert.
           </p>
 
           {/* Animated Counters Grid */}
-          <div className="grid grid-cols-3 gap-3 sm:gap-6 py-6 border-y border-white/10 mb-8">
+          <div className="grid grid-cols-3 gap-3 sm:gap-6 py-6 border-y border-black/10 dark:border-white/10 mb-8">
             <div>
-              <div className="text-3xl sm:text-5xl font-display font-extrabold text-[#c6ff00]">
+              <div className="text-3xl sm:text-5xl font-display font-extrabold text-[#65a30d] dark:text-[#c6ff00]">
                 <AnimatedCounter from={0} to={3} suffix="+" />
               </div>
-              <p className="text-[11px] sm:text-xs md:text-sm text-zinc-400 font-medium mt-1">
+              <p className="text-[11px] sm:text-xs md:text-sm text-zinc-500 dark:text-zinc-400 font-medium mt-1">
                 Years Experience
               </p>
             </div>
             <div>
-              <div className="text-3xl sm:text-5xl font-display font-extrabold text-[#c6ff00]">
+              <div className="text-3xl sm:text-5xl font-display font-extrabold text-[#65a30d] dark:text-[#c6ff00]">
                 <AnimatedCounter from={0} to={80} suffix="+" />
               </div>
-              <p className="text-[11px] sm:text-xs md:text-sm text-zinc-400 font-medium mt-1">
+              <p className="text-[11px] sm:text-xs md:text-sm text-zinc-500 dark:text-zinc-400 font-medium mt-1">
                 Projects Completed
               </p>
             </div>
             <div>
-              <div className="text-3xl sm:text-5xl font-display font-extrabold text-[#c6ff00]">
+              <div className="text-3xl sm:text-5xl font-display font-extrabold text-[#65a30d] dark:text-[#c6ff00]">
                 <AnimatedCounter from={0} to={100} suffix="%" />
               </div>
-              <p className="text-[11px] sm:text-xs md:text-sm text-zinc-400 font-medium mt-1">
+              <p className="text-[11px] sm:text-xs md:text-sm text-zinc-500 dark:text-zinc-400 font-medium mt-1">
                 Client Satisfaction
               </p>
             </div>
@@ -85,7 +85,7 @@ export function AboutSection({
             </Link>
             <a
               href="mailto:mehedihasan958327@gmail.com"
-              className="text-xs font-mono text-zinc-400 hover:text-white transition-colors break-all"
+              className="text-xs font-mono text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors break-all"
             >
               mehedihasan958327@gmail.com
             </a>

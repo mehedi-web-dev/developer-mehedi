@@ -28,29 +28,29 @@ export function ReviewsSection() {
   ];
 
   return (
-    <section id="reviews" className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
+    <section id="reviews" className="py-20 px-4 sm:px-6 max-w-6xl mx-auto border-t border-black/10 dark:border-white/10">
       <div className="text-center max-w-2xl mx-auto mb-14">
-        <span className="text-xs uppercase tracking-widest text-[#c6ff00] font-mono font-semibold block mb-2">
+        <span className="text-xs uppercase tracking-widest text-[#65a30d] dark:text-[#c6ff00] font-mono font-semibold block mb-2">
           Testimonials
         </span>
-        <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight mb-4">
+        <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight mb-4">
           What My Clients Say
         </h2>
-        <p className="text-zinc-400 text-sm">
+        <p className="text-zinc-600 dark:text-zinc-400 text-sm">
           Real feedback from entrepreneurs, agency founders, and business owners worldwide.
         </p>
       </div>
 
       {/* Highlights Banner Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-        <div className="p-8 rounded-3xl bg-white text-black shadow-xl flex flex-col justify-between">
+        <div className="p-8 rounded-3xl bg-white dark:bg-white text-black shadow-xl border border-black/10 dark:border-white/10 flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-1 text-[#0c0d0e] mb-3">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-current" />
+                <Star key={i} className="w-5 h-5 fill-current text-[#65a30d] dark:text-[#0c0d0e]" />
               ))}
             </div>
-            <h3 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight text-black">
               Over 80+ 5-Star Reviews Worldwide
             </h3>
           </div>
@@ -64,7 +64,7 @@ export function ReviewsSection() {
             <div className="w-10 h-10 rounded-full bg-black/10 flex items-center justify-center mb-3">
               <ShieldCheck className="w-6 h-6 stroke-[2.5]" />
             </div>
-            <h3 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight">
+            <h3 className="text-2xl sm:text-3xl font-display font-extrabold tracking-tight text-black">
               200% Dedication to Every Project
             </h3>
           </div>
@@ -79,21 +79,21 @@ export function ReviewsSection() {
         {testimonials.map((rev, i) => (
           <div
             key={i}
-            className="p-6 rounded-2xl bg-[#141517] border border-white/10 flex flex-col justify-between"
+            className="p-6 rounded-2xl bg-white dark:bg-[#141517] border border-black/10 dark:border-white/10 shadow-md flex flex-col justify-between"
           >
             <div>
-              <div className="flex items-center gap-1 text-[#c6ff00] mb-3">
+              <div className="flex items-center gap-1 text-[#65a30d] dark:text-[#c6ff00] mb-3">
                 {[...Array(5)].map((_, idx) => (
                   <Star key={idx} className="w-4 h-4 fill-current" />
                 ))}
               </div>
-              <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed italic mb-4">
+              <p className="text-xs sm:text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed italic mb-4">
                 &ldquo;{rev.text}&rdquo;
               </p>
             </div>
-            <div className="pt-4 border-t border-white/10">
-              <p className="text-xs font-bold text-white">{rev.author}</p>
-              <p className="text-[11px] text-zinc-500">{rev.role}</p>
+            <div className="pt-4 border-t border-black/10 dark:border-white/10">
+              <p className="text-xs font-bold text-zinc-900 dark:text-white">{rev.author}</p>
+              <p className="text-[11px] text-zinc-500 dark:text-zinc-400">{rev.role}</p>
             </div>
           </div>
         ))}

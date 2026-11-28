@@ -97,7 +97,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
       {/* Case Study Header Lockup */}
       <header className="mb-12">
         <div className="flex flex-wrap items-center gap-3 mb-4">
-          <span className="px-3.5 py-1 rounded-full bg-[#c6ff00]/10 border border-[#c6ff00]/30 text-xs font-mono font-semibold text-[#c6ff00]">
+          <span className="px-3.5 py-1 rounded-full bg-[#c6ff00]/20 dark:bg-[#c6ff00]/10 border border-[#c6ff00]/40 dark:border-[#c6ff00]/30 text-xs font-mono font-semibold text-[#65a30d] dark:text-[#c6ff00]">
             {project.category}
           </span>
           <span className="text-xs font-mono text-zinc-500">
@@ -105,16 +105,16 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
           </span>
         </div>
 
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight text-white mb-6 leading-[1.05]">
+        <h1 className="text-4xl sm:text-6xl md:text-7xl font-display font-extrabold tracking-tight text-zinc-900 dark:text-white mb-6 leading-[1.05]">
           {project.title}
         </h1>
 
-        <p className="text-zinc-300 text-base sm:text-xl leading-relaxed max-w-3xl">
+        <p className="text-zinc-700 dark:text-zinc-300 text-base sm:text-xl leading-relaxed max-w-3xl">
           {project.shortDescription}
         </p>
 
         {/* Action Buttons & Links */}
-        <div className="flex flex-wrap items-center gap-4 mt-8 pt-6 border-t border-white/10">
+        <div className="flex flex-wrap items-center gap-4 mt-8 pt-6 border-t border-black/10 dark:border-white/10">
           {project.liveUrl && (
             <a
               href={project.liveUrl}
@@ -133,7 +133,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/[0.05] hover:bg-[#25D366]/20 border border-white/15 hover:border-[#25D366]/40 text-xs font-semibold text-zinc-200 hover:text-white transition-all"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-black/5 dark:bg-white/[0.05] hover:bg-[#25D366]/20 border border-black/10 dark:border-white/15 hover:border-[#25D366]/40 text-xs font-semibold text-zinc-700 dark:text-zinc-200 hover:text-black dark:hover:text-white transition-all"
           >
             <WhatsAppIcon className="w-4 h-4 text-[#25D366]" />
             <span>Discuss Similar Project</span>
@@ -144,7 +144,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.04] hover:bg-white/10 border border-white/10 text-xs font-semibold text-zinc-300 hover:text-white transition-all"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-black/5 dark:bg-white/[0.04] hover:bg-black/10 dark:hover:bg-white/10 border border-black/10 dark:border-white/10 text-xs font-semibold text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white transition-all"
             >
               <GithubIcon className="w-4 h-4" />
               <span>Source Code</span>
@@ -155,7 +155,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
 
       {/* Hero Featured Media */}
       <section className="mb-16">
-        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-[28px] sm:rounded-[36px] overflow-hidden border border-white/15 bg-zinc-950 shadow-2xl group">
+        <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full rounded-[28px] sm:rounded-[36px] overflow-hidden border border-black/10 dark:border-white/15 bg-zinc-950 shadow-2xl group">
           <img
             src={project.thumbnail}
             alt={project.title}
@@ -167,7 +167,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
       {/* Main Grid: Case Study Content (8 cols) + Meta Sidebar (4 cols) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         {/* Left Column: Case Study Narrative */}
-        <div className="lg:col-span-8 space-y-10 text-zinc-300 leading-relaxed">
+        <div className="lg:col-span-8 space-y-10 text-zinc-700 dark:text-zinc-300 leading-relaxed">
           {project.description ? (
             <div className="prose prose-invert max-w-none space-y-8">
               {project.description.split("\n\n").map((block, idx) => {
@@ -176,7 +176,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                   return (
                     <h2
                       key={idx}
-                      className="text-2xl sm:text-3xl font-display font-extrabold text-white tracking-tight pt-4 border-t border-white/10 flex items-center gap-3"
+                      className="text-2xl sm:text-3xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight pt-4 border-t border-black/10 dark:border-white/10 flex items-center gap-3"
                     >
                       <span className="w-2 h-2 rounded-full bg-[#c6ff00]" />
                       <span>{trimmed.replace("### ", "")}</span>
@@ -188,8 +188,8 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                   return (
                     <ul key={idx} className="space-y-3 pl-2">
                       {items.map((it, i) => (
-                        <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-zinc-300">
-                          <CheckCircle2 className="w-5 h-5 text-[#c6ff00] shrink-0 mt-0.5" />
+                        <li key={i} className="flex items-start gap-3 text-sm sm:text-base text-zinc-700 dark:text-zinc-300">
+                          <CheckCircle2 className="w-5 h-5 text-[#65a30d] dark:text-[#c6ff00] shrink-0 mt-0.5" />
                           <span>{it.replace(/^- \*\*(.*?)\*\*:?/, "$1 —").replace(/^- /, "")}</span>
                         </li>
                       ))}
@@ -197,27 +197,27 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                   );
                 }
                 return (
-                  <p key={idx} className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+                  <p key={idx} className="text-sm sm:text-base text-zinc-700 dark:text-zinc-300 leading-relaxed">
                     {trimmed}
                   </p>
                 );
               })}
             </div>
           ) : (
-            <p className="text-zinc-400 text-base">{project.shortDescription}</p>
+            <p className="text-zinc-600 dark:text-zinc-400 text-base">{project.shortDescription}</p>
           )}
 
           {/* Project Gallery If Multiple Images */}
           {Array.isArray(project.gallery) && project.gallery.length > 1 && (
-            <div className="pt-8 border-t border-white/10">
-              <h3 className="text-xl font-display font-bold text-white mb-6">
+            <div className="pt-8 border-t border-black/10 dark:border-white/10">
+              <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-6">
                 Interface Previews
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {project.gallery.slice(1).map((img, i) => (
                   <div
                     key={i}
-                    className="rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 aspect-video"
+                    className="rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 bg-zinc-900 aspect-video"
                   >
                     <img
                       src={img}
@@ -233,25 +233,25 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
 
         {/* Right Column: Project Meta Card & Consultation Widget */}
         <aside className="lg:col-span-4 space-y-6">
-          <div className="rounded-3xl border border-white/10 bg-[#141517]/80 backdrop-blur-md p-6 sm:p-8 space-y-6 shadow-xl">
+          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#141517]/80 backdrop-blur-md p-6 sm:p-8 space-y-6 shadow-xl">
             <div>
               <span className="text-xs font-mono uppercase text-zinc-500 tracking-wider block mb-1">
                 Project Category
               </span>
-              <p className="text-sm font-semibold text-white">{project.category}</p>
+              <p className="text-sm font-semibold text-zinc-900 dark:text-white">{project.category}</p>
             </div>
 
-            <div className="border-t border-white/10 pt-4">
+            <div className="border-t border-black/10 dark:border-white/10 pt-4">
               <span className="text-xs font-mono uppercase text-zinc-500 tracking-wider block mb-1">
                 Completion Date
               </span>
-              <p className="text-sm font-semibold text-white flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-[#c6ff00]" />
+              <p className="text-sm font-semibold text-zinc-900 dark:text-white flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[#65a30d] dark:text-[#c6ff00]" />
                 <span>{formattedDate}</span>
               </p>
             </div>
 
-            <div className="border-t border-white/10 pt-4">
+            <div className="border-t border-black/10 dark:border-white/10 pt-4">
               <span className="text-xs font-mono uppercase text-zinc-500 tracking-wider block mb-2">
                 Technologies &amp; Architecture
               </span>
@@ -259,7 +259,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                 {project.technologies.map((tech) => (
                   <span
                     key={tech}
-                    className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-mono text-zinc-300"
+                    className="px-2.5 py-1 rounded-lg bg-black/5 dark:bg-white/[0.04] border border-black/10 dark:border-white/10 text-xs font-mono text-zinc-700 dark:text-zinc-300"
                   >
                     {tech}
                   </span>
@@ -268,7 +268,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
             </div>
 
             {project.liveUrl && (
-              <div className="border-t border-white/10 pt-4">
+              <div className="border-t border-black/10 dark:border-white/10 pt-4">
                 <a
                   href={project.liveUrl}
                   target="_blank"
@@ -283,19 +283,19 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
           </div>
 
           {/* Quick Contact Card */}
-          <div className="rounded-3xl border border-white/10 bg-gradient-to-br from-[#161719] to-[#0f1012] p-6 sm:p-8 text-center space-y-4 shadow-xl">
-            <span className="w-10 h-10 rounded-full bg-[#c6ff00]/10 text-[#c6ff00] flex items-center justify-center mx-auto text-lg font-bold">
+          <div className="rounded-3xl border border-black/10 dark:border-white/10 bg-gradient-to-br from-zinc-100 to-white dark:from-[#161719] dark:to-[#0f1012] p-6 sm:p-8 text-center space-y-4 shadow-xl">
+            <span className="w-10 h-10 rounded-full bg-[#c6ff00]/20 text-[#65a30d] dark:text-[#c6ff00] flex items-center justify-center mx-auto text-lg font-bold">
               ⚡
             </span>
-            <h3 className="text-lg font-bold text-white">
+            <h3 className="text-lg font-bold text-zinc-900 dark:text-white">
               Want a high-converting website like this?
             </h3>
-            <p className="text-xs text-zinc-400 leading-relaxed">
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
               Guaranteed launch within 7–10 days with clean architecture, speed optimization, and responsive design.
             </p>
             <Link
               href="/#contact"
-              className="block w-full py-2.5 rounded-full bg-white hover:bg-zinc-200 text-black font-semibold text-xs uppercase tracking-wider transition-all"
+              className="block w-full py-2.5 rounded-full bg-zinc-900 hover:bg-black text-white dark:bg-white dark:hover:bg-zinc-200 dark:text-black font-semibold text-xs uppercase tracking-wider transition-all"
             >
               Get in Touch
             </Link>
@@ -305,22 +305,22 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
 
       {/* Related Projects Section */}
       {relatedProjects.length > 0 && (
-        <section className="mt-24 pt-16 border-t border-white/10">
+        <section className="mt-24 pt-16 border-t border-black/10 dark:border-white/10">
           <div className="flex items-center justify-between gap-4 mb-10">
             <div>
-              <span className="text-xs uppercase tracking-widest text-[#c6ff00] font-mono font-semibold block mb-1">
+              <span className="text-xs uppercase tracking-widest text-[#65a30d] dark:text-[#c6ff00] font-mono font-semibold block mb-1">
                 More Case Studies
               </span>
-              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-white">
+              <h2 className="text-2xl sm:text-4xl font-display font-extrabold text-zinc-900 dark:text-white">
                 Other Featured Work
               </h2>
             </div>
             <Link
               href="/#portfolio-preview"
-              className="text-xs font-mono uppercase tracking-wider text-zinc-400 hover:text-white transition-colors flex items-center gap-1.5"
+              className="text-xs font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 hover:text-black dark:hover:text-white transition-colors flex items-center gap-1.5"
             >
               <span>View All</span>
-              <ArrowRight className="w-4 h-4 text-[#c6ff00]" />
+              <ArrowRight className="w-4 h-4 text-[#65a30d] dark:text-[#c6ff00]" />
             </Link>
           </div>
 
@@ -329,7 +329,7 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
               <Link
                 key={rel._id}
                 href={`/portfolio/${rel.slug}`}
-                className="group block rounded-3xl border border-white/10 bg-[#141517] overflow-hidden hover:border-[#c6ff00]/40 transition-all shadow-xl"
+                className="group block rounded-3xl border border-black/10 dark:border-white/10 bg-white dark:bg-[#141517] overflow-hidden hover:border-[#c6ff00]/60 transition-all shadow-xl"
               >
                 <div className="aspect-[16/10] overflow-hidden bg-zinc-900 relative">
                   <img
@@ -345,14 +345,14 @@ export default async function ProjectDetailsPage({ params }: ProjectDetailsPageP
                 </div>
                 <div className="p-6 sm:p-8 flex items-center justify-between gap-4">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-display font-extrabold text-white group-hover:text-[#c6ff00] transition-colors mb-2">
+                    <h3 className="text-xl sm:text-2xl font-display font-extrabold text-zinc-900 dark:text-white group-hover:text-[#65a30d] dark:group-hover:text-[#c6ff00] transition-colors mb-2">
                       {rel.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-400 line-clamp-2">
+                    <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 line-clamp-2">
                       {rel.shortDescription}
                     </p>
                   </div>
-                  <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-black group-hover:bg-[#c6ff00] transition-colors shrink-0">
+                  <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-zinc-500 dark:text-zinc-400 group-hover:text-black group-hover:bg-[#c6ff00] transition-colors shrink-0">
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>

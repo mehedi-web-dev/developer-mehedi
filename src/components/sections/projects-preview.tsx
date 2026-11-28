@@ -93,7 +93,7 @@ function StackingProjectCard({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="group relative w-full bg-[#141517] rounded-[28px] sm:rounded-[36px] border border-white/10 overflow-hidden shadow-2xl hover:border-[#c6ff00]/40 transition-all duration-300"
+        className="group relative w-full bg-white dark:bg-[#141517] rounded-[28px] sm:rounded-[36px] border border-black/10 dark:border-white/10 overflow-hidden shadow-2xl hover:border-[#c6ff00]/60 transition-all duration-300"
       >
         <Link href={`/portfolio/${project.slug}`} className="block">
           <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
@@ -112,33 +112,33 @@ function StackingProjectCard({
             </div>
 
             {/* Project Details (Right 5 Columns) */}
-            <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between bg-gradient-to-br from-[#141517] to-[#111214]">
+            <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between bg-gradient-to-br from-zinc-50 to-white dark:from-[#141517] dark:to-[#111214]">
               <div>
                 <div className="flex items-center justify-between gap-4 mb-4">
-                  <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">
+                  <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
                     Case Study 0{index + 1}
                   </span>
-                  <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-black group-hover:bg-[#c6ff00] transition-colors">
+                  <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex items-center justify-center text-zinc-600 dark:text-zinc-400 group-hover:text-black group-hover:bg-[#c6ff00] transition-colors">
                     <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
                   </div>
                 </div>
 
-                <h3 className="text-2xl sm:text-4xl font-display font-extrabold text-white mb-4 group-hover:text-[#c6ff00] transition-colors leading-tight">
+                <h3 className="text-2xl sm:text-4xl font-display font-extrabold text-zinc-900 dark:text-white mb-4 group-hover:text-[#65a30d] dark:group-hover:text-[#c6ff00] transition-colors leading-tight">
                   {project.title}
                 </h3>
 
-                <p className="text-zinc-400 text-sm sm:text-base leading-relaxed mb-6">
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed mb-6">
                   {project.subtitle}
                 </p>
               </div>
 
               {/* Technologies Pills */}
-              <div className="pt-6 border-t border-white/10">
+              <div className="pt-6 border-t border-black/10 dark:border-white/10">
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/5 text-[11px] font-mono text-zinc-300"
+                      className="px-2.5 py-1 rounded-lg bg-black/5 dark:bg-white/[0.04] border border-black/5 dark:border-white/5 text-[11px] font-mono text-zinc-700 dark:text-zinc-300"
                     >
                       {tech}
                     </span>
@@ -171,17 +171,17 @@ export function ProjectsPreviewSection({ initialProjects }: ProjectsPreviewSecti
       : FEATURED_STACK_PROJECTS;
 
   return (
-    <section id="portfolio-preview" className="py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
+    <section id="portfolio-preview" className="py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-black/10 dark:border-white/10">
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-16">
         <div className="max-w-2xl">
-          <span className="text-xs uppercase tracking-widest text-[#c6ff00] font-mono font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-widest text-[#65a30d] dark:text-[#c6ff00] font-mono font-semibold block mb-2">
             Selected Works
           </span>
-          <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight mb-4">
             Featured Projects
           </h2>
-          <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+          <p className="text-zinc-600 dark:text-zinc-400 text-sm sm:text-base leading-relaxed">
             These selected projects reflect my passion for combining strategy and creativity — solving real business challenges through purposeful design and clean code.
           </p>
         </div>

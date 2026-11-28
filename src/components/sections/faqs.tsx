@@ -34,17 +34,17 @@ export function FAQSection() {
   ];
 
   return (
-    <section id="faqs" className="py-20 px-4 sm:px-6 max-w-4xl mx-auto border-t border-white/5">
+    <section id="faqs" className="py-20 px-4 sm:px-6 max-w-4xl mx-auto border-t border-black/10 dark:border-white/10">
       <div className="text-center mb-12">
-        <span className="text-xs uppercase tracking-widest text-[#c6ff00] font-mono font-semibold block mb-2">
+        <span className="text-xs uppercase tracking-widest text-[#65a30d] dark:text-[#c6ff00] font-mono font-semibold block mb-2">
           Questions &amp; Answers
         </span>
-        <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-white tracking-tight">
+        <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight">
           Frequently Asked Questions
         </h2>
       </div>
 
-      <div className="border-t border-white/10 divide-y divide-white/10">
+      <div className="border-t border-black/10 dark:border-white/10 divide-y divide-black/10 dark:divide-white/10">
         {faqs.map((faq, idx) => (
           <AccordionItem
             key={idx}

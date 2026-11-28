@@ -54,19 +54,19 @@ export function ServicesPreviewSection() {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
         {/* Left Column */}
         <div className="md:col-span-5">
-          <span className="text-xs uppercase tracking-widest text-[#c6ff00] font-mono font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-widest text-[#65a30d] dark:text-[#c6ff00] font-mono font-semibold block mb-2">
             Services &amp; Expertise
           </span>
-          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-white tracking-tight leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight leading-tight mb-4">
             Smart Web Solutions for Digital Growth
           </h2>
-          <p className="text-zinc-400 text-sm leading-relaxed mb-6">
+          <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6">
             A beautiful website is just the beginning. With performance engineering, conversion-focused design, and modern web architecture, we turn passive visitors into loyal clients.
           </p>
         </div>
 
         {/* Right Column Accordions */}
-        <div className="md:col-span-7 border-t border-white/10 divide-y divide-white/10">
+        <div className="md:col-span-7 border-t border-black/10 dark:border-white/10 divide-y divide-black/10 dark:divide-white/10">
           {services.map((item, idx) => (
             <AccordionItem
               key={idx}

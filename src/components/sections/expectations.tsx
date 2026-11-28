@@ -55,21 +55,21 @@ export function ExpectationsSection({ hideDesktopSlot = false }: ExpectationsSec
   ];
 
   return (
-    <section id="expectations" className="py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-white/5">
+    <section id="expectations" className="py-24 px-4 sm:px-6 max-w-6xl mx-auto border-t border-black/10 dark:border-white/10">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         {/* Left Column Content & Accordions */}
         <div className="lg:col-span-7">
-          <span className="text-xs uppercase tracking-widest text-[#c6ff00] font-mono font-semibold block mb-2">
+          <span className="text-xs uppercase tracking-widest text-[#65a30d] dark:text-[#c6ff00] font-mono font-semibold block mb-2">
             Web Development &amp; Design
           </span>
-          <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-white tracking-tight leading-tight mb-4">
+          <h2 className="text-3xl sm:text-5xl font-display font-extrabold text-zinc-900 dark:text-white tracking-tight leading-tight mb-4">
             What can you expect from me?
           </h2>
-          <p className="text-zinc-400 text-sm leading-relaxed mb-8">
+          <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-8">
             My approach combines strategic insight with modern visual design to create web solutions that deliver measurable business growth.
           </p>
 
-          <div className="border-t border-white/10 mb-6 divide-y divide-white/10">
+          <div className="border-t border-black/10 dark:border-white/10 mb-6 divide-y divide-black/10 dark:divide-white/10">
             {expectations.map((item, idx) => (
               <AccordionItem
                 key={idx}
@@ -83,8 +83,8 @@ export function ExpectationsSection({ hideDesktopSlot = false }: ExpectationsSec
             ))}
           </div>
 
-          <div className="pt-6 border-t border-white/10 text-xs text-zinc-400">
-            <p className="font-semibold text-white mb-1 flex items-center gap-2">
+          <div className="pt-6 border-t border-black/10 dark:border-white/10 text-xs text-zinc-600 dark:text-zinc-400">
+            <p className="font-semibold text-zinc-900 dark:text-white mb-1 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#c6ff00] inline-block" />
               Guaranteed delivery within 7-10 days
             </p>
@@ -97,7 +97,7 @@ export function ExpectationsSection({ hideDesktopSlot = false }: ExpectationsSec
         {/* Right Column: On Desktop, Sticky 3D Card flips into this space! On Mobile, shows standard card */}
         <div className="lg:col-span-5 flex justify-center">
           <div className="w-[340px] h-[476px] hidden lg:block" />
-          <div className="lg:hidden w-full max-w-sm rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+          <div className="lg:hidden w-full max-w-sm rounded-3xl overflow-hidden border border-black/10 dark:border-white/10 shadow-2xl">
             <img
               src="/developer-desk.jpg"
               alt="Developer Workspace"
