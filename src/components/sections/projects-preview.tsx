@@ -56,13 +56,13 @@ function StackingProjectCard({
         className="group relative w-full bg-white dark:bg-[#141517] rounded-[28px] sm:rounded-[36px] border border-black/10 dark:border-white/10 overflow-hidden shadow-2xl hover:border-[#c6ff00]/60 transition-all duration-300"
       >
         <Link href={`/portfolio/${project.slug}`} className="block">
-          <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
-            {/* Project Media (Left 7 Columns) */}
-            <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-zinc-900">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-stretch overflow-hidden">
+            {/* Project Media (Left 50%) */}
+            <div className="relative w-full h-[260px] sm:h-[340px] lg:h-full min-h-[260px] lg:min-h-[420px] overflow-hidden bg-zinc-900 min-w-0">
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute top-5 left-5 z-10">
                 <span className="px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-white/10 text-xs font-semibold text-[#c6ff00] font-mono">
@@ -71,8 +71,8 @@ function StackingProjectCard({
               </div>
             </div>
 
-            {/* Project Details (Right 5 Columns) */}
-            <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between bg-gradient-to-br from-zinc-50 to-white dark:from-[#141517] dark:to-[#111214]">
+            {/* Project Details (Right 50%) */}
+            <div className="relative z-10 min-w-0 p-6 sm:p-8 lg:p-10 flex flex-col justify-between bg-gradient-to-br from-zinc-50 to-white dark:from-[#141517] dark:to-[#111214]">
               <div>
                 <div className="flex items-center justify-between gap-4 mb-4">
                   <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">
